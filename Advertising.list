@@ -1,0 +1,122 @@
+// Advertising Block 去广告以及隐私追踪保护
+DOMAIN-KEYWORD,umeng
+
+// 芒果TV
+DOMAIN-SUFFIX,videojj.com
+
+// 哔哩哔哩
+// DOMAIN,data.bilibili.com
+// DOMAIN,dataflow.biliapi.com
+// DOMAIN,thirdparty.biliapi.com
+// DOMAIN,cm.bilibili.com
+// 百度
+DOMAIN-SUFFIX,hm.baidu.com
+// 阿里
+DOMAIN-SUFFIX,adash.man.aliyuncs.com
+DOMAIN-SUFFIX,umdc.aliapp.org
+DOMAIN-SUFFIX,adashxgc.ut.taobao.com
+DOMAIN-SUFFIX,amdc.m.taobao.com
+DOMAIN-SUFFIX,nbsdk-baichuan.alicdn.com
+DOMAIN-SUFFIX,apoll.m.taobao.com
+DOMAIN-SUFFIX,adash-c.ut.taobao.com
+// 腾讯
+DOMAIN-SUFFIX,beacon.qq.com
+DOMAIN-SUFFIX,fusion.qq.com
+DOMAIN-SUFFIX,pingma.qq.com
+DOMAIN-SUFFIX,bugly.qq.com
+DOMAIN-SUFFIX,rqd.qq.com
+// 小米
+DOMAIN-SUFFIX,xmpush.xiaomi.com
+// 饿了么
+DOMAIN-SUFFIX,newton-api.ele.me
+// 滴滴出行
+DOMAIN,ct.xiaojukeji.com
+DOMAIN,gwp.xiaojukeji.com
+URL-REGEX,"^https?:\/\/res\.xiaojukeji\.com\/resapi\/activity\/get(Ruled|Preload)"
+// flurry
+DOMAIN-SUFFIX,flurry.com
+// 极光推送
+DOMAIN-SUFFIX,jpush.cn
+// 广点通
+DOMAIN-SUFFIX,tanx.com
+// igexin
+DOMAIN-SUFFIX,igexin.com
+// MobSDK
+DOMAIN-SUFFIX,api.cmt.mob.com
+DOMAIN-SUFFIX,api.exc.mob.com
+DOMAIN-SUFFIX,api.share.mob.com
+DOMAIN-SUFFIX,c.data.mob.com
+DOMAIN-SUFFIX,cca.mob.com
+// 同盾科技
+DOMAIN-SUFFIX,fraudmetrix.cn
+// AppsFlyer
+DOMAIN-SUFFIX,appsflyer.com
+// appcenter
+DOMAIN-SUFFIX,in.appcenter.ms
+// GrowingIO
+DOMAIN-SUFFIX,growingio.com
+// mintegral
+DOMAIN-SUFFIX,rayjump.com
+// UserVoice
+DOMAIN-SUFFIX,uservoice.com
+// Amazon
+DOMAIN-SUFFIX,xdrig.com
+// 高德地图
+DOMAIN-SUFFIX,qchannel01.cn
+DOMAIN-SUFFIX,irs01.com
+DOMAIN-SUFFIX,log.umsns.com
+// 12306
+DOMAIN-SUFFIX,ad.12306.cn
+// Keep
+DOMAIN-SUFFIX,wanproxy.127.net
+// 美团
+DOMAIN-SUFFIX,dreport.meituan.net
+// 同花顺
+DOMAIN,adm.10jqka.com.cn
+DOMAIN,stat.10jqka.com.cn
+
+// URL
+// 哔哩哔哩
+URL-REGEX,^https?:\/\/app\.bilibili\.com\/x\/v2\/dataflow\/report
+// 微信公众号
+URL-REGEX,^https?:\/\/mp\.weixin\.qq\.com\/mp\/(getappmsgad|appmsgreport|ad_repor|advertisement|readtemplate|ad_complaint|ad_video)
+// 京东
+URL-REGEX,^https?:\/\/api\.m\.jd.com\/client\.action\?functionId=start
+URL-REGEX,^https?:\/\/(bdsp-x|dsp-x)\.jd\.com\/adx\/
+URL-REGEX,^https?:\/\/ms\.jr\.jd\.com\/gw\/generic\/base\/na\/m\/adInfo
+// 小米运动
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/homepage_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sleep_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_summary_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_training_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/step_detail_ad\?
+URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/training_video_ad\?
+// 美团
+URL-REGEX,^https?:\/\/img\.meituan\.net\/midas\/
+URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/.+\/linglong\/
+// 高德地图
+URL-REGEX,^https?:\/\/m\d{1}\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\/
+URL-REGEX,^https?:\/\/optimus-ads.amap.com\/uploadimg\/
+// 中国联通
+URL-REGEX,^https?:\/\/m\.client\.10010\.com\/mobileService\/customer\/accountListData\.htm
+URL-REGEX,^https?:\/\/m\.client\.10010\.com\/uniAdmsInterface\/getWelcomeAd
+// 工商银行
+URL-REGEX,"http:\/\/v\.icbc\.com\.cn\/userfiles\/Resources\/WAP\/advertisement\/"
+// 招商银行
+URL-REGEX,"^https?:\/\/pic1cdn\.cmbchina\.com\/appinitads\/"
+// 掌上生活(招商银行)
+URL-REGEX,"^https?:\/\/mlife\.cmbchina\.com\/ClientFaceService\/preCacheAdvertise\.json$"
+// Thunder
+URL-REGEX,^https?:\/\/images\.client\.vip\.xunlei\.com\/.+\/advert\/
+// VUE
+URL-REGEX,^https?:\/\/static\.vuevideo\.net\/styleAssets\/.+\/splash_ad
+URL-REGEX,^https?:\/\/static\.vuevideo\.net\/styleAssets\/advertisement\/
+// 人人视频
+URL-REGEX,^https?:\/\/msspjh\.emarbox\.com\/getAdConfig
+URL-REGEX,^https?:\/\/api\.videozhishi\.com\/api\/getAdvertising
+URL-REGEX,^https?:\/\/api\.rr\.tv\/ad\/
+// Google
+URL-REGEX,^https?:\/\/googleads\.g\.doubleclick\.net\/mads\/
+// Pixiv
+AND,((USER-AGENT,pixiv*), (NOT,((DOMAIN-KEYWORD,pixiv))))
