@@ -1,6 +1,6 @@
 /*
 [Script]
-http-response ^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/queryByCatalogAll)
+^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/queryByCatalogAll|special|user\/appPay)
 [MITM]
 hostname = claritywallpaper.com
 */
@@ -11,6 +11,13 @@ if (-1 != $request.url.indexOf('/special/queryByCatalogAll')) {
     for (var i = 0; i < body.data.length; i++) {
         body.data[i].isFree = true;
     }
+} else if (-1 != $request.url.indexOf('/special/')) {
+    body.data.isFree = true;
+    for (var i = 0; i < body.data.pictureList.length; i++) {
+        body.data.pictureList[i].isFree = true;
+    }
+} else if (-1 != $request.url.indexOf('/user/appPay')) {
+    body.data.isPayed = true;
 } else if (-1 != $request.url.indexOf('/userInfo')) {
     body.data.level = 5;
     body.data.expireTime = 4070965662;

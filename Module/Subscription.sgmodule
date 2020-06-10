@@ -9,7 +9,8 @@ VSCO = type=http-response,pattern=https://vsco.co/api/subscriptions/2.1/user-sub
 Documents = type=http-response,pattern=^https:\/\/license\.pdfexpert\.com\/api\/.*\/.*\/subscription\/(refresh$|check$),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Documents.js,script-update-interval=0
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js,script-update-interval=0
 懒饭 = type=http-response,pattern=^https:\/\/lanfanapp.com\/api\/v1\/user\/(prime.json|page_detail.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Lanfan.js,script-update-interval=0
-克拉壁纸 = type=http-response,pattern=^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/queryByCatalogAll),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/ClarityWallpaper.js,script-update-interval=0
+// 失效
+克拉壁纸 = type=http-response,pattern=^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/queryByCatalogAll|special|user\/appPay),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/ClarityWallpaper.js,script-update-interval=0
 
 [MITM]
 hostname = %APPEND% api.faceapp.io, vsco.co, license.pdfexpert.com, backend.getdrafts.com, lanfanapp.com, claritywallpaper.com
