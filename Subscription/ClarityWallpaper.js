@@ -8,10 +8,10 @@ let body = $response.body;
 body = JSON.parse(body);
 console.log(body)
 if (-1 != $request.url.indexOf('/special/ff')) {
-    if (data.hasProperty('isFree')) {
+    if (body.data.hasProperty('isFree')) {
         body.data.isFree = true;
     }
-    if (data.hasProperty('pictureList')) {
+    if (body.data.hasProperty('pictureList')) {
         for (var i = 0; i < body.data.pictureList.length; i++) {
             body.data.pictureList[i].isFree = true;
         }
