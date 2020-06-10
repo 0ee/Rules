@@ -13,24 +13,18 @@ if (-1 != $request.url.indexOf('/special/queryByCatalogAll')) {
         body.data[i].isFree = true;
     }
 } else if (-1 != $request.url.indexOf('/special/ff')) {
-    if (body.data.hasProperty('isFree')) {
+    if(typeof body.data === 'object'){
         body.data.isFree = true;
-    }
-    if (body.data.hasProperty('pictureList')) {
         for (var i = 0; i < body.data.pictureList.length; i++) {
             body.data.pictureList[i].isFree = true;
         }
-    } else {
-        for (var i = 0; i < body.data.length; i++) {
-            body.data[i].isFree = true;
-        }
     }
-
+    console.log(typeof body.data)
 } else if (-1 != $request.url.indexOf('/user/appPay')) {
     body.data.isPayed = true;
 } else if (-1 != $request.url.indexOf('/userInfo')) {
-    body.data.level = 5;
-    body.data.expireTime = 4070965662;
+    body.data.level = 3;
+    body.data.expireTime = 1623313429;
 }
 body = JSON.stringify(body);
 $done({body});
