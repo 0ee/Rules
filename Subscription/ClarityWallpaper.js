@@ -8,14 +8,19 @@ let body = $response.body;
 body = JSON.parse(body);
 console.log(body)
 if (-1 != $request.url.indexOf('/special/ff')) {
-    for (var i = 0; i < body.data.length; i++) {
-        body.data[i].isFree = true;
+    if (data.hasProperty('isFree')) {
+        body.data.isFree = true;
     }
-} else if (-1 != $request.url.indexOf('/special/')) {
-    body.data.isFree = true;
-    for (var i = 0; i < body.data.pictureList.length; i++) {
-        body.data.pictureList[i].isFree = true;
+    if (data.hasProperty('pictureList')) {
+        for (var i = 0; i < body.data.pictureList.length; i++) {
+            body.data.pictureList[i].isFree = true;
+        }
+    } else {
+        for (var i = 0; i < body.data.length; i++) {
+            body.data[i].isFree = true;
+        }
     }
+
 } else if (-1 != $request.url.indexOf('/user/appPay')) {
     body.data.isPayed = true;
 } else if (-1 != $request.url.indexOf('/userInfo')) {
