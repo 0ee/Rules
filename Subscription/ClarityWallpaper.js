@@ -1,13 +1,13 @@
 /*
 [Script]
-^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/queryByCatalogAll|special|user\/appPay)
+^https:\/\/claritywallpaper\.com\/clarity\/api\/(userInfo|special\/ff|special|user\/appPay)
 [MITM]
 hostname = claritywallpaper.com
 */
 let body = $response.body;
 body = JSON.parse(body);
 console.log(body)
-if (-1 != $request.url.indexOf('/special/queryByCatalogAll')) {
+if (-1 != $request.url.indexOf('/special/ff')) {
     for (var i = 0; i < body.data.length; i++) {
         body.data[i].isFree = true;
     }
