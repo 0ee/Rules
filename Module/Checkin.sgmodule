@@ -16,26 +16,23 @@
 美团 Cookie = type=http-request,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/meituan/meituan.cookie.js
 美团 Cron = type=cron,cronexp=7 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/meituan/meituan.js
 
-美团外卖 Cookie = type=http-request,pattern=(^https:\/\/promotion.waimai.meituan.com\/playcenter\/signIn\/entry|^https:\/\/promotion.waimai.meituan.com\/playcenter\/signIn\/doaction),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/wmmeituan/wmmeituan.cookie.js
-美团外卖 Cron = type=cron,cronexp=8 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/wmmeituan/wmmeituan.js
-
 电信营业厅 Cookie = type=http-request,pattern=^https:\/\/wapside.189.cn:9001\/api\/home\/sign,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.cookie.js
-电信营业厅 Cron = type=cron,cronexp=9 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.js
+电信营业厅 Cron = type=cron,cronexp=8 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.js
 
 联通营业厅 Cookie = type=http-request,pattern=^https:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 联通营业厅 Cookie = type=http-request,pattern=^https:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign.do,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 联通营业厅 Cookie = type=http-request,pattern=^https:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
-联通营业厅 Cron = type=cron,cronexp=10 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.js
+联通营业厅 Cron = type=cron,cronexp=9 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10000/10000.js
 
 智行火车票 Cookie = type=http-request,pattern=^https:\/\/m\.ctrip\.com/restapi/soa2/14593/json/attendanceDay?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.cookie.js
-智行火车票 Cron = type=cron,cronexp=11 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.js
+智行火车票 Cron = type=cron,cronexp=10 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.js
 
 哔哩哔哩直播 Cookie = type=http-request,pattern=^https:\/\/live\.bilibili\.com\/?.?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js
-哔哩哔哩直播 Cron = type=cron,cronexp=12 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.js
+哔哩哔哩直播 Cron = type=cron,cronexp=11 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.js
 哔哩哔哩银瓜子转硬币 = type=cron,cronexp=20 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.silver2coin.js
 
 吾爱破解论坛 Cookie = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
-吾爱破解论坛 Cron = type=cron,cronexp=13 0 * * *,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
+吾爱破解论坛 Cron = type=cron,cronexp=12 0 * * *,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js
 
 [MITM]
-hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, h5.ele.me, i.meituan.com, promotion.waimai.meituan.com, wapside.189.cn:9001, act.10010.com, m.client.10010.com, m.ctrip.com, *.bilibili.com, www.52pojie.cn
+hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, h5.ele.me, i.meituan.com, wapside.189.cn:9001, act.10010.com, m.client.10010.com, m.ctrip.com, *.bilibili.com, www.52pojie.cn
