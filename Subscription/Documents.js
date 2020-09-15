@@ -13,7 +13,7 @@ body["isInGracePeriod"] = false;
 body["isEligibleForIntroPeriod"] = false;
 body["originalTransactionId"] = "20000000000000";
 body["subscriptionState"] = "active";
-body["subscriptionExpirationDate"] = "13:14 31/12/2020";
+body["subscriptionExpirationDate"] = "13:14 31/12/2022";
 body["subscriptionAutoRenewStatus"] = "autoRenewOff";
 body["subscriptionReceiptId"] = "1500000000000";
 
