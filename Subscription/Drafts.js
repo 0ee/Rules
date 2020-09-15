@@ -9,7 +9,7 @@ body = JSON.parse(body);
 console.log(body)
 if (-1 != $request.url.indexOf('/api/v1/verification/account_status')) {
     body["is_subscription_active"] = true;
-    body["active_expires_at"] = "2022-09-01T05:06:53Z";
+    body["active_expires_at"] = "2022-12-31T05:06:53Z";
     body["active_subscription_type"] = "year";//none
     body["is_blocked"] = false;
 }
