@@ -39,6 +39,9 @@ DOMAIN-SUFFIX,getdrafts.com
 DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,agilebits.com
 
+// Movie
+DOMAIN-SUFFIX,chaospace.fun
+
 // blocked sites
 DOMAIN-KEYWORD,slack
 DOMAIN-SUFFIX,dlercloud.org
@@ -430,6 +433,7 @@ DOMAIN-SUFFIX,snapchat.com
 DOMAIN-SUFFIX,sndcdn.com
 DOMAIN-SUFFIX,sockslist.net
 DOMAIN-SUFFIX,softs.wtf
+DOMAIN-SUFFIX,sgp1.info
 DOMAIN-SUFFIX,sony.com
 DOMAIN-SUFFIX,sony.com.hk
 DOMAIN-SUFFIX,sonyentertainmentnetwork.com
@@ -648,6 +652,7 @@ DOMAIN-KEYWORD,porn
 DOMAIN-KEYWORD,telegram
 DOMAIN-KEYWORD,twitter
 DOMAIN-KEYWORD,youtube
+DOMAIN-KEYWORD,epic
 DOMAIN-SUFFIX,1e100.net
 DOMAIN-SUFFIX,2mdn.net
 DOMAIN-SUFFIX,abc.xyz
