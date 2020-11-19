@@ -1,0 +1,32 @@
+#!name=Checkin
+#!desc=Get Checkin Cookie
+#!system=ios
+
+
+[Script]
+京东(Bonus) Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+海底捞 Cookie = type=http-request,pattern=^https:\/\/activity-1\.m\.duiba\.com\.cn\/signactivity\/getSignInfo,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/Haidilao.js
+海底捞等级 Cookie = type=http-request,pattern=^https:\/\/superapp\.kiwa-tech\.com\/app\/coupon\/customerLevelShow,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/Haidilao.js
+
+饿了么 Cookie = type=http-request,pattern=^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Task/elemGetCookies.js
+
+美团 Cookie = type=http-request,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/meituan/meituan.cookie.js
+
+联通营业厅 Cookie = type=http-request,pattern=^https:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.htm,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
+联通营业厅 Cookie = type=http-request,pattern=^https?:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
+联通营业厅 Cookie = type=http-request,pattern=^https?:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
+
+智行火车票 Cookie = type=http-request,pattern=^https:\/\/m\.ctrip\.com/restapi/soa2/14593/json/attendanceDay?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.cookie.js
+
+哔哩哔哩直播 Cookie = type=http-request,pattern=^https:\/\/live\.bilibili\.com\/?.?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js
+
+滴滴 Cookie = type=http-request,pattern=^https:\/\/as\.xiaojukeji\.com\/ep\/as\/toggles\?,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/DiDi/DiDi.js,requires-body=true
+滴滴 Cookie2 = type=http-request,pattern=^https:\/\/bosp-api\.xiaojukeji\.com\/wechat\/benefit\/public\/index\?,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/DiDi/DiDi_ticket.js,requires-body=true
+
+快手极速版 Cookie = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/nebula\/task\/earning\?,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou.js
+
+Geekhub Cookie = type=http-request,pattern=^https:\/\/geekhub\.com\/checkins\/start,script-path=https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.cookie.js
+
+[MITM]
+hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, superapp.kiwa-tech.com, h5.ele.me, i.meituan.com, act.10010.com, m.client.10010.com, m.ctrip.com, live.bilibili.com, as.xiaojukeji.com, bosp-api.xiaojukeji.com, nebula.kuaishou.com, geekhub.com
