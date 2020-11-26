@@ -47,6 +47,8 @@ DOMAIN-SUFFIX,api.exc.mob.com
 DOMAIN-SUFFIX,api.share.mob.com
 DOMAIN-SUFFIX,c.data.mob.com
 DOMAIN-SUFFIX,cca.mob.com
+// bytedance
+DOMAIN-SUFFIX,dm.bytedance.com
 // 同盾科技
 DOMAIN-SUFFIX,fraudmetrix.cn
 // AppsFlyer
@@ -116,6 +118,8 @@ URL-REGEX,^https?:\/\/static\.vuevideo\.net\/styleAssets\/advertisement\/
 URL-REGEX,^https?:\/\/msspjh\.emarbox\.com\/getAdConfig
 URL-REGEX,^https?:\/\/api\.videozhishi\.com\/api\/getAdvertising
 URL-REGEX,^https?:\/\/api\.rr\.tv\/ad\/
+// 随手记
+URL-REGEX,^https?:\/\/api\.feidee.net\/v1\/user_equity\/AdFree
 // Google
 URL-REGEX,^https?:\/\/googleads\.g\.doubleclick\.net\/mads\/
 // Pixiv
