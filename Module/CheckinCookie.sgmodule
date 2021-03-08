@@ -9,9 +9,6 @@
 海底捞 Cookie = type=http-request,pattern=^https:\/\/activity-1\.m\.duiba\.com\.cn\/signactivity\/getSignInfo,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/Haidilao.js
 海底捞等级 Cookie = type=http-request,pattern=^https:\/\/superapp\.kiwa-tech\.com\/app\/coupon\/customerLevelShow,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Haidilao/Haidilao.js
 
-饿了么 Cookie = type=http-request,pattern=^https:\/\/h5\.ele\.me\/restapi\/eus\/v\d\/current_user$,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/songyangzz/QuantumultX/master/elem/elemGetCookies.js
-饿了么吃货 Cookie = type=http-request,pattern=^https?:\/\/h5\.ele\.me\/restapi\/svip_biz\/v1\/supervip\/query_mission_list\?longitude=([^&]*).*latitude=([^&]*),script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/eleme/eleme_daily.js
-
 美团 Cookie = type=http-request,pattern=^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/meituan/meituan.cookie.js
 
 联通营业厅 Cookie = type=http-request,pattern=^https?:\/\/m\.client\.10010\.com\/dailylottery\/static\/(integral|doubleball)\/firstpage,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/10010/unicom_checkin.js
@@ -34,4 +31,4 @@ Geekhub Cookie = type=http-request,pattern=^https:\/\/geekhub\.com\/checkins\/st
 网易云音乐 Cookie = type=http-request,pattern=^https:\/\/music.163.com\/weapi\/user\/level,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/neteasemusic/neteasemusic.cookie.js
 
 [MITM]
-hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, superapp.kiwa-tech.com, h5.ele.me, i.meituan.com, m.client.10010.com, m.ctrip.com, live.bilibili.com, as.xiaojukeji.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com, music.163.com
+hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, superapp.kiwa-tech.com, i.meituan.com, m.client.10010.com, m.ctrip.com, live.bilibili.com, as.xiaojukeji.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com, music.163.com
