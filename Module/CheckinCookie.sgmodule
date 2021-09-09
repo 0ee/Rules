@@ -13,8 +13,6 @@
 
 智行火车票 Cookie = type=http-request,pattern=^https:\/\/m\.ctrip\.com/restapi/soa2/14593/json/attendanceDay?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.cookie.js
 
-滴滴 Cookie = type=http-request,pattern=^https:\/\/as\.xiaojukeji\.com\/ep\/as\/toggles\?,script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/DiDi/DiDi_new.js
-
 快手极速版 Cookie = type=http-request,pattern=https:\/\/nebula\.kuaishou\.com\/nebula\/task\/earning\?,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/kuaishou.js
 
 Geekhub Cookie = type=http-request,pattern=^https:\/\/(www\.)?geekhub\.com\/checkins\/start,script-path=https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.cookie.js
@@ -25,4 +23,4 @@ Geekhub Cookie = type=http-request,pattern=^https:\/\/(www\.)?geekhub\.com\/chec
 微博钱包 Cookie = type=http-request,pattern=https:\/\/pay\.sc\.weibo\.com\/aj\/mobile\/home\/welfare\/signin\/do\?,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js
 
 [MITM]
-hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, superapp.kiwa-tech.com, i.meituan.com, m.ctrip.com, as.xiaojukeji.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com
+hostname = %APPEND% api.m.jd.com, activity-1.m.duiba.com.cn, superapp.kiwa-tech.com, i.meituan.com, m.ctrip.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com
