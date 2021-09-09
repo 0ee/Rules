@@ -19,5 +19,7 @@ Geekhub Cookie = type=http-request,pattern=^https:\/\/(www\.)?geekhub\.com\/chec
 微博 Cookie = type=http-request,pattern=https:\/\/api\.weibo\.cn\/\d\/page\/\w+\?gsid,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js
 微博钱包 Cookie = type=http-request,pattern=https:\/\/pay\.sc\.weibo\.com\/aj\/mobile\/home\/welfare\/signin\/do\?,script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js
 
+NGA Cookie = type=http-request,pattern=^https:\/\/ngabbs.com\/nuke.php\?,script-path=https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.cookie.js
+
 [MITM]
-hostname = %APPEND% api.m.jd.com, i.meituan.com, m.ctrip.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com
+hostname = %APPEND% api.m.jd.com, i.meituan.com, m.ctrip.com, nebula.kuaishou.com, geekhub.com, api.kkmh.com, api.weibo.cn, pay.sc.weibo.com, ngabbs.com
