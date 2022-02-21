@@ -17,5 +17,3 @@ Geekhub Cron = type=cron,cronexp=16 0 * * *,wake-system=1,script-path=https://ra
 快看漫画 Cron = type=cron,cronexp=0 9 * * *,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js
 
 微博 Cron = type=cron,cronexp=17 0 * * *,script-path=https://raw.githubusercontent.com/GoodHolidays/Scripts/master/Task/weibo.js
-
-NGA Cron = type=cron,cronexp=1 9 * * *,script-path=https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.js
