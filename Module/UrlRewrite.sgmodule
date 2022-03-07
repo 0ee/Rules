@@ -4,14 +4,25 @@
 
 
 [URL Rewrite]
+# 知乎
 ^https?://www.google.(com|cn)/search.*?q=zh\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=zh, 302
+# 淘宝
 ^https?://www.google.(com|cn)/search.*?q=tb\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=tb, 302
+# 京东
 ^https?://www.google.(com|cn)/search.*?q=jd\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=jd, 302
+# 哔哩哔哩
 ^https?://www.google.(com|cn)/search.*?q=bl\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=bl, 302
+# 大众点评
 ^https?://www.google.(com|cn)/search.*?q=dp\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=dp, 302
+# 豆瓣
 ^https?://www.google.(com|cn)/search.*?q=db\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=db, 302
+# YouTube
 ^https?://www.google.(com|cn)/search.*?q=ytb\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=ytb, 302
+# 拼多多
 ^https?://www.google.(com|cn)/search.*?q=pdd\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=pdd, 302
+# 小红书
 ^https?://www.google.(com|cn)/search.*?q=xhs\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=xhs, 302
+# 抖音
 ^https?://www.google.(com|cn)/search.*?q=dy\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=dy, 302
+# 微博
 ^https?://www.google.(com|cn)/search.*?q=wb\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=wb, 302
