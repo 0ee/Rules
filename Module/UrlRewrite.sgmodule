@@ -20,6 +20,7 @@
 ^https?://www.google.(com|cn|com.hk)/search.*?q=ytb\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=ytb, 302
 # 拼多多
 ^https?://www.google.(com|cn|com.hk)/search.*?q=pdd\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=pdd, 302
+^https?://www.google.(com|cn|com.hk)/search.*?q=%E6%8B%BC%E5%A4%9A%E5%A4%9A\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=pdd, 302
 # 小红书
 ^https?://www.google.(com|cn|com.hk)/search.*?q=xhs\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=xhs, 302
 # 抖音
