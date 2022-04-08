@@ -7,7 +7,7 @@
 VSCO = type=http-response,pattern=https://vsco.co/api/subscriptions/2.1/user-subscriptions,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/VSCO.js
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js
 懒饭 = type=http-response,pattern=^https:\/\/lanfanapp.com\/api\/v1\/user\/(prime.json|page_detail.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Lanfan.js
-Endel = type=http-response,pattern=^https?:\/\/api-production.endel.io\/v3\/call,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Endel.js
+Endel = type=http-response,pattern=^https?:\/\/api-production.endel.io\/v4\/call,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Endel.js
 
 [MITM]
 hostname = %APPEND% vsco.co, backend.getdrafts.com, lanfanapp.com, api-production.endel.io
