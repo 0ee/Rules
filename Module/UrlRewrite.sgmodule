@@ -26,3 +26,8 @@
 ^https?://www.google.(com|cn)/search.*?q=dy\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=dy, 302
 # 微博
 ^https?://www.google.(com|cn)/search.*?q=wb\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=wb, 302
+# 美团
+^https?://www.google.(com|cn)/search.*?q=mt\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=mt, 302
+# App Store
+^https?://www.google.(com|cn)/search.*?q=app\+ shortcuts://x-callback-url/run-shortcut?name=URL%20Rewrite&input=text&text=app, 302
+
