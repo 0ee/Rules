@@ -9,6 +9,7 @@ Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verific
 懒饭 = type=http-response,pattern=^https:\/\/lanfanapp.com\/api\/v1\/user\/(prime.json|page_detail.json),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Lanfan.js
 Endel = type=http-response,pattern=^https?:\/\/api-production.endel.io\/v4\/call,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Endel.js
 Emby = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
+探潮 = type=http-response,pattern=http://api.ohuokeji.com/api/maotai/me,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/TanChao.js
 
 [MITM]
-hostname = %APPEND% vsco.co, backend.getdrafts.com, lanfanapp.com, api-production.endel.io, mb3admin.com
+hostname = %APPEND% vsco.co, backend.getdrafts.com, lanfanapp.com, api-production.endel.io, mb3admin.com, api.ohuokeji.com
