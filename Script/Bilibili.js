@@ -77,7 +77,8 @@ if (-1 != $request.url.indexOf('resource/show/tab?') && 0 == body['code']) {
 if (-1 != $request.url.indexOf('/x/v2/account/mine') && 0 == body['code']) {
     body['data']['vip_section'] = {};
     body['data']['vip_section_v2'] = {};
-    body['data']['sections'] = body['data']['sections'].filter(
+    body['data']['live_tip'] = {};
+    body['data']['sections_v2'] = body['data']['sections_v2'].filter(
         function (item, index) {
             if ('创作中心' == item.title) {
                 return false;
