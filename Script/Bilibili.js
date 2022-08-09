@@ -62,8 +62,8 @@ if (-1 != $request.url.indexOf('/x/v2/reply/main') && 0 == body['code']) {
 }
 
 // tab
-if (-1 != $request.url.indexOf('resource/show/tab?') && 0 == body['code']) {
-    // 70 直播 影视
+if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
+    // 70 39 直播 影视
     body['data']['tab'] = body['data']['tab'].filter(function (item) {
         return item.id != 38247 && item.id != 51079 && item.id != 536 && item.id != 39 && item.id != 151 && item.id != 165 && item.id != 168 && item.id != 171
     });
@@ -80,7 +80,7 @@ if (-1 != $request.url.indexOf('/x/v2/account/mine') && 0 == body['code']) {
     body['data']['live_tip'] = {};
     body['data']['sections_v2'] = body['data']['sections_v2'].filter(
         function (item, index) {
-            if ('创作中心' == item.title) {
+            if ('创作中心' == item.title || '推荐服务' == item.title) {
                 return false;
             }
             item.items = item.items.filter(function (section_items) {
