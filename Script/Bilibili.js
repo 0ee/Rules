@@ -1,5 +1,26 @@
+function fixPos(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        // 修复pos
+        arr[i].pos = i + 1;
+    }
+}
+function resetTabPos(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i].name == '热门'){
+            arr[i].pos = 1;
+            arr[i].default_selected = 1;
+            continue;
+        }
+        // 修复pos
+        arr[i].pos = i + 2;
+        delete arr[i].default_selected;
+    }
+    arr.sort(function(a,b){
+        return a.pos - b.pos
+    });
+}
 const up_blacklist = ['NathanRich火锅大王','大祥哥来了'];
-const title_blackwords = ['乔碧萝','鸡你太美'];
+const title_blackwords = ['乔碧萝','鸡你太美','代肝'];
 const region_blacklist = ['宅舞','三次元舞蹈'];
 let body = $response.body;
 console.log($request.url)
@@ -73,17 +94,18 @@ if (-1 != $request.url.indexOf('/x/v2/reply/main') && 0 == body['code']) {
 if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
     // 70 39 直播 151 影视 136117 新征程
     body['data']['tab'] = body['data']['tab'].filter(function (item) {
-        return item.id != 38247 && item.id != 51079 && item.id != 536 && item.id != 39 && item.id != 151 && item.id != 165 && item.id != 168 && item.id != 171 && item.id != 136117 && item.name != '追番'
+        return item.id != 38247 && item.id != 51079 && item.id != 536 && item.name != '直播' && item.id != 151 && item.id != 165 && item.id != 168 && item.id != 171 && item.id != 136117 && item.name != '追番'
     });
+    resetTabPos(body['data']['tab']);
     // 游戏中心
     body['data']['top'] = body['data']['top'].filter(function (item) {
-        return item.id != 222;
+        return item.id != 222 && item.id != 176;
     });
     // 去除发布、会员购
     body['data']['bottom'] = body['data']['bottom'].filter(function (item) {
         return item.id != 670 && item.id != 242;
     });
-    // 去除左上角
+    fixPos(body['data']['bottom']);
     body['data']['top_left'] = {};
 }
 
