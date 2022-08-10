@@ -5,6 +5,7 @@ let body = $response.body;
 console.log($request.url)
 console.log(body)
 body = JSON.parse(body);
+// 开屏页面
 
 // 观看页面
 if (-1 != $request.url.indexOf('/x/v2/view\?a') && 0 == body['code']) {
@@ -69,10 +70,11 @@ if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
     });
     // 游戏中心
     body['data']['top'] = body['data']['top'].filter(function (item) {
-        return item.id != 222
+        return item.id != 222 && item.id != 176;
     });
+    // 去除发布、会员购
     body['data']['bottom'] = body['data']['bottom'].filter(function (item) {
-        return item.id != 670
+        return item.id != 670 && item.id != 242;
     });
 }
 
@@ -88,7 +90,7 @@ if (-1 != $request.url.indexOf('/x/v2/account/mine') && 0 == body['code']) {
             }
             item.items = item.items.filter(function (section_items) {
                 console.log(section_items.title);
-                if ((['我的关注', '我的钱包', '会员购中心', '直播中心', '青少年模式', '看视频免流量', 'BW 成就', '听视频'].includes(section_items.title))) {
+                if ((['我的关注', '我的钱包', '会员购中心', '直播中心', '青少年模式', '看视频免流量', 'BW 成就', '听视频', '青少年守护', '限流推送详细解读'].includes(section_items.title))) {
                     return false;
                 }
                 return true;
