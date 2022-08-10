@@ -6,6 +6,13 @@ console.log($request.url)
 console.log(body)
 body = JSON.parse(body);
 // 开屏页面
+if (-1 != $request.url.indexOf('x/v2/splash') && 0 == body['code']) {
+    console.log('开屏页' + ($request.url.indexOf("splash/show") !== -1 ? 'show' : 'list'));
+    if (body.data.hasOwnProperty('show')) {
+            delete body.data.show;
+    }
+}
+
 
 // 观看页面
 if (-1 != $request.url.indexOf('/x/v2/view\?a') && 0 == body['code']) {
@@ -31,7 +38,7 @@ if (-1 != $request.url.indexOf('/x/v2/rank') && 0 == body['code']) {
 if (-1 != $request.url.indexOf('/x/v2/feed') && 0 == body['code']) {
     body['data']['items'] = body['data']['items'].filter(function (item) {
         // search_subscribe 人气UP主推荐
-        if (['ad_web_s', 'ad_web', 'live', 'banner', 'search_subscribe'].includes(item.card_goto)) {
+        if (['ad_web_s', 'ad_av', 'ad_web', 'live', 'banner', 'search_subscribe','ad_web_gif','ad_player', 'ad_inline_3d', 'game', 'ad_inline_av'].includes(item.card_goto)) {
             return false;
         }
         if (item.hasOwnProperty('ad_info')) {
