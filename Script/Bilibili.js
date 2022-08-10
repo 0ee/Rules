@@ -73,7 +73,7 @@ if (-1 != $request.url.indexOf('/x/v2/reply/main') && 0 == body['code']) {
 if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
     // 70 39 直播 151 影视 136117 新征程
     body['data']['tab'] = body['data']['tab'].filter(function (item) {
-        return item.id != 38247 && item.id != 51079 && item.id != 536 && item.id != 39 && item.id != 151 && item.id != 165 && item.id != 168 && item.id != 171 && item.id != 136117 && item.title != '追番'
+        return item.id != 38247 && item.id != 51079 && item.id != 536 && item.id != 39 && item.id != 151 && item.id != 165 && item.id != 168 && item.id != 171 && item.id != 136117 && item.name != '追番'
     });
     // 游戏中心
     body['data']['top'] = body['data']['top'].filter(function (item) {
