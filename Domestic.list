@@ -1,6 +1,7 @@
 PROCESS-NAME,WeChat
 PROCESS-NAME,Lark*
 PROCESS-NAME,企业微信*
+PROCESS-NAME,wechatwebdevtools*
 // 飞书
 DOMAIN-SUFFIX,feishu.cn
 // Game
