@@ -36,10 +36,10 @@ if (!$response.body) {
 if ($request.method !== "GET") {
     $notification.post(notifyTitle, "method错误:", method);
 }
+body = JSON.parse(body);
 if (!body.data) {
     $notification.post(notifyTitle, url, "data字段错误");
 }
-body = JSON.parse(body);
 // 开屏页面
 if (-1 != $request.url.indexOf('x/v2/splash') && 0 == body['code']) {
     console.log('开屏页' + ($request.url.indexOf("splash/show") !== -1 ? 'show' : 'list'));
