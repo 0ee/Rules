@@ -19,12 +19,26 @@ function resetTabPos(arr) {
         return a.pos - b.pos
     });
 }
-const up_blacklist = ['NathanRich火锅大王','大祥哥来了'];
-const title_blackwords = ['乔碧萝','鸡你太美','代肝'];
-const region_blacklist = ['宅舞','三次元舞蹈'];
+const up_blacklist = [];
+const title_blackwords = ['代肝'];
+const region_blacklist = [];
 let body = $response.body;
+notifyTitle = 'bilibili-json';
 console.log($request.url)
+console.log($request.method)
 console.log(body)
+const url = $request.url;
+if (!$response.body) {
+    // 有undefined的情况
+    console.log(`$response.body为undefined:${url}`);
+    $done({});
+}
+if ($request.method !== "GET") {
+    $notification.post(notifyTitle, "method错误:", method);
+}
+if (!body.data) {
+    $notification.post(notifyTitle, url, "data字段错误");
+}
 body = JSON.parse(body);
 // 开屏页面
 if (-1 != $request.url.indexOf('x/v2/splash') && 0 == body['code']) {
@@ -57,7 +71,10 @@ if (-1 != $request.url.indexOf('/x/v2/rank') && 0 == body['code']) {
 
 // feed
 if (-1 != $request.url.indexOf('/x/v2/feed') && 0 == body['code']) {
-    body['data']['items'] = body['data']['items'].filter(function (item) {
+    if (!body.data.items?.length) {
+            $notification.post(notifyTitle, '推荐页', "items字段错误");
+    }else{
+        body['data']['items'] = body['data']['items'].filter(function (item) {
         // search_subscribe 人气UP主推荐
         if (['ad_web_s', 'ad_av', 'ad_web', 'live', 'banner', 'search_subscribe','ad_web_gif','ad_player', 'ad_inline_3d', 'game', 'ad_inline_av'].includes(item.card_goto)) {
             return false;
@@ -78,6 +95,8 @@ if (-1 != $request.url.indexOf('/x/v2/feed') && 0 == body['code']) {
         }
         return true;
     });
+    }
+
 }
 
 // 搜索页Banner
