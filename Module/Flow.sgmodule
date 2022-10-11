@@ -1,0 +1,15 @@
+#!name=私人定制
+#!desc=Flow
+# 作用: 跳过部分应用的代理检测
+# 来源: https://raw.githubusercontent.com/mieqq/mieqq/master/skip-proxy-lists.sgmodule
+# 作用: 广告联盟去广告(快手联盟,优量汇,穿山甲)
+# 来源: https://raw.githubusercontent.com/app2smile/rules/master/module/adsense.sgmodule
+
+[General]
+skip-proxy = %APPEND% www.baidu.com,yunbusiness.ccb.com,wxh.wo.cn,gate.lagou.com,www.abchina.com.cn,mbank.psbc.com,www.10010.com
+
+[MITM]
+hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, is.snssdk.com, mi.gdt.qq.com, open.e.kuaishou.com
+
+[Script]
+广告联盟去广告 = type=http-response,pattern=^https:\/\/((api-access\.pangolin-sdk-toutiao|is\.snssdk)\.com\/api\/ad\/union\/sdk\/get_ads|open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/adsense.js
