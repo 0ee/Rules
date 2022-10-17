@@ -11,7 +11,7 @@ let headers = $response.headers;
 const isQuanX = typeof $task !== "undefined";
 const binaryBody = isQuanX ? new Uint8Array($response.bodyBytes) : $response.body;
 let gzipStrName = 'grpc-encoding';
-if(!headers[gzipStrName]){
+if (!headers[gzipStrName]) {
     // Loon QX做调整
     console.log('响应头首字母大写');
     gzipStrName = 'Grpc-Encoding';
@@ -26,25 +26,26 @@ let needProcessFlag = false;
 if (method !== "POST") {
     $notification.post(notifyTitle, "method错误:", method);
 }
-if(url.includes("Dynamic/DynVideo")){
-	console.log('动态DynVideo');
-	const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
-	let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
-	if(!dynAllReplyObj.upList){
+if (url.includes("Dynamic/DynVideo")) {
+    console.log('动态DynVideo');
+    const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
+    let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
+    console.log(dynAllReplyObj);
+    if (!dynAllReplyObj.upList) {
         console.log('upList为空');
     } else {
         needProcessFlag = true;
         dynAllReplyObj.upList = null;
         console.log('最常访问upList去除');
     }
-    if(needProcessFlag){
+    if (needProcessFlag) {
         body = processNewBody(dynAllReplyType.encode(dynAllReplyObj).finish());
     }
-} else if(url.includes("Dynamic/DynAll")){
+} else if (url.includes("Dynamic/DynAll")) {
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
-    if(!dynAllReplyObj.topicList){
+    if (!dynAllReplyObj.topicList) {
         console.log('topicList为空');
     } else {
         needProcessFlag = true;
@@ -52,7 +53,7 @@ if(url.includes("Dynamic/DynVideo")){
         console.log('推荐话题topicList去除');
     }
 
-    if(!dynAllReplyObj.upList){
+    if (!dynAllReplyObj.upList) {
         console.log('upList为空');
     } else {
         needProcessFlag = true;
@@ -60,85 +61,85 @@ if(url.includes("Dynamic/DynVideo")){
         console.log('最常访问upList去除');
     }
 
-    if(!dynAllReplyObj.dynamicList?.list?.length){
+    if (!dynAllReplyObj.dynamicList?.list?.length) {
         console.log('动态列表list为空');
     } else {
         let adCount = 0;
         dynAllReplyObj.dynamicList.list = dynAllReplyObj.dynamicList.list.filter(item => {
-            if(item.cardType !== 15){
+            if (item.cardType !== 15) {
                 return true;
             }
             adCount++;
             return false;
         });
-        if(adCount){
+        if (adCount) {
             needProcessFlag = true;
         }
         console.log(`动态列表广告数量:${adCount}`);
     }
-    if(needProcessFlag){
+    if (needProcessFlag) {
         body = processNewBody(dynAllReplyType.encode(dynAllReplyObj).finish());
     }
-} else if(url.includes("View/View")){
+} else if (url.includes("View/View")) {
     console.log('视频播放页View/View');
     const viewReplyType = biliRoot.lookupType("bilibili.app.view.ViewReply");
     let viewReplyObj = viewReplyType.decode(unGzipBody);
-    if(!viewReplyObj.cms?.length){
+    if (!viewReplyObj.cms?.length) {
         console.log('cms为空');
     } else {
         let adCount = 0;
         const sourceContentDtoType = biliRoot.lookupType("bilibili.ad.v1.SourceContentDto");
-        for(let i = 0; i < viewReplyObj.cms.length; i++){
+        for (let i = 0; i < viewReplyObj.cms.length; i++) {
             let item = viewReplyObj.cms[i];
-            if(item.sourceContent?.value){
+            if (item.sourceContent?.value) {
                 // 注意这里虽然proto没有属性value  但是viewReplyMessage解析的有
                 const sourceContentDtoObj = sourceContentDtoType.decode(item.sourceContent.value);
-                if(sourceContentDtoObj.adContent){
+                if (sourceContentDtoObj.adContent) {
                     adCount++;
                 }
             }
         }
         viewReplyObj.cms = [];
         console.log(`up主推荐广告:${adCount}`);
-        if(adCount){
+        if (adCount) {
             needProcessFlag = true;
         }
     }
 
-    if(!viewReplyObj.relates?.length){
+    if (!viewReplyObj.relates?.length) {
         console.log('relates相关推荐为空');
     } else {
         let adCount = 0;
         viewReplyObj.relates = viewReplyObj.relates.filter(item => {
-            if(item.goto === 'cm'){
+            if (item.goto === 'cm') {
                 adCount++;
                 return false;
             }
             return true;
         });
         console.log(`相关推荐广告:${adCount}`);
-        if(adCount){
+        if (adCount) {
             needProcessFlag = true;
         }
     }
 
     let tIconMap = viewReplyObj.tIcon;
     for (const i in tIconMap) {
-        if(tIconMap[i] === null){
+        if (tIconMap[i] === null) {
             // 解决tIcon的null is not an object问题
             console.log(`tIconMap:${i}`);
             delete tIconMap[i];
         }
     }
-    if(needProcessFlag){
+    if (needProcessFlag) {
         body = processNewBody(viewReplyType.encode(viewReplyObj).finish());
     }
-} else if(url.includes("PlayURL/PlayView")){
+} else if (url.includes("PlayURL/PlayView")) {
     console.log('PlayURL/PlayView/View');
     const playViewReplyType = biliRoot.lookupType("bilibili.app.playurl.PlayViewReply");
     let playViewReplyObj = playViewReplyType.decode(unGzipBody);
     const oldBackgroundConf = playViewReplyObj.playArc?.backgroundPlayConf;
-    if(oldBackgroundConf && (!oldBackgroundConf.isSupport || oldBackgroundConf.disabled)){
+    if (oldBackgroundConf && (!oldBackgroundConf.isSupport || oldBackgroundConf.disabled)) {
         console.log(`后台播放限制去除`);
         playViewReplyObj.playArc.backgroundPlayConf.isSupport = true;
         playViewReplyObj.playArc.backgroundPlayConf.disabled = false;
@@ -153,7 +154,7 @@ if(url.includes("Dynamic/DynVideo")){
     $notification.post('bilibili-proto', "路径匹配错误:", url);
 }
 
-if(needProcessFlag){
+if (needProcessFlag) {
     console.log(`${body.byteLength}---${body.buffer.byteLength}`);
     $done({
         body,
@@ -164,7 +165,7 @@ if(needProcessFlag){
     $done({});
 }
 
-function processNewBody(unGzipBody){
+function processNewBody(unGzipBody) {
     const length = unGzipBody.length;
     let merge = new Uint8Array(5 + length);
     merge.set(intToUint8Array(length), 1);
@@ -172,7 +173,7 @@ function processNewBody(unGzipBody){
     return merge;
 }
 
-function intToUint8Array (num) {
+function intToUint8Array(num) {
     let arr = new ArrayBuffer(4); // an Int32 takes 4 bytes
     let view = new DataView(arr);
     view.setUint32(0, num, false); // byteOffset = 0; litteEndian = false
