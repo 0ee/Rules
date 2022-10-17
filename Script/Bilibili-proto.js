@@ -43,7 +43,7 @@ if(url.includes("Dynamic/DynAll")){
         console.log('upList为空');
     } else {
         needProcessFlag = true;
-        // dynAllReplyObj.upList = null;
+        dynAllReplyObj.upList = null;
         console.log('最常访问upList去除');
     }
 
