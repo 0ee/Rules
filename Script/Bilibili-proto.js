@@ -26,8 +26,21 @@ let needProcessFlag = false;
 if (method !== "POST") {
     $notification.post(notifyTitle, "method错误:", method);
 }
-
-if(url.includes("Dynamic/DynAll") || url.includes("Dynamic/DynVideo")){
+if(url.includes("Dynamic/DynVideo")){
+	console.log('动态DynVideo');
+	const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
+	let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
+	if(!dynAllReplyObj.upList){
+        console.log('upList为空');
+    } else {
+        needProcessFlag = true;
+        dynAllReplyObj.upList = null;
+        console.log('最常访问upList去除');
+    }
+    if(needProcessFlag){
+        body = processNewBody(dynAllReplyType.encode(dynAllReplyObj).finish());
+    }
+}elseif(url.includes("Dynamic/DynAll")){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
