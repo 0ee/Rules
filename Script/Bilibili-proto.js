@@ -40,7 +40,7 @@ if(url.includes("Dynamic/DynVideo")){
     if(needProcessFlag){
         body = processNewBody(dynAllReplyType.encode(dynAllReplyObj).finish());
     }
-}elseif(url.includes("Dynamic/DynAll")){
+} else if(url.includes("Dynamic/DynAll")){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
