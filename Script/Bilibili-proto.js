@@ -27,7 +27,7 @@ if (method !== "POST") {
     $notification.post(notifyTitle, "method错误:", method);
 }
 
-if(url.includes("Dynamic/DynAll")){
+if(url.includes("Dynamic/DynAll") || url.includes("Dynamic/DynVideo")){
     console.log('动态DynAll');
     const dynAllReplyType = biliRoot.lookupType("bilibili.app.dynamic.DynAllReply");
     let dynAllReplyObj = dynAllReplyType.decode(unGzipBody);
