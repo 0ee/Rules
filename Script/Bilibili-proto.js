@@ -39,11 +39,11 @@ if (url.includes("Dynamic/DynVideo")) {
         dynVideoReplyObj.videoUpList = null;
         console.log('最常访问upList去除');
     }
-    if (!dynAllReplyObj.dynamicList?.list?.length) {
+    if (!dynVideoReplyObj.dynamicList?.list?.length) {
         console.log('动态列表list为空');
     } else {
         let adCount = 0;
-        dynAllReplyObj.dynamicList.list = dynAllReplyObj.dynamicList.list.filter(item => {
+        dynVideoReplyObj.dynamicList.list = dynVideoReplyObj.dynamicList.list.filter(item => {
             if (item.cardType !== 15) {
                 return true;
             }
