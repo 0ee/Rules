@@ -47,6 +47,10 @@ if (-1 != $request.url.indexOf('x/v2/splash') && 0 == body['code']) {
             delete body.data.show;
     }
 }
+// 首页活动标签
+if (-1 != $request.url.indexOf('x/resource/top/activity') && 0 == body['code']) {
+    body['data'] = [];
+}
 
 
 // 观看页面
