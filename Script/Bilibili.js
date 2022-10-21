@@ -132,7 +132,7 @@ if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
     body['data']['top_left'] = {};
 }
 
-// 我的
+// 我的页面
 if (-1 != $request.url.indexOf('/x/v2/account/mine') && 0 == body['code']) {
     body['data']['vip_section'] = {};
     body['data']['vip_section_v2'] = {};
@@ -155,5 +155,11 @@ if (-1 != $request.url.indexOf('/x/v2/account/mine') && 0 == body['code']) {
             return true;
         });
 }
+
+// 我的信息
+if (-1 != $request.url.indexOf('/x/v2/account/myinfo') && 0 == body['code']) {
+    body['data']['vip']['label'] = {};
+}
+
 body = JSON.stringify(body);
 $done({body});
