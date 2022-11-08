@@ -37,7 +37,7 @@ if ($request.method !== "GET") {
     $notification.post(notifyTitle, "method错误:", method);
 }
 body = JSON.parse(body);
-if (!body.data) {
+if (!body.data && body.code >= 0) {
     $notification.post(notifyTitle, url, "data字段错误");
 }
 // 开屏页面
