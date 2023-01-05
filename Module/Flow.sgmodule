@@ -1,5 +1,7 @@
 #!name=私人定制
 #!desc=Flow
+# 作用: 1.增补跳过代理部分段内容 2.增补返回真实IP段内容
+# 来源: https://github.com/VirgilClyne/GetSomeFries/blob/main/sgmodule/General.sgmodule
 # 作用: 跳过部分应用的代理检测
 # 来源: https://raw.githubusercontent.com/mieqq/mieqq/master/skip-proxy-lists.sgmodule
 # 作用: 广告联盟去广告(快手联盟,优量汇,穿山甲)
@@ -13,7 +15,8 @@
 
 
 [General]
-skip-proxy = %APPEND% www.baidu.com,yunbusiness.ccb.com,wxh.wo.cn,gate.lagou.com,www.abchina.com.cn,mbank.psbc.com,www.10010.com
+skip-proxy = %APPEND% www.baidu.com, yunbusiness.ccb.com, gate.lagou.com, injections.adguard.org, local.adguard.org, cable.auth.com 
+always-real-ip = %INSERT% *.lan, cable.auth.com, *.msftconnecttest.com, *.msftncsi.com, network-test.debian.org, detectportal.firefox.com, resolver1.opendns.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, stun.*, global.turn.twilio.com, global.stun.twilio.com, localhost.*.qq.com, *.logon.battlenet.com.cn, *.logon.battle.net, *.blzstatic.cn, music.163.com, *.music.163.com, *.126.net, musicapi.taihe.com, music.taihe.com, songsearch.kugou.com, trackercdn.kugou.com, *.kuwo.cn, api-jooxtt.sanook.com, api.joox.com, joox.com, y.qq.com, *.y.qq.com, streamoc.music.tc.qq.com, mobileoc.music.tc.qq.com, isure.stream.qqmusic.qq.com, dl.stream.qqmusic.qq.com, aqqmusic.tc.qq.com, amobile.music.tc.qq.com, *.xiami.com, *.music.migu.cn, music.migu.cn, proxy.golang.org, *.mcdn.bilivideo.cn, *.cmpassport.com, id6.me, open.e.189.cn, mdn.open.wo.cn, opencloud.wostore.cn, auth.wosms.cn, *.jegotrip.com.cn, *.icitymobile.mobi, *.pingan.com.cn, *.cmbchina.com, pool.ntp.org, *.pool.ntp.org, ntp.*.com, time.*.com, ntp?.*.com, time?.*.com, time.*.gov, time.*.edu.cn, *.ntp.org.cn, PDC._msDCS.*.*, DC._msDCS.*.*, GC._msDCS.*.*
 
 [MITM]
 hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, is.snssdk.com, mi.gdt.qq.com, open.e.kuaishou.com, boxer.baidu.com, security.wechat.com, weixin110.qq.com, wmapi.meituan.com,api.m.jd.com,mi.gdt.qq.com, cmsapi.dmall.com
