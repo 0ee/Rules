@@ -12,7 +12,7 @@ if ( - 1 != $request.url.indexOf('/api/v1/verification/account_status')) {
         body = $response.body;
     }
     body["is_subscription_active"] = true;
-    body["active_expires_at"] = "2024-12-31T05:06:53Z";
+    body["active_expires_at"] = "2030-12-31T05:06:53Z";
     body["active_subscription_type"] = "year"; //none
     body["is_blocked"] = false;
     body["has_had_free_trial"] = false;
