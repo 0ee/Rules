@@ -17,3 +17,7 @@ Geekhub Cron = type=cron,cronexp=16 0 * * *,script-path=https://raw.githubuserco
 微博 Cron = type=cron,cronexp=17 0 * * *,script-path=https://raw.githubusercontent.com/FoKit/Quantumult-X/main/scripts/weibo_sign.js
 
 NGA Cron = type=cron,cronexp=18 0 * * *,script-path=https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.js
+
+京东评价 = type=cron,cronexp="37 15 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/shufflewzc/faker2/main/jd_evaluation.js
+
+阿里云盘 Cron = type=cron,cronexp="0 10 0 * * ?",wake-system=1,script-path=https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js
