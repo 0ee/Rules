@@ -122,7 +122,7 @@ if (-1 != $request.url.indexOf('resource/show/tab/v2?') && 0 == body['code']) {
     resetTabPos(body['data']['tab']);
     // 游戏中心
     body['data']['top'] = body['data']['top'].filter(function (item) {
-        return item.id != 222 && item.id != 176;
+        return item.id != 222;
     });
     // 去除发布、会员购
     body['data']['bottom'] = body['data']['bottom'].filter(function (item) {
