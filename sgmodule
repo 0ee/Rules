@@ -21,3 +21,39 @@ https://raw.githubusercontent.com/Tartarus2014/Surge-Script/master/Task.sgmodule
 https://raw.githubusercontent.com/VirgilClyne/iRingo/main/sgmodule/Location.sgmodule
 https://raw.githubusercontent.com/VirgilClyne/iRingo/main/sgmodule/Siri.sgmodule
 https://raw.githubusercontent.com/VirgilClyne/iRingo/main/sgmodule/TestFlight.sgmodule
+
+
+
+
+# 官方手册 - https://manual.nssurge.com/
+# 理解原理 - https://manual.nssurge.com/book/understanding-surge/cn/
+# 帮助中心 - https://nssurge.zendesk.com/
+# 技术社区 - https://community.nssurge.com
+
+
+# Self-use sgmodule:
+
+# Advanced Settings & URL Redirect - https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Module/General.sgmodule
+
+# Block Advertising for Surge iOS - https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Module/Block/Advertising.sgmodule
+
+# Block YouTube Advertising - https://raw.githubusercontent.com/Maasea/sgmodule/master/YoutubeAds.sgmodule
+
+# iRingo for Siri & Search - https://raw.githubusercontent.com/VirgilClyne/iRingo/main/sgmodule/Siri.Proxy.sgmodule
+
+# iRingo for Location Services - https://raw.githubusercontent.com/VirgilClyne/iRingo/main/sgmodule/Location.sgmodule
+
+# BoxJs - https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule
+
+# iRingo.boxjs.json - https://raw.githubusercontent.com/VirgilClyne/iRingo/main/box/iRingo.boxjs.json
+
+
+fake vip
+https://github.com/cjf0423/Surge/blob/56c1b9772403e632ca9eb7c0b828b2bfca39875a/Module/Fake_Vip.sgmodule
+#高德地图
+https://github.com/Runeston/module/blob/600fbb565c79cad5768ffbc2225c79154621d9e0/amap.sgmodule
+
+https://github.com/WeilongHao/surge/tree/a898f31168b96136bd65413decbc9ce6cdf3ec49/Module
+https://github.com/kiiiiiklll/surge-/blob/5340754d03d2cbb7c9f7c2b1b21e99475a183772/surge-%E6%A8%A1%E5%9D%97
+https://github.com/zkyary/Surge/blob/ad78766d37c615a588803fe40727e7a02f1440df/Module/Module.list
+https://raw.githubusercontent.com/Tartarus2014/Surge-Script/master/Cookie.sgmodule
