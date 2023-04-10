@@ -1,5 +1,7 @@
 // Dropbox
 PROCESS-NAME,Dropbox
+PROCESS-NAME,Reeder
+PROCESS-NAME,Music
 
 // Apple
 DOMAIN,beta.itunes.apple.com
@@ -20,6 +22,7 @@ USER-AGENT,Steam*
 DOMAIN-KEYWORD,microsoft
 DOMAIN-SUFFIX,hotmail.com
 DOMAIN-SUFFIX,live.com
+DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,live.net
 DOMAIN-SUFFIX,msn.com
 DOMAIN-SUFFIX,office.com
@@ -52,6 +55,13 @@ DOMAIN-KEYWORD,epic
 DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,discord.gg
 DOMAIN-SUFFIX,discord.com
+DOMAIN-SUFFIX,fanatical.com
+DOMAIN-SUFFIX,humblebundle.com
+DOMAIN-SUFFIX,steamcommunity.com
+DOMAIN-SUFFIX,steampowered.com
+DOMAIN-SUFFIX,steamstatic.com
+DOMAIN-SUFFIX,binance.com
+DOMAIN-SUFFIX,anaconda.com
 
 
 // blocked sites
