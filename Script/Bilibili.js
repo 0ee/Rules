@@ -19,7 +19,7 @@ function resetTabPos(arr) {
         return a.pos - b.pos
     });
 }
-const up_blacklist = [];
+const up_blacklist = ['自由大野猪'];
 const title_blackwords = ['代肝'];
 const region_blacklist = [];
 let body = $response.body;
@@ -79,11 +79,27 @@ if (-1 != $request.url.indexOf('/x/v2/feed') && 0 == body['code']) {
             $notification.post(notifyTitle, '推荐页', "items字段错误");
     }else{
         body['data']['items'] = body['data']['items'].filter(function (item) {
-        // search_subscribe 人气UP主推荐
-        if (['ad_web_s', 'ad_av', 'ad_web', 'live', 'banner', 'search_subscribe','ad_web_gif','ad_player', 'ad_inline_3d', 'game', 'ad_inline_av'].includes(item.card_goto)) {
+        if ([
+                'ad_web_s',
+                'ad_av', // 广告
+                'ad_web',
+                'live',
+                'banner',
+                'search_subscribe', // 人气UP主推荐
+                'ad_web_gif', // gif广告
+                'ad_player', // 视频广告
+                'ad_inline_3d',  //
+                'game', //游戏
+                'ad_inline_av', // 
+                'live' //直播
+           ].includes(item.card_goto)) {
             return false;
         }
         if (item.hasOwnProperty('ad_info')) {
+            return false;
+        }
+        // 过滤短视频
+        if (item.player_args.duration < 60){
             return false;
         }
         if (up_blacklist.includes(item.args.up_name)) {
