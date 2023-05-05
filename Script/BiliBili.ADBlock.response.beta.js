@@ -188,6 +188,7 @@ const URL = new URLs();
 									if(card.card_data.small_card_v1.pendent_list.length <= 0){
 										return false;
 									}
+									return true;
 									// 只保留天选时刻和红包抽奖
 									card.card_data.small_card_v1.pendent_list.forEach(pendent => {
 										if (pendent.pendent_id === 1096){
