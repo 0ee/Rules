@@ -182,7 +182,7 @@ const URL = new URLs();
 								body.data.card_list.forEach(card => {
 									if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
 										$.log(`🎉`,card.card_data.small_card_v1.title);
-										$notification.post('有特殊标识', '有特殊标识', card.card_data.title);
+										$notification.post('有特殊标识', '有特殊标识', card.card_data.small_card_v1.title);
 									}
 								});
 							}
