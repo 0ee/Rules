@@ -179,12 +179,12 @@ const URL = new URLs();
 							break;
 						case "xlive/app-interface/v2/index/feed": // 直播列表
 							if (body.data?.card_list) {
-								for (let i = 0; i < body.data.card_list.length; i++) {
-							        if( body.data.card_list.card_type === 'small_card_v1' && body.data.card_list.card_data.small_card_v1.pendent_list.length > 0 ){
-							            $notification.post("有特殊标识","有特殊标识",body.data.card_list.card_data.toString());
-							        }
-							    }
-							    $notification.post("遍历直播列表","有特殊标识",'哈哈');
+								body.data.card_list.forEach(card => {
+									if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
+										$.log(`🎉`,card.card_data.small_card_v1.title);
+										$notification.post('有特殊标识', '有特殊标识', card.card_data.title);
+									}
+								});
 							}
 							break;
 					};
