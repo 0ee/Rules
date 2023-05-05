@@ -177,6 +177,16 @@ const URL = new URLs();
 								body.data.new_tab_info.outer_list.filter((i) => i.biz_id !== 33);
 							}
 							break;
+						case "xlive/app-interface/v2/index/feed": // 直播列表
+							if (body.data?.card_list) {
+								for (let i = 0; i < body.data.card_list.length; i++) {
+							        if( body.data.card_list.card_type === 'small_card_v1' && body.data.card_list.card_data.small_card_v1.pendent_list.length > 0 ){
+							            $notification.post("有特殊标识","有特殊标识",body.data.card_list.card_data.toString());
+							        }
+							    }
+							    $notification.post("遍历直播列表","有特殊标识",'哈哈');
+							}
+							break;
 					};
 					break;
 			};
