@@ -181,8 +181,15 @@ const URL = new URLs();
 							if (body.data?.card_list) {
 								body.data.card_list.forEach(card => {
 									if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
-										$.log(`🎉`,JSON.stringify(card.card_data.small_card_v1));
-										$notification.post('有特殊标识', '有特殊标识', card.card_data.small_card_v1.title);
+										// $.log(`🎉`,JSON.stringify(card.card_data.small_card_v1));
+										// $notification.post('有特殊标识', '有特殊标识', card.card_data.small_card_v1.title);
+										body.data.small_card_v1.pendent_list.forEach(pendent => {
+											if (pendent.pendent_id === 1096){
+												$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+											} else if (pending.pendent_id === 504){
+												$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+											}
+										});
 									}
 								});
 							}
