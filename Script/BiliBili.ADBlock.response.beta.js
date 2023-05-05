@@ -179,19 +179,44 @@ const URL = new URLs();
 							break;
 						case "xlive/app-interface/v2/index/feed": // 直播列表
 							if (body.data?.card_list) {
-								body.data.card_list.forEach(card => {
-									if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
-										// $.log(`🎉`,JSON.stringify(card.card_data.small_card_v1));
-										// $notification.post('有特殊标识', '有特殊标识', card.card_data.small_card_v1.title);
-										body.data.small_card_v1.pendent_list.forEach(pendent => {
-											if (pendent.pendent_id === 1096){
-												$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
-											} else if (pending.pendent_id === 504){
-												$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
-											}
-										});
+								body.data.card_list = body.data.card_list.filter((card) => {
+									// 保留我的关注
+									if(card.card_type !== 'small_card_v1'){
+										return true;
 									}
+									// 过滤没特殊标识的直播
+									if(card.card_data.small_card_v1.pendent_list.length <= 0){
+										return false;
+									}
+									// 只保留天选时刻和红包抽奖
+									card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+										if (pendent.pendent_id === 1096){
+											$.log(`红包抽奖`,JSON.stringify(pendent));
+											$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+											return true;
+										} else if (pendent.pendent_id === 504){
+											$.log(`天选时刻`,JSON.stringify(pendent));
+											$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+											return true;
+										}
+									});
+									return false;
 								});
+								// body.data.card_list.forEach(card => {
+								// 	if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
+								// 		card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+								// 			if (pendent.pendent_id === 1096){
+								// 				$.log(`红包抽奖`,JSON.stringify(pendent));
+								// 				$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+								// 			} else if (pendent.pendent_id === 504){
+								// 				$.log(`天选时刻`,JSON.stringify(pendent));
+								// 				$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+								// 			} else{
+
+								// 			}
+								// 		});
+								// 	}
+								// });
 							}
 							break;
 					};
