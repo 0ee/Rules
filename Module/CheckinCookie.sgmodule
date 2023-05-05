@@ -6,7 +6,6 @@
 [Script]
 智行火车票 Cookie = type=http-request,pattern=^https:\/\/m\.ctrip\.com/restapi/soa2/14593/json/attendanceDay?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.cookie.js
 
-Geekhub Cookie = type=http-request,pattern=^https:\/\/(www\.)?geekhub\.com\/checkins\/start,script-path=https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.cookie.js
 
 微博 Token = type=http-request,pattern=^https:\/\/api\.weibo\.cn\/\d\/users\/show,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/FoKit/Scripts/main/scripts/weibo_sign.js
 微博 Cookie = type=http-request,pattern=^https:\/\/api\.weibo\.cn\/2\/logservice\/attach,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/FoKit/Scripts/main/scripts/weibo_sign.js
@@ -22,4 +21,4 @@ V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/dail
 叮咚买菜_获取cookie = type=http-request,pattern=^https?:\/\/maicai\.api\.ddxq\.mobi\/point\/home\?api_version,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/dingdong/dingdong_checkin.js
 
 [MITM]
-hostname = %APPEND% m.ctrip.com, www.geekhub.com, api.weibo.cn, pay.sc.weibo.com, ngabbs.com, auth.aliyundrive.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi
+hostname = %APPEND% m.ctrip.com, api.weibo.cn, ngabbs.com, auth.aliyundrive.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi

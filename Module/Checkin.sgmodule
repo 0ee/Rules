@@ -6,7 +6,6 @@
 [Script]
 智行火车票 Cron = type=cron,cronexp=10 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.js
 
-Geekhub Cron = type=cron,cronexp=11 0 * * *,script-path=https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.js,wake-system=true
 
 微博 Cron = type=cron,cronexp=12 0 * * *,script-path=https://raw.githubusercontent.com/FoKit/Scripts/main/scripts/weibo_sign.js
 
@@ -16,7 +15,6 @@ NGA Cron = type=cron,cronexp=13 0 * * *,script-path=https://raw.githubuserconten
 
 V2EX Cron = type=cron,cronexp=14 0 * * *,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.js
 
-BiliBili抽红包 Cron = type=cron,cronexp=10 10 0 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/redpocket.js
 
 什么值得买 Cron = type=cron,cronexp=15 0 * * *,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_daily.js,timeout=120
 
