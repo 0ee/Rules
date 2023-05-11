@@ -87,6 +87,9 @@ const URL = new URLs();
 										} else if (cardGoto === 'live') {
 											$.log(`🎉 ${$.name}`, "直播去除");
 											return false;
+										} else if (cardGoto === 'vertical_av') {
+											$.log(`🎉 ${$.name}`, "竖屏去除");
+											return false;
 										}
 									}
 									const {player_args: playerArgs} = i;
