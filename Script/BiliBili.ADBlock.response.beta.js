@@ -115,6 +115,9 @@ const URL = new URLs();
 								$.log(`🎉 ${$.name}`, "story广告去除");
 							}
 							break;
+						case "x/resource/top/activity": // 首页活动标签
+							body.data = [];
+							break;
 					};
 					break;
 				case "api.bilibili.com":
