@@ -1,3 +1,4 @@
+# Keep.js = requires-body=1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Keep.js,type=http-response,pattern=https://(app|api).gotokeep.com/config/v3,max-size=-1,script-update-interval=0
 let body = $response.body;
 console.log($request.url)
 console.log(body)
