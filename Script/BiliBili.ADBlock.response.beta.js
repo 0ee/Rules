@@ -162,6 +162,9 @@ const DataBase = {
 																return true;
 															}
 														});
+														if(item.title.includes('蔡徐坤')){
+															return undefined;	
+														}
 
 													}
 													return item;
@@ -257,7 +260,9 @@ const DataBase = {
 									}
 									break;
 								case "x/resource/top/activity": // 首页活动标签
-									body.data = [];
+									// body.data.hash = "";
+									// body.data.online = {};
+									body.data = {};
 									break;
 							};
 							break;
