@@ -142,7 +142,7 @@ const DataBase = {
 														} else if (cardGoto === 'search_subscribe') {
 															$.log(`🎉 ${$.name}`, "人气UP主推荐去除");
 															return undefined;
-														} else if (cardGoto === 'vertical_av') {
+														} else if (item.goto === 'vertical_av') {
 															$.log(`🎉 ${$.name}`, "竖屏去除");
 															return undefined;
 														}
