@@ -143,7 +143,7 @@ const DataBase = {
 															$.log(`🎉 ${$.name}`, "竖屏去除");
 															return undefined;
 														}
-														const {player_args: playerArgs} = i;
+														const {player_args: playerArgs} = item;
 															if (playerArgs) {
 														        if (playerArgs.duration < 60){
 														        	$.log(`🎉 ${$.name}`, "过滤短视频");
