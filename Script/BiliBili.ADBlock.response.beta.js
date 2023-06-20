@@ -362,15 +362,15 @@ const DataBase = {
 											// $.log(JSON.stringify(card));
 											// 永远保留第1和第2项,以防为空无法展示
 											if(index === 0 || index === 1){
-												return true;
+												// return true;
 											}
 											// 保留我的关注
 											if(card.card_type !== 'small_card_v1'){
-												return true;
+												// return true;
 											}
 											// 过滤没特殊标识的直播
 											if(card.card_data.small_card_v1.pendent_list.length <= 0){
-												return false;
+												// return false;
 											}
 											// return true;
 											// 只保留天选时刻和红包抽奖
@@ -385,23 +385,8 @@ const DataBase = {
 													return true;
 												}
 											});
-											return false;
+											return true;
 										});
-										// body.data.card_list.forEach(card => {
-										// 	if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
-										// 		card.card_data.small_card_v1.pendent_list.forEach(pendent => {
-										// 			if (pendent.pendent_id === 1096){
-										// 				$.log(`红包抽奖`,JSON.stringify(pendent));
-										// 				$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
-										// 			} else if (pendent.pendent_id === 504){
-										// 				$.log(`天选时刻`,JSON.stringify(pendent));
-										// 				$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
-										// 			} else{
-
-										// 			}
-										// 		});
-										// 	}
-										// });
 									}
 									break;
 							};
