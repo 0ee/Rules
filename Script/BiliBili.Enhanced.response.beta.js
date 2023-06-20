@@ -151,7 +151,6 @@ const DataBase = {
 									break;
 								case "x/v2/account/mine": { // 账户信息-我的
 									let data = body.data;
-									data.vip_section_v2 = {};
 									data.sections_v2 = Configs.Mine.sections_v2.map(e => {
 										$.log(`e.title = ${e.title}`)
 										//$.log(`e.items = ${JSON.stringify(e.items)}`);
