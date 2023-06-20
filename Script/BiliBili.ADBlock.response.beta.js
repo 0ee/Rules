@@ -360,10 +360,9 @@ const DataBase = {
 									if (body.data?.card_list) {
 										body.data.card_list = body.data.card_list.filter((card, index) => {
 											// $.log(JSON.stringify(card));
-											$.log(index);
-											// 永远保留第1项,以防为空无法展示
-											if(index === 0){
-												// return true;
+											// 永远保留第1和第2项,以防为空无法展示
+											if(index === 0 || index === 1){
+												return true;
 											}
 											// 保留我的关注
 											if(card.card_type !== 'small_card_v1'){
@@ -373,7 +372,7 @@ const DataBase = {
 											if(card.card_data.small_card_v1.pendent_list.length <= 0){
 												return false;
 											}
-											return true;
+											// return true;
 											// 只保留天选时刻和红包抽奖
 											card.card_data.small_card_v1.pendent_list.forEach(pendent => {
 												if (pendent.pendent_id === 1096){
