@@ -41,4 +41,4 @@ BiliBili.ADBlock.response.proto = type=http-response, pattern=^https:\/\/(grpc\.
 
 [MITM]
 hostname = %APPEND% manga.bilibili.com, api.live.bilibili.com, api.vc.bilibili.com, app.bilibili.com, app.biliapi.net, api.bilibili.com, api.biliapi.net, grpc.biliapi.net
-h2 = true
+# h2 = true
