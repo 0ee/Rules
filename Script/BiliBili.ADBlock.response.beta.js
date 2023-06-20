@@ -1,6 +1,9 @@
 /*
 WEBSITE: https://biliuniverse.io
 README: https://github.com/BiliUniverse
+rids https://github.com/lbw1998/bilibili-desktop/blob/32383cc7ee06c2988e279150c31d2813f5b3bee3/src/utils/rid.ts#L388
+rids https://github.com/OlafZhang/bilib/blob/0968c17507d9dc0749daa238746186aebfcaaba5/class.md?plain=1#L114
+rids https://github.com/aaa1115910/bv/blob/4241a93dc1abcf37c7845a24eb8652b90e954f5d/app/src/main/kotlin/dev/aaa1115910/bv/util/PartitionUtil.kt#L73
 */
 const $ = new Env("📺 BiliBili: 🛡️ ADBlock v0.3.1(2) response.beta");
 const URL = new URLs();
@@ -143,13 +146,23 @@ const DataBase = {
 															$.log(`🎉 ${$.name}`, "竖屏去除");
 															return undefined;
 														}
-														const {player_args: playerArgs} = item;
-															if (playerArgs) {
-														        if (playerArgs.duration < 60){
-														        	$.log(`🎉 ${$.name}`, "过滤短视频");
-														            return undefined;
-														        }
+														const {player_args: playerArgs, args: args} = item;
+														$.log(JSON.stringify(args));
+														if (playerArgs) {
+													        if (playerArgs.duration < 60){
+													        	$.log(`🎉 ${$.name}`, "过滤短视频");
+													            return undefined;
+													        }
+														}
+														if (item.args.rid === 138){ // 分区 138.搞笑
+															return undefined;
+														}
+														item.three_point_v2 = item.three_point_v2.filter((point)=>{
+															if (point.type === 'watch_later'){
+																return true;
 															}
+														});
+
 													}
 													return item;
 												}));
@@ -337,6 +350,55 @@ const DataBase = {
 											$.log(`🚧 ${$.name}`, "用户设置直播页广告不去除");
 											break;
 									};
+									break;
+								case "xlive/app-interface/v2/index/feed": // 直播列表
+									if (body.data?.card_list) {
+										body.data.card_list = body.data.card_list.filter((card, index) => {
+											// $.log(JSON.stringify(card));
+											$.log(index);
+											// 永远保留第1项,以防为空无法展示
+											if(index === 0){
+												// return true;
+											}
+											// 保留我的关注
+											if(card.card_type !== 'small_card_v1'){
+												return true;
+											}
+											// 过滤没特殊标识的直播
+											if(card.card_data.small_card_v1.pendent_list.length <= 0){
+												return false;
+											}
+											return true;
+											// 只保留天选时刻和红包抽奖
+											card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+												if (pendent.pendent_id === 1096){
+													$.log(`红包抽奖`,JSON.stringify(pendent));
+													$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+													return true;
+												} else if (pendent.pendent_id === 504){
+													$.log(`天选时刻`,JSON.stringify(pendent));
+													$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+													return true;
+												}
+											});
+											return false;
+										});
+										// body.data.card_list.forEach(card => {
+										// 	if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
+										// 		card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+										// 			if (pendent.pendent_id === 1096){
+										// 				$.log(`红包抽奖`,JSON.stringify(pendent));
+										// 				$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+										// 			} else if (pendent.pendent_id === 504){
+										// 				$.log(`天选时刻`,JSON.stringify(pendent));
+										// 				$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+										// 			} else{
+
+										// 			}
+										// 		});
+										// 	}
+										// });
+									}
 									break;
 							};
 							break;
