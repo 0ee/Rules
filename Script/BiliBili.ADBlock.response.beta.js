@@ -114,6 +114,9 @@ const DataBase = {
 															} else {
 																await fixPosition().then(result => item = result);//小广告补位
 															}
+														} else if (cardGoto === 'live') {
+															$.log(`🎉 ${$.name}`, "直播去除");
+															return undefined;
 														} else if (cardGoto === 'live' && cardType === 'small_cover_v9') {
 															let blockUpLiveList = Settings?.Detail?.blockUpLiveList;
 															if (typeof blockUpLiveList === 'number') {
@@ -138,9 +141,6 @@ const DataBase = {
 															return undefined;//大广告直接去除
 														} else if (cardGoto === 'search_subscribe') {
 															$.log(`🎉 ${$.name}`, "人气UP主推荐去除");
-															return undefined;
-														} else if (cardGoto === 'live') {
-															$.log(`🎉 ${$.name}`, "直播去除");
 															return undefined;
 														} else if (cardGoto === 'vertical_av') {
 															$.log(`🎉 ${$.name}`, "竖屏去除");
@@ -358,35 +358,57 @@ const DataBase = {
 									break;
 								case "xlive/app-interface/v2/index/feed": // 直播列表
 									if (body.data?.card_list) {
-										body.data.card_list = body.data.card_list.filter((card, index) => {
-											// $.log(JSON.stringify(card));
-											// 永远保留第1和第2项,以防为空无法展示
-											if(index === 0 || index === 1){
-												// return true;
+										body.data.card_list.forEach((card,index) => {
+											if (card.card_type === 'small_card_v1' && card.card_data.small_card_v1.pendent_list.length) {
+												card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+													if (pendent.pendent_id === 1096){
+														$.log(`红包抽奖`,JSON.stringify(pendent));
+														body.data.card_list[index].card_data.small_card_v1.cover = "http://i0.hdslb.com/bfs/new_dyn/dd26ac9908f9b64d2aeb564439c1690e406700536.png";
+														$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+													} else if (pendent.pendent_id === 504){
+														$.log(`天选时刻`,JSON.stringify(pendent));
+														body.data.card_list[index].card_data.small_card_v1.cover = "http://i0.hdslb.com/bfs/new_dyn/dd26ac9908f9b64d2aeb564439c1690e406700536.png";
+														$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+													} else{
+														
+													}
+												});
+											}else{
+												delete(body.data.card_list[index])
 											}
-											// 保留我的关注
-											if(card.card_type !== 'small_card_v1'){
-												// return true;
-											}
-											// 过滤没特殊标识的直播
-											if(card.card_data.small_card_v1.pendent_list.length <= 0){
-												// return false;
-											}
-											// return true;
-											// 只保留天选时刻和红包抽奖
-											card.card_data.small_card_v1.pendent_list.forEach(pendent => {
-												if (pendent.pendent_id === 1096){
-													$.log(`红包抽奖`,JSON.stringify(pendent));
-													$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
-													return true;
-												} else if (pendent.pendent_id === 504){
-													$.log(`天选时刻`,JSON.stringify(pendent));
-													$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
-													return true;
-												}
-											});
-											return true;
 										});
+
+										// body.data.card_list = body.data.card_list.filter((card, index) => {
+										// 	// $.log(JSON.stringify(card));
+										// 	// 永远保留第1和第2项,以防为空无法展示
+										// 	if(index === 0 || index === 1){
+										// 		// return true;
+										// 	}
+										// 	// 保留我的关注
+										// 	if(card.card_type !== 'small_card_v1'){
+										// 		// return true;
+										// 	}
+										// 	// 过滤没特殊标识的直播
+										// 	if(card.card_data.small_card_v1.pendent_list.length <= 0){
+										// 		return false;
+										// 	}
+										// 	// return true;
+										// 	// 只保留天选时刻和红包抽奖
+										// 	card.card_data.small_card_v1.pendent_list.forEach(pendent => {
+										// 		if (pendent.pendent_id === 1096){
+										// 			$.log(`红包抽奖`,JSON.stringify(pendent));
+										// 			$notification.post('红包抽奖', '有特殊标识', card.card_data.small_card_v1.title);
+										// 			card.card_data.small_card_v1.cover = "http://i0.hdslb.com/bfs/new_dyn/dd26ac9908f9b64d2aeb564439c1690e406700536.png";
+										// 			return true;
+										// 		} else if (pendent.pendent_id === 504){
+										// 			$.log(`天选时刻`,JSON.stringify(pendent));
+										// 			$notification.post('天选时刻', '有特殊标识', card.card_data.small_card_v1.title);
+										// 			card.card_data.small_card_v1.cover = "http://i0.hdslb.com/bfs/new_dyn/dd26ac9908f9b64d2aeb564439c1690e406700536.png";
+										// 			return true;
+										// 		}
+										// 	});
+										// 	return true;
+										// });
 									}
 									break;
 							};
