@@ -86,6 +86,7 @@ const DataBase = {
 												body.data.items = await Promise.all(body.data.items.map(async item => {
 													const { card_type: cardType, card_goto: cardGoto } = item;
 													if (cardType && cardGoto) {
+														$.log(`rid ${item.args.rid}, rname ${item.args.rname}, title ${item.title}, cardType ${cardType}, cardGoto ${cardGoto}, goto ${item.goto}`);
 														if (['banner_v8', 'banner_ipad_v8'].includes(cardType) && cardGoto === 'banner') {
 															switch (Settings?.Detail?.activity) {
 																case true:
@@ -146,8 +147,7 @@ const DataBase = {
 															$.log(`🎉 ${$.name}`, "竖屏去除");
 															return undefined;
 														}
-														const {player_args: playerArgs, args: args} = item;
-														$.log(JSON.stringify(args));
+														const {player_args: playerArgs } = item;
 														if (playerArgs) {
 													        if (playerArgs.duration < 60){
 													        	$.log(`🎉 ${$.name}`, "过滤短视频");
@@ -165,6 +165,8 @@ const DataBase = {
 														if(item.title.includes('蔡徐坤')){
 															return undefined;	
 														}
+														delete item.top_rcmd_reason
+														// delete item.rcmd_reason
 
 													}
 													return item;
@@ -219,6 +221,7 @@ const DataBase = {
 													}
 												}
 												$.setdata(itemsCache, "@BiliBili.Index.Caches");
+												singleItem.title = '补· '+singleItem.title;
 												return singleItem;
 											}
 											break;
@@ -737,6 +740,16 @@ const DataBase = {
 													break;
 												};
 												case "SearchByType": { // 分类结果（番剧、用户、影视、专栏）
+													break;
+												};
+											};
+											break;
+										case "bilibili.app.show.v1.Popular": // 热门
+											/******************  initialization start  *******************/
+											/******************  initialization finish  *******************/
+											switch (PATHs?.[1]) {
+												case "Index": {
+													$.log("热门首页");
 													break;
 												};
 											};
