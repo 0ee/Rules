@@ -110,6 +110,7 @@ const DataBase = {
 														} else if (['cm_v2', 'cm_v1'].includes(cardType) && ['ad_web_s', 'ad_av', 'ad_web_gif'].includes(cardGoto)) {
 															// ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d  上方大的视频3d广告 ad_inline_eggs 上方大的视频广告
 															$.log(`🎉 ${$.name}`, `${cardGoto}广告去除`);
+															return undefined;
 															if (params.device !== "phone") {
 																return undefined;//pad直接去除
 															} else {
@@ -125,6 +126,7 @@ const DataBase = {
 															}
 															if (blockUpLiveList && blockUpLiveList.includes(item?.args?.up_id?.toString())) {
 																$.log(`🎉 ${$.name}`, `屏蔽Up主<${item?.args?.up_name}>直播推广`);
+																return undefined;
 																await fixPosition().then(result => item = result);//小广告补位
 															}
 														} else if (cardType === 'cm_v2' && ['ad_player', 'ad_inline_3d', 'ad_inline_eggs'].includes(cardGoto)) {
@@ -132,6 +134,7 @@ const DataBase = {
 															return undefined;//大广告直接去除
 														} else if (cardType === 'small_cover_v10' && cardGoto === 'game') {
 															$.log(`🎉 ${$.name}`, "游戏广告去除");
+															return undefined;
 															if (params.device !== "phone") {
 																return undefined;//pad直接去除
 															} else {
