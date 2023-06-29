@@ -169,7 +169,8 @@ const DataBase = {
 															return undefined;	
 														}
 														delete item.top_rcmd_reason
-														// delete item.rcmd_reason
+														delete item.rcmd_reason
+														delete item.rcmd_reason_style
 
 													}
 													return item;

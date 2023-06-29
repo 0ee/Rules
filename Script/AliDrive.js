@@ -1,9 +1,7 @@
 // https:\/\/(?:api\.aliyundrive\.com\/apps\/v1\/users\/home\/widgets|member\.aliyundrive\.com\/v1\/users\/tools|api.aliyundrive.com/apps/v1/users/apps/welcome|api.aliyundrive.com/apps/v1/users/app_list|api.aliyundrive.com/business/v1.0/users/feature/list|api.aliyundrive.com/business/v1.0/users/vip/info|api.aliyundrive.com/business/v1/users/me/vip/info|member.aliyundrive.com/v1/users/me|api.aliyundrive.com/v2/databox/get_personal_info)
 let body = $response.body;
+if (!$response.body) $done({});
 console.log($request.url)
-if($request.method == 'OPTIONS'){
-    $done({});
-}
 // console.log(body)
 body = JSON.parse(body);
 // https://api.aliyundrive.com/apps/v1/users/app_list
