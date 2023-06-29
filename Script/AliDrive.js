@@ -92,8 +92,8 @@ if ($request.url.includes("/business/v1/users/me/vip/info")) {
     body.description = "";
     body.membershipIdentity = "svip";
     body.titleImage = "https://gw.alicdn.com/imgextra/i1/O1CN01Z2Yv4u1jrJ5S5TYpo_!!6000000004601-2-tps-216-60.png";
-    body.level = "20t";
-    body.rightButtonText = "";
+    body.level = "8t";
+    body.rightButtonText = "查看";
 }
 // https://api.aliyundrive.com/business/v1.0/users/vip/info
 if ($request.url.includes("/business/v1.0/users/vip/info")) {
