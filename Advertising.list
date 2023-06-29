@@ -59,6 +59,9 @@ DOMAIN-SUFFIX,in.appcenter.ms
 DOMAIN-SUFFIX,growingio.com
 // mintegral
 DOMAIN-SUFFIX,rayjump.com
+// AppLovin
+DOMAIN-SUFFIX,d.applovin.com
+DOMAIN-SUFFIX,rt.applovin.com
 // UserVoice
 DOMAIN-SUFFIX,uservoice.com
 // Amazon
