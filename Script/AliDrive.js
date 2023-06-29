@@ -1,6 +1,9 @@
 // https:\/\/(?:api\.aliyundrive\.com\/apps\/v1\/users\/home\/widgets|member\.aliyundrive\.com\/v1\/users\/tools|api.aliyundrive.com/apps/v1/users/apps/welcome|api.aliyundrive.com/apps/v1/users/app_list|api.aliyundrive.com/business/v1.0/users/feature/list|api.aliyundrive.com/business/v1.0/users/vip/info|api.aliyundrive.com/business/v1/users/me/vip/info|member.aliyundrive.com/v1/users/me|api.aliyundrive.com/v2/databox/get_personal_info)
 let body = $response.body;
 console.log($request.url)
+if($request.method == 'OPTIONS'){
+    $done({});
+}
 // console.log(body)
 body = JSON.parse(body);
 // https://api.aliyundrive.com/apps/v1/users/app_list
@@ -99,6 +102,8 @@ if ($request.url.includes("/business/v1/users/me/vip/info")) {
 if ($request.url.includes("/business/v1.0/users/vip/info")) {
     body.identity = "svip";
     body.level = "svip";
+    body.icon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
+    body.mediumIcon= "https://gw.alicdn.com/imgextra/i4/O1CN01Mk916Y1c99aVBrgxM_!!6000000003557-2-tps-222-60.png";
     body.vipList.forEach((element, index, array) => {
         if(element.code === "svip"){ // 20TB超级会员
             array[index].expire = 1893427200;  
