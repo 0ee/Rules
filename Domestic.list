@@ -103,7 +103,6 @@ DOMAIN-SUFFIX,img4me.com
 DOMAIN-SUFFIX,bjango.com
 DOMAIN-SUFFIX,ipify.org
 DOMAIN-SUFFIX,ipip.net
-DOMAIN-SUFFIX,gotokeep.com
 DOMAIN-SUFFIX,playcvn.com
 DOMAIN-SUFFIX,ithome.com
 DOMAIN-SUFFIX,jd.com
@@ -220,8 +219,13 @@ DOMAIN-SUFFIX,zmzapi.net
 DOMAIN-SUFFIX,zmzfile.com
 DOMAIN-SUFFIX,vuevideo.net
 DOMAIN-SUFFIX,cdnvue.com
-DOMAIN-SUFFIX,keepcdn.com
 DOMAIN-SUFFIX,elemecdn.com
+# https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Keep/Keep.list
+DOMAIN-SUFFIX,calorietech.com
+DOMAIN-SUFFIX,gotokeep.com
+DOMAIN-SUFFIX,keep.com
+DOMAIN-SUFFIX,keep.com.cn
+DOMAIN-SUFFIX,keepcdn.com
 
 // Accelerate direct sites
 DOMAIN-KEYWORD,torrent

@@ -7,6 +7,7 @@
 #!manual=https://manual.biliuniverse.io
 #!icon=https://github.com/BiliUniverse/ADBlock/raw/main/database/icon_108x.png
 
+#https://github.com/BiliUniverse/ADBlock/blob/main/modules/BiliBili.ADBlock.beta.sgmodule
 [URL Rewrite]
 # 去除搜索中的默认关键词
 ^https?:\/\/(grpc\.biliapi\.net|app\.bilibili\.com)\/bilibili\.app\.interface\.v1\.Search\/DefaultWords$ - reject
