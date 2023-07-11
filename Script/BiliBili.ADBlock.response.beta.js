@@ -168,7 +168,7 @@ const DataBase = {
 														if(item.title.includes('蔡徐坤')){
 															return undefined;	
 														}
-														delete item.top_rcmd_reason
+														// delete item.top_rcmd_reason
 														delete item.rcmd_reason
 														delete item.rcmd_reason_style
 
