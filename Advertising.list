@@ -85,8 +85,6 @@ DOMAIN,clientlog.music.163.com
 DOMAIN,clientlog3.music.163.com
 DOMAIN,crash.163.com
 DOMAIN,crashlytics.163.com
-// 无期迷途
-DOMAIN-SUFFIX,aisnogames.com
 
 // URL
 // 哔哩哔哩
