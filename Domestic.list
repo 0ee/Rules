@@ -227,6 +227,8 @@ DOMAIN-SUFFIX,gotokeep.com
 DOMAIN-SUFFIX,keep.com
 DOMAIN-SUFFIX,keep.com.cn
 DOMAIN-SUFFIX,keepcdn.com
+// 无期迷途
+DOMAIN-SUFFIX,aisnogames.com
 
 // Accelerate direct sites
 DOMAIN-KEYWORD,torrent
