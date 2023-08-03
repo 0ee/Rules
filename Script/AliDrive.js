@@ -21,7 +21,7 @@ if ($request.method === 'OPTIONS') {
             return true;
         });
     }
-    // https://api.aliyundrive.com/v2/databox/get_personal_info
+    //  https://api.aliyundrive.com/v2/databox/get_personal_info?_rx-s=mobile
     if ($request.url.includes("/v2/databox/get_personal_info")) {
         body.personal_rights_info.spu_id = "svip";
     }
@@ -92,17 +92,16 @@ if ($request.method === 'OPTIONS') {
             array[index].intercept = false;
         });
     }
-    // https://api.alipan.com/business/v1.1/users/me/vip/info
+    //  https://api.alipan.com/business/v1.1/users/me/vip/info
     if ($request.url.includes("/business/v1.1/users/me/vip/info")) {
         body.identity = "svip";
         body.titleNotice = "";
         body.description = "";
-        body.membershipIdentity = "svip";
         body.titleImage = "https://gw.alicdn.com/imgextra/i1/O1CN01Z2Yv4u1jrJ5S5TYpo_!!6000000004601-2-tps-216-60.png";
-        body.level = "8t";
         body.rightButtonText = "查看";
     }
-    // https://api.alipan.com/business/v1.0/users/vip/info
+    //  https://api.aliyundrive.com/business/v1.0/users/vip/info?_rx-s=mobile
+    //  https://api.alipan.com/business/v1.0/users/vip/info
     if ($request.url.includes("/business/v1.0/users/vip/info")) {
         body.identity = "svip";
         body.level = "svip";

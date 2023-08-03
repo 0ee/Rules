@@ -2,7 +2,7 @@
 #!desc=阿里云盘增强
 
 [Script]
-AliDrive.Enhanced = type=http-response, pattern=https:\/\/(api.aliyundrive.com|api.aliyundrive.com), requires-body=1, max-size=0, timeout=15, debug=1, script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/AliDrive.js
+AliDrive.Enhanced = type=http-response, pattern=https:\/\/(api.aliyundrive.com|api.alipan.com), requires-body=1, max-size=0, timeout=15, debug=1, script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/AliDrive.js
 
 [MITM]
 hostname = %APPEND% member.aliyundrive.com, api.aliyundrive.com, api.alipan.com
