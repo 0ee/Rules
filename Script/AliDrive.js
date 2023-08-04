@@ -32,19 +32,20 @@ if ($request.method === 'OPTIONS') {
             if(i.code === 'riqianhuodong'){ // 签到
                 return false;
             }
-            if(i.code === 'lianxubaoyue'){return false;}
+            if(i.code === 'lianxubaoyue'){
+                return false;
+            }
             return true;
             });
         // coreFeatures
         body.coreFeatures.items = body.coreFeatures.items.filter(i=>{
-            console.log(i)
             if(i.code === 'AI_ASSISTANT'){ // 图搜
                 return false;
             }
             return true;
         });
-        body.minorBackup = {};
-        body.mainBackup ={};
+        // body.minorBackup = {};
+        // body.mainBackup ={};
     }
     // https://member.alipan.com/v1/users/tools
     // https://member.aliyundrive.com/v1/users/tools
