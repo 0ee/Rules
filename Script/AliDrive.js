@@ -1,4 +1,4 @@
-// https:\/\/(?:api\.aliyundrive\.com\/apps\/v1\/users\/home\/widgets|member\.aliyundrive\.com\/v1\/users\/tools|api.aliyundrive.com/apps/v1/users/apps/welcome|api.aliyundrive.com/apps/v1/users/app_list|api.aliyundrive.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.1/users/me/vip/info|member.aliyundrive.com/v1/users/me|api.aliyundrive.com/v2/databox/get_personal_info)
+// https:\/\/(api.alipan.com/apps/v1/users/app_list|api.aliyundrive.com/v2/databox/get_personal_info|api.alipan.com/apps/v2/users/home/widgets|member.alipan.com/v1/users/tools|member.aliyundrive.com/v1/users/tools|api.alipan.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.1/users/me/vip/info|api.aliyundrive.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.0/users/vip/info|member.alipan.com/v1/users/me|member.aliyundrive.com/v1/users/me|api.alipan.com/adrive/v1/app/logos)
 let body = $response.body;
 console.log($request.url)
 console.log($request.method)
@@ -32,9 +32,9 @@ if ($request.method === 'OPTIONS') {
             if(i.code === 'riqianhuodong'){ // 签到
                 return false;
             }
-        if(i.code === 'lianxubaoyue'){return false;}
+            if(i.code === 'lianxubaoyue'){return false;}
             return true;
-        });
+            });
         // coreFeatures
         body.coreFeatures.items = body.coreFeatures.items.filter(i=>{
             console.log(i)
@@ -43,24 +43,27 @@ if ($request.method === 'OPTIONS') {
             }
             return true;
         });
+        body.minorBackup = {};
+        body.mainBackup ={};
     }
+    // https://member.alipan.com/v1/users/tools
     // https://member.aliyundrive.com/v1/users/tools
     if (-1 != $request.url.indexOf('/v1/users/tools')) {
-    body.result.commonTools = body.result.commonTools.filter(i=>{
-    if(i.id === 'data'){return false;}
-    return true;
-    })
+        body.result.commonTools = body.result.commonTools.filter(i=>{
+        if(i.id === 'data'){return false;}
+            return true;
+        })
         body.result.moreTools = body.result.moreTools.filter(i=>{
-            
             if(i.id === 'darenCenter'){ // 达人中心
                 return false;
             } else if(i.id === 'bottles'){ // 好运瓶
                 return false;
             } else if(i.id === 'friendTransferPan'){ // 给云盘好友传文件
-        return false;
-        } else if(i.id === 'helpAndFeedback'){ // 帮助与反馈
-        return false;}
-        console.log(i)
+                return false;
+            } else if(i.id === 'helpAndFeedback'){ // 帮助与反馈
+                return false;
+            }
+            console.log(i)
             return true;
         });
     }
@@ -93,9 +96,24 @@ if ($request.method === 'OPTIONS') {
             }
         });
     }
+    // https://member.alipan.com/v1/users/me
     // https://member.aliyundrive.com/v1/users/me
     if ($request.url.includes("/v1/users/me")) {
         body.membershipIdentity = "svip";
+        body.badges.forEach((element, index, array) => {
+            if(element.code === "member-ship"){
+                array[index].defaultIcon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
+            }
+        });
+    }
+    // https://api.alipan.com/adrive/v1/app/logos
+    if ($request.url.includes("/adrive/v1/app/logos")) {
+        body.items.forEach((element, index, array) => {
+            if(element.labelCode === "not-acquired"){
+                array[index].labelCode = "acquired";
+                array[index].labelText = "已获得";
+            }
+        });
     }
 
     body = JSON.stringify(body);
