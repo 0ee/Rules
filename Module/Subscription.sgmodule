@@ -9,6 +9,7 @@ Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verific
 Endel = type=http-response,pattern=^https?:\/\/api-production.endel.io\/v4\/call,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Endel.js
 Emby = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
 探潮 = type=http-response,pattern=http://api.ohuokeji.com/api/maotai/me,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/TanChao.js
+Documents = type=http-response,pattern=https://license.pdfexpert.com/api/2.0/documents/subscription/check|https://license.pdfexpert.com/api/2.0/documents/subscription/save_user_properties|https://license.pdfexpert.com/api/2.0/documents/subscription/statistics_processed|https://license.pdfexpert.com/api/2.0/documents/subscription/offer|https://license.pdfexpert.com/api/2.0/documents/subscription/refresh,requires-body=1,max-size=-1,debug=1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Documents.js
 
 [MITM]
-hostname = %APPEND% vsco.co, backend.getdrafts.com,  api-production.endel.io, mb3admin.com, api.ohuokeji.com
+hostname = %APPEND% vsco.co, backend.getdrafts.com,  api-production.endel.io, mb3admin.com, api.ohuokeji.com, license.pdfexpert.com
