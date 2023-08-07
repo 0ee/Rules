@@ -1,4 +1,4 @@
-// https:\/\/(api.alipan.com/apps/v1/users/app_list|api.aliyundrive.com/v2/databox/get_personal_info|api.alipan.com/apps/v2/users/home/widgets|member.alipan.com/v1/users/tools|member.aliyundrive.com/v1/users/tools|api.alipan.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.1/users/me/vip/info|api.aliyundrive.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.0/users/vip/info|member.alipan.com/v1/users/me|member.aliyundrive.com/v1/users/me|api.alipan.com/adrive/v1/app/logos)
+// https:\/\/(api.alipan.com/apps/v1/users/app_list|api.aliyundrive.com/v2/databox/get_personal_info|api.alipan.com/apps/v2/users/home/widgets|member.alipan.com/v1/users/tools|member.aliyundrive.com/v1/users/tools|api.alipan.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.1/users/me/vip/info|api.aliyundrive.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.0/users/vip/info|member.alipan.com/v1/users/me|member.aliyundrive.com/v1/users/me|api.alipan.com/adrive/v1/app/logos|member.alipan.com/v1/users/onboard_list|member.alipan.com/v2/activity/sign_in_info|api.alipan.com/adrive/v2/backup/device_applet_list_summary)
 let body = $response.body;
 console.log($request.url)
 console.log($request.method)
@@ -65,8 +65,9 @@ if ($request.method === 'OPTIONS') {
                 return false;
             } else if(i.id === 'helpAndFeedback'){ // 帮助与反馈
                 return false;
+            } else if(i.id === 'fileClean'){ // 文件清理
+                return false;
             }
-            console.log(i)
             return true;
         });
     }
@@ -119,6 +120,19 @@ if ($request.method === 'OPTIONS') {
         });
     }
 
+    // https://member.alipan.com/v1/users/onboard_list
+    if ($request.url.includes("/v1/users/onboard_list")) {
+        body.result = [];
+    }
+
+    // https://member.alipan.com/v2/activity/sign_in_info
+    if ($request.url.includes("/v2/activity/sign_in_info")) {
+        body.result.rewards = [];
+    }
+    // https://api.alipan.com/adrive/v2/backup/device_applet_list_summary
+    if ($request.url.includes("/adrive/v2/backup/device_applet_list_summary")) {
+        body.deviceItems = [];
+    }
     body = JSON.stringify(body);
     $done({body});
 }

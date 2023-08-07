@@ -2,7 +2,7 @@
 #!desc=阿里云盘增强
 
 [Script]
-AliDrive.Enhanced = type=http-response, pattern=https:\/\/(api.alipan.com/apps/v1/users/app_list|api.aliyundrive.com/v2/databox/get_personal_info|api.alipan.com/apps/v2/users/home/widgets|member.alipan.com/v1/users/tools|member.aliyundrive.com/v1/users/tools|api.alipan.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.1/users/me/vip/info|api.aliyundrive.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.0/users/vip/info|member.alipan.com/v1/users/me|member.aliyundrive.com/v1/users/me|api.alipan.com/adrive/v1/app/logos), requires-body=1, max-size=0, timeout=15, debug=1, script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/AliDrive.js
+AliDrive.Enhanced = type=http-response, pattern=https:\/\/(api.alipan.com/apps/v1/users/app_list|api.aliyundrive.com/v2/databox/get_personal_info|api.alipan.com/apps/v2/users/home/widgets|member.alipan.com/v1/users/tools|member.aliyundrive.com/v1/users/tools|api.alipan.com/business/v1.0/users/feature/list|api.alipan.com/business/v1.1/users/me/vip/info|api.aliyundrive.com/business/v1.0/users/vip/info|api.alipan.com/business/v1.0/users/vip/info|member.alipan.com/v1/users/me|member.aliyundrive.com/v1/users/me|api.alipan.com/adrive/v1/app/logos|member.alipan.com/v1/users/onboard_list|member.alipan.com/v2/activity/sign_in_info|api.alipan.com/adrive/v2/backup/device_applet_list_summary), requires-body=1, max-size=0, timeout=15, debug=1, script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/AliDrive.js
 
 [MITM]
 hostname = %APPEND% member.aliyundrive.com, member.alipan.com, api.aliyundrive.com, api.alipan.com
