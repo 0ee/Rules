@@ -44,6 +44,8 @@ if ($request.method === 'OPTIONS') {
             }
             return true;
         });
+        delete body.minorBackup;
+        delete body.mainBackup;
         // body.minorBackup = {};
         // body.mainBackup ={};
     }
