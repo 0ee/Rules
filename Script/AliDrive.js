@@ -130,7 +130,7 @@ if ($request.method === 'OPTIONS') {
 
     // https://member.alipan.com/v2/activity/sign_in_info
     if ($request.url.includes("/v2/activity/sign_in_info")) {
-        body.result.rewards = [];
+        body.result = [];
     }
     // https://api.alipan.com/adrive/v2/backup/device_applet_list_summary
     if ($request.url.includes("/adrive/v2/backup/device_applet_list_summary")) {
