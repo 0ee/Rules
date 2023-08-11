@@ -48,9 +48,6 @@ if ($request.method === 'OPTIONS') {
         delete body.mainBackup;
         // body.minorBackup = {};
         // body.mainBackup ={};
-        if (body.signIn.isSignIn) {
-            delete body.signIn;
-        }
     }
     // https://member.alipan.com/v1/users/tools
     // https://member.aliyundrive.com/v1/users/tools
