@@ -67,6 +67,8 @@ if ($request.method === 'OPTIONS') {
                 return false;
             } else if(i.id === 'fileClean'){ // 文件清理
                 return false;
+            } else if(i.id === 'advertisemen'){
+                return false;
             }
             return true;
         });
