@@ -67,7 +67,7 @@ if ($request.method === 'OPTIONS') {
                 return false;
             } else if(i.id === 'fileClean'){ // 文件清理
                 return false;
-            } else if(i.id === 'advertisemen'){
+            } else if(i.id === 'advertisement'){ // 特惠流量包
                 return false;
             }
             return true;
