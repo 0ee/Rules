@@ -79,6 +79,11 @@ if ($request.method === 'OPTIONS') {
         body.identity = "svip";
         body.features.forEach((element, index, array) => {
             array[index].intercept = false;
+            if(array[index].hasOwnProperty('features')){
+                array[index].features.forEach((e,i,a)=>{
+                    a[i].intercept = false;
+                })
+            }
         });
     }
     //  https://api.alipan.com/business/v1.1/users/me/vip/info
