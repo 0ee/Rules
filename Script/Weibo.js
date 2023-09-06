@@ -754,6 +754,14 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         (t) => t.title !== "广场"
       );
     }
+  } else if (url.includes("/aj/appicon/list")) {
+    if (obj?.data?.list?.length > 0) {
+      for (let item of obj.data.list) {
+        if (item?.cardType) {
+          item.cardType = 2;
+        }
+      }
+    }
   } else if (url.includes("/v1/ad/preload")) {
     // 开屏广告
     if (obj?.ads?.length > 0) {
