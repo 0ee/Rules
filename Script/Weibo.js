@@ -383,8 +383,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                 i.itemId === "100505_-_album" || // 我的相册
                 i.itemId === "100505_-_like" || // 赞/收藏
                 i.itemId === "100505_-_watchhistory" || // 浏览记录
-                i.itemId === "100505_-_draft" // 草稿箱
-              // i.itemId === "100505_-_pay" || // 我的钱包
+                // i.itemId === "100505_-_draft" // 草稿箱
+                i.itemId === "100505_-_pay"  // 我的钱包
               // i.itemId === "100505_-_ordercenter" || // 我的订单
               // i.itemId === "100505_-_productcenter" || // 创作中心
               // i.itemId === "100505_-_promote" || // 广告中心
@@ -417,6 +417,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           newItems.push(item);
         } else {
           // 其他项目全部移除
+          // 为你推荐
           continue;
         }
       }
@@ -665,7 +666,11 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           continue;
         }
       }
-      obj.items = newItems;
+      if (obj?.header?.data?.nick == '原神') {
+        obj.items = obj.items;
+      } else {
+        obj.items = newItems;
+      }
     }
   } else if (url.includes("/2/statuses/extend")) {
     // 微博详情页
