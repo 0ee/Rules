@@ -230,7 +230,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         delete obj.rootComment.comment_bubble;
       }
     }
-  } else if (url.includes("/2/container/asyn")) {
+  } else if (url.includes("/2/container/asyn") && !url.includes("100808fc439dedbb06ca5fd858848e521b8716")) {
     if (obj?.items?.length > 0) {
       let newItems = [];
       for (let item of obj.items) {
@@ -595,7 +595,6 @@ if (url.includes("/interface/sdk/sdkad.php")) {
       obj.items = newItems;
     }
   } else if (url.includes("/2/statuses/container_timeline_topic")) {
-    console.log(obj.items)
     // 超话信息流
     if (obj?.header?.data?.follow_guide_info) {
       // 底部弹出的关注按钮
@@ -673,7 +672,6 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         obj.items = newItems;
       }
     }
-    console.log(obj.items)
   } else if (url.includes("/2/statuses/extend")) {
     // 微博详情页
     if (obj?.trend?.extra_struct?.extBtnInfo?.btn_picurl?.includes("ad")) {
