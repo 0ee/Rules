@@ -595,6 +595,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
       obj.items = newItems;
     }
   } else if (url.includes("/2/statuses/container_timeline_topic")) {
+    console.log(obj.items)
     // 超话信息流
     if (obj?.header?.data?.follow_guide_info) {
       // 底部弹出的关注按钮
@@ -672,6 +673,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         obj.items = newItems;
       }
     }
+    console.log(obj.items)
   } else if (url.includes("/2/statuses/extend")) {
     // 微博详情页
     if (obj?.trend?.extra_struct?.extBtnInfo?.btn_picurl?.includes("ad")) {
