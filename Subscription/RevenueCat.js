@@ -26,6 +26,7 @@ if (typeof $response == "undefined") {
         '%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9B%BE':{ name: 'pro', id: 'com.happydogteam.relax.lifetimePro'},
         // 极简日记
         'MinimalDiary':{ name: 'pro', id: 'com.mad.MinimalDiary.lifetime'},
+        'Spark': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
 
     };
     const data = {
