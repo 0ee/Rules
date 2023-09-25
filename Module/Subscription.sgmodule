@@ -6,9 +6,9 @@
 [Script]
 VSCO = type=http-response,pattern=https://vsco.co/api/subscriptions/2.1/user-subscriptions,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/VSCO.js
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js
-Endel = type=http-response,pattern=^https?:\/\/api-production.endel.io\/v\d\/call,requires-body=1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Endel.js
 Emby = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
 探潮 = type=http-response,pattern=http://api.ohuokeji.com/api/maotai/me,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/TanChao.js
 
+
 [MITM]
-hostname = %APPEND% vsco.co, backend.getdrafts.com,  api-production.endel.io, mb3admin.com, api.ohuokeji.com
+hostname = %APPEND% vsco.co, backend.getdrafts.com,  mb3admin.com, api.ohuokeji.com
