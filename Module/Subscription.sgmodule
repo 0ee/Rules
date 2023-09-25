@@ -9,7 +9,7 @@ Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verific
 Emby = type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
 探潮 = type=http-response,pattern=http://api.ohuokeji.com/api/maotai/me,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/TanChao.js
 RevenueCat Cache= type=http-request,requires-body=0,pattern=^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$),script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/RevenueCat.js
-RevenueCat = type=http-response,pattern=^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/[^/]+$),requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/RevenueCat.js
+RevenueCat = type=http-response,pattern=^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$),requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/RevenueCat.js
 
 [MITM]
 hostname = %APPEND% vsco.co, backend.getdrafts.com,  mb3admin.com, api.ohuokeji.com, api.revenuecat.com
