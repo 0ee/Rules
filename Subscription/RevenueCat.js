@@ -1,5 +1,6 @@
 const res = {};
 const parsedData = JSON.parse(typeof $response != "undefined" && $response.body || null);
+console.log(parsedData);
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
     delete $request.headers["X-RevenueCat-ETag"];
@@ -46,4 +47,5 @@ if (typeof $response == "undefined") {
     }
     res.body = JSON.stringify(parsedData);
 }
+console.log(res);
 $done(res);
