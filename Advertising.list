@@ -37,6 +37,13 @@ DOMAIN,gwp.xiaojukeji.com
 URL-REGEX,"^https?:\/\/res\.xiaojukeji\.com\/resapi\/activity\/get(Ruled|Preload)"
 // flurry
 DOMAIN-SUFFIX,flurry.com
+// DoubleClick
+DOMAIN-SUFFIX,doubleclick-cn.net
+// Google
+DOMAIN-SUFFIX,googleads-cn.com
+DOMAIN-SUFFIX,googleadservices-cn.com
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,googleadsserving.cn
 // 极光推送
 DOMAIN-SUFFIX,jpush.cn
 // 广点通
