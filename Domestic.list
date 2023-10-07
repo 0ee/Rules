@@ -33,6 +33,9 @@ USER-AGENT,WeChat*
 USER-AGENT,MicroMessenger Client*
 USER-AGENT,Lark*
 
+// NopeCHA
+DOMAIN,api.nopecha.com
+
 # Domestic
 DOMAIN-SUFFIX,cn
 DOMAIN-KEYWORD,alicdn
