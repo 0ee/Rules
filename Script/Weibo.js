@@ -1,5 +1,5 @@
 // By RuCu6
-// 2023-08-30 19:25
+// 2023-10-05 17:35
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -250,7 +250,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
   } else if (url.includes("/2/direct_messages/user_list")) {
     if (obj?.user_list?.length > 0) {
       obj.user_list = obj.user_list.filter(
-        (i) => !["活动通知"].includes(i.user.name)
+        (i) => !["活动通知", "闪聊"].includes(i?.user?.name)
       );
     }
   } else if (url.includes("/2/flowlist")) {
@@ -262,6 +262,14 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           }
         }
       }
+    }
+  } else if (url.includes("/2/groups/allgroups/v2")) {
+    // 顶部tab
+    if (obj?.pageDatas?.length > 0) {
+      // homeFeed关注 homeHot推荐
+      obj.pageDatas = obj.pageDatas.filter(
+        (i) => i?.pageDataType !== "homeExtend"
+      );
     }
   } else if (url.includes("/2/messageflow/notice")) {
     // 消息动态页
@@ -338,11 +346,15 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           if (item?.data) {
             if (!isAd(item.data)) {
               removeFeedAd(item.data);
-              if (item?.data?.title?.structs?.length > 0) {
-                // 赞过的微博
+              if (
+                item?.data?.title?.text !== "热门" &&
+                item?.data?.title?.structs?.length > 0
+              ) {
+                // 移除赞过的微博 保留热门内容
                 continue;
+              } else {
+                newItems.push(item);
               }
-              newItems.push(item);
             }
           }
         }
@@ -417,7 +429,6 @@ if (url.includes("/interface/sdk/sdkad.php")) {
           newItems.push(item);
         } else {
           // 其他项目全部移除
-          // 为你推荐
           continue;
         }
       }
@@ -513,27 +524,35 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         if (card?.card_group?.length > 0) {
           let newGroup = [];
           for (let group of card.card_group) {
-            if (group?.mblog) {
-              if (!isAd(group.mblog)) {
-                // 头像挂件,关注按钮
-                removeAvatar(group.mblog);
-                if (group?.mblog?.title_source) {
-                  delete group.mblog.title_source;
+            if (group?.card_type === 22) {
+              // 先筛选card_group里面的card_type
+              // 横版广告图
+              continue;
+            } else {
+              if (group?.mblog) {
+                // 有mblog字段的过滤广告
+                if (!isAd(group.mblog)) {
+                  // 头像挂件,关注按钮
+                  removeAvatar(group.mblog);
+                  if (group?.mblog?.title_source) {
+                    delete group.mblog.title_source;
+                  }
+                  if (group?.mblog?.source_tag_struct) {
+                    delete group.mblog.source_tag_struct;
+                  }
+                  if (group?.mblog?.extend_info) {
+                    delete group.mblog.extend_info;
+                  }
+                  // 商品橱窗
+                  if (group?.mblog?.common_struct) {
+                    delete group.mblog.common_struct;
+                  }
+                  newGroup.push(group);
                 }
-                if (group?.mblog?.source_tag_struct) {
-                  delete group.mblog.source_tag_struct;
-                }
-                if (group?.mblog?.extend_info) {
-                  delete group.mblog.extend_info;
-                }
-                // 商品橱窗
-                if (group?.mblog?.common_struct) {
-                  delete group.mblog.common_struct;
-                }
+              } else {
+                // 没有mblog字段的全部推送
                 newGroup.push(group);
               }
-            } else {
-              newGroup.push(group);
             }
           }
           card.card_group = newGroup;
@@ -581,6 +600,9 @@ if (url.includes("/interface/sdk/sdkad.php")) {
             if (item.data?.title?.structs) {
               // 移除 未关注人消息 (你关注的博主，他自己关注的别的博主的微博消息)
               continue;
+            }
+            if (item?.data?.action_button_icon_dic) {
+              delete item.data.action_button_icon_dic;
             }
             newItems.push(item);
           } else if (item?.category === "feedBiz") {
