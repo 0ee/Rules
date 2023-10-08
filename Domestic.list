@@ -198,10 +198,6 @@ DOMAIN-SUFFIX,weiphone.com
 DOMAIN-SUFFIX,weiphone.net
 DOMAIN-SUFFIX,wenku8.net
 DOMAIN-SUFFIX,windowsupdate.com
-DOMAIN-SUFFIX,xiaojukeji.com
-DOMAIN-SUFFIX,didistatic.com
-DOMAIN-SUFFIX,didichuxing.com
-DOMAIN-SUFFIX,udache.com
 DOMAIN-SUFFIX,ximalaya.com
 DOMAIN-SUFFIX,xmcdn.com
 DOMAIN-SUFFIX,xteko.com
@@ -232,6 +228,51 @@ DOMAIN-SUFFIX,keep.com.cn
 DOMAIN-SUFFIX,keepcdn.com
 // 无期迷途
 DOMAIN-SUFFIX,aisnogames.com
+DOMAIN-SUFFIX,shziyi.com
+// 知识星球
+DOMAIN-SUFFIX,zsxq.com
+// 滴滴出行
+DOMAIN-SUFFIX,apptaxi.com.cn
+DOMAIN-SUFFIX,cxyule.com
+DOMAIN-SUFFIX,didi-food.com
+DOMAIN-SUFFIX,didi.cn
+DOMAIN-SUFFIX,didi.xin
+DOMAIN-SUFFIX,didialift.com
+DOMAIN-SUFFIX,didiapp.net.cn
+DOMAIN-SUFFIX,didiaustralia.blog
+DOMAIN-SUFFIX,didichuxing.com
+DOMAIN-SUFFIX,didiglobal.com
+DOMAIN-SUFFIX,didimobility.co.jp
+DOMAIN-SUFFIX,didimobility.com
+DOMAIN-SUFFIX,didiopenapi.com
+DOMAIN-SUFFIX,didiqiche.com
+DOMAIN-SUFFIX,didistatic.com
+DOMAIN-SUFFIX,diditaxi.com
+DOMAIN-SUFFIX,diditaxi.com.cn
+DOMAIN-SUFFIX,didiwuxian.com
+DOMAIN-SUFFIX,didiyun.com
+DOMAIN-SUFFIX,didiyun.org
+DOMAIN-SUFFIX,didiyunapi.com
+DOMAIN-SUFFIX,juyanwenjuan.com
+DOMAIN-SUFFIX,udache.com
+DOMAIN-SUFFIX,xiaojuchefu.cn
+DOMAIN-SUFFIX,xiaojukeji.com
+// 12306
+DOMAIN-SUFFIX,12306.cn
+DOMAIN-SUFFIX,95306.cn
+DOMAIN-SUFFIX,95572.com
+DOMAIN-SUFFIX,china-railway.com.cn
+DOMAIN-SUFFIX,china-ric.com
+DOMAIN-SUFFIX,crct.com
+DOMAIN-SUFFIX,cre.cn
+DOMAIN-SUFFIX,crecc.com.cn
+DOMAIN-SUFFIX,creip.cn
+DOMAIN-SUFFIX,crscl.com.cn
+DOMAIN-SUFFIX,gzrailway.com.cn
+DOMAIN-SUFFIX,nntlj.com
+DOMAIN-SUFFIX,peoplerail.com
+DOMAIN-SUFFIX,rails.cn
+DOMAIN-SUFFIX,tdpress.com
 
 // Accelerate direct sites
 DOMAIN-KEYWORD,torrent
