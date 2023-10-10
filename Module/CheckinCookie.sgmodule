@@ -26,6 +26,9 @@ B站Cookie(APP) = type=http-request,pattern=^https?:\/\/app\.bilibili\.com\/x\/r
 
 B站Cookie(网页) = type=http-request,pattern=^https?:\/\/m.bilibili.com/$,script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js,requires-body=0
 
+建行生活Cookie = type=http-request,pattern=^https?:\/\/yunbusiness\.ccb\.com\/clp_coupon\/txCtrl\?txcode=A3341A040,script-path=https://raw.githubusercontent.com/ClydeTime/Surge/main/Script/Task/CCBLife.js,requires-body=1
+
+
 
 [MITM]
-hostname = %APPEND% m.ctrip.com, api.weibo.cn, ngabbs.com, auth.aliyundrive.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com
+hostname = %APPEND% m.ctrip.com, api.weibo.cn, ngabbs.com, auth.aliyundrive.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com, yunbusiness.ccb.com
