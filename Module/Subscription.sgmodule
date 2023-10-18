@@ -5,7 +5,6 @@
 
 [Script]
 用药助手 = type=http-response,pattern=^https://newdrugs.dxy.cn,requires-body=1,max-size=0,script-path=https://cdn.jsdelivr.net/gh/aozaki-kuro/ruleset@main/Surge/scripts/drug.js
-ChatGPT = type=http-response,pattern=^https?:\/\/ios\.chat\.openai\.com\/backend-api\/(accounts\/check\/|models),requires-body=1,max-size=0,script-path=https://ghproxy.com/https://raw.githubusercontent.com/yqc007/QuantumultX/master/ChatGPTPlusCrack.js,script-update-interval=0
 Nicegram = type=http-response,pattern=^https?:\/\/restore-access\.indream\.app\/restoreAccess\?id=\d{5,10},requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/Nicegram.js
 VSCO = type=http-response,pattern=https://vsco.co/api/subscriptions/2.1/user-subscriptions,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/VSCO.js
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js
@@ -16,4 +15,4 @@ RevenueCat Cache= type=http-request,requires-body=0,pattern=^https?:\/\/api\.rev
 RevenueCat = type=http-response,pattern=^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$),requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/RevenueCat.js
 
 [MITM]
-hostname = %APPEND% newdrugs.dxy.cn, ios.chat.openai.com, restore-access.indream.app, vsco.co, backend.getdrafts.com,  mb3admin.com, api.ohuokeji.com, license.pdfexpert.com, api.revenuecat.com
+hostname = %APPEND% newdrugs.dxy.cn, restore-access.indream.app, vsco.co, backend.getdrafts.com,  mb3admin.com, api.ohuokeji.com, license.pdfexpert.com, api.revenuecat.com
