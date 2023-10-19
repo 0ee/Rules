@@ -8,7 +8,7 @@ DOMAIN-SUFFIX,videojj.com
 DOMAIN,data.bilibili.com
 #DOMAIN,dataflow.biliapi.com
 DOMAIN,thirdparty.biliapi.com
-DOMAIN,cm.bilibili.com
+#DOMAIN,cm.bilibili.com
 // 百度
 DOMAIN-SUFFIX,hm.baidu.com
 // 阿里
