@@ -205,7 +205,7 @@ $.log(`⚠ ${$.name}, FORMAT: ${FORMAT}`, "");
 									data = data.sort(compareFn("tid")); // 排序
 									//$.log(JSON.stringify(data));
 									data = data.map(e => { // 过滤
-										if (Settings.Region.Index.includes(e.tid)) return e;
+										if (Settings.Region.includes(e.tid)) return e;
 									}).filter(Boolean);
 									//$.log(JSON.stringify(data));
 
