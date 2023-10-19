@@ -6,7 +6,7 @@ DOMAIN-SUFFIX,videojj.com
 
 // 哔哩哔哩
 DOMAIN,data.bilibili.com
-DOMAIN,dataflow.biliapi.com
+#DOMAIN,dataflow.biliapi.com
 DOMAIN,thirdparty.biliapi.com
 DOMAIN,cm.bilibili.com
 // 百度
