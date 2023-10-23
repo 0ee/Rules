@@ -812,10 +812,10 @@ const DataBase = {
 											switch (PATHs?.[1]) {
 												case "Index": {
 													let data = PopularReply.fromBinary(body);
-													// BigInt.prototype.toJSON = function () {
-  													//   return this.toString();
-													// };
-													// $.log(`热门首页`,JSON.stringify(data));
+													BigInt.prototype.toJSON = function () {
+  													  return this.toString();
+													};
+													$.log(`热门首页`,JSON.stringify(data));
 													data.items = data.items.filter((item) => {
 														if(item?.item?.oneofKind === "smallCoverV5"){
 															// item?.smallCoverV5 = 
