@@ -1,6 +1,7 @@
 const res = {};
 const parsedData = JSON.parse(typeof $response != "undefined" && $response.body || null);
 console.log(parsedData);
+const flag = false;
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
     delete $request.headers["X-RevenueCat-ETag"];
@@ -43,10 +44,18 @@ if (typeof $response == "undefined") {
             parsedData.subscriber.subscriptions[id] = data;
             parsedData.subscriber.entitlements[name] = JSON.parse(JSON.stringify(data));
             parsedData.subscriber.entitlements[name].product_identifier = id;
+            flag = true;
             break;
         }
     }
     res.body = JSON.stringify(parsedData);
 }
-console.log(res);
-$done(res);
+console.log(UA);
+if(flag){
+    console.log(res);
+    $done(res);    
+}else{
+    console.log('不改动');
+    $done({});
+}
+
