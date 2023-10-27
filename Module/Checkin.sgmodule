@@ -25,5 +25,3 @@ B站每日任务 = type=cron,cronexp=30 7 * * *,script-path=https://raw.githubus
 高德打车签到 Cron = type=cron, cronexp=1 0 * * *, script-path=https://raw.githubusercontent.com/ClydeTime/Surge/main/Script/Task/amap.js, wake-system=1
 
 Bili漫画签到 Cron = type=cron,cronexp=0 9 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
-
-网上国网 Cron = type=cron,cronexp=0 5 21 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/Yuheng0101/X/main/Tasks/95598/95598.js,timeout=60
