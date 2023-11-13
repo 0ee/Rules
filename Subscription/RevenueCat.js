@@ -29,6 +29,7 @@ if (typeof $response == "undefined") {
         'MinimalDiary':{ name: 'pro', id: 'com.mad.MinimalDiary.lifetime'},
         'Spark': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
         'Reader':{name:'pro', id: 'reader.lifetime.pro'},
+        'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
