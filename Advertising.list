@@ -1,5 +1,6 @@
 // Advertising Block 去广告以及隐私追踪保护
 DOMAIN-KEYWORD,umeng
+DOMAIN-SUFFIX,errlog.umeng.com
 
 // 芒果TV
 DOMAIN-SUFFIX,videojj.com
