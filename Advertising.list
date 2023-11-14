@@ -129,13 +129,6 @@ URL-REGEX,"^https?:\/\/pic1cdn\.cmbchina\.com\/appinitads\/"
 URL-REGEX,"^https?:\/\/mlife\.cmbchina\.com\/ClientFaceService\/preCacheAdvertise\.json$"
 // Thunder
 URL-REGEX,^https?:\/\/images\.client\.vip\.xunlei\.com\/.+\/advert\/
-// VUE
-URL-REGEX,^https?:\/\/static\.vuevideo\.net\/styleAssets\/.+\/splash_ad
-URL-REGEX,^https?:\/\/static\.vuevideo\.net\/styleAssets\/advertisement\/
-// 人人视频
-URL-REGEX,^https?:\/\/msspjh\.emarbox\.com\/getAdConfig
-URL-REGEX,^https?:\/\/api\.videozhishi\.com\/api\/getAdvertising
-URL-REGEX,^https?:\/\/api\.rr\.tv\/ad\/
 // 随手记
 URL-REGEX,^https?:\/\/api\.feidee.net\/v1\/user_equity\/AdFree
 // Google
