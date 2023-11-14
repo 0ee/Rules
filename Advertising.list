@@ -28,6 +28,7 @@ DOMAIN-SUFFIX,bugly.qq.com
 DOMAIN-SUFFIX,rqd.qq.com
 DOMAIN-SUFFIX,wxsnsdy.wxs.qq.com
 DOMAIN-SUFFIX,wxsnsdythumb.wxs.qq.com
+DOMAIN-SUFFIX,adsmind.ugdtimg.com
 // 小米
 DOMAIN-SUFFIX,xmpush.xiaomi.com
 // 饿了么
@@ -99,6 +100,8 @@ DOMAIN,crashlytics.163.com
 // URL
 // 哔哩哔哩
 URL-REGEX,^https?:\/\/app\.bilibili\.com\/x\/v2\/dataflow\/report
+URL-REGEX,^https:\/\/api\.bilibili\.com\/open\/monitor\/report\?
+URL-REGEX,^https:\/\/app\.bilibili\.com\/x\/topic\/vert\/center\?access
 // 微信公众号
 URL-REGEX,^https?:\/\/mp\.weixin\.qq\.com\/mp\/(getappmsgad|appmsgreport|ad_repor|advertisement|readtemplate|ad_complaint|ad_video)
 // 京东
