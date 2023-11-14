@@ -6,6 +6,7 @@ PROCESS-NAME,wechatwebdevtools*
 DOMAIN-SUFFIX,feishu.cn
 // Game
 USER-AGENT,rabbit*
+DOMAIN-SUFFIX,yshelper.com
 
 // IQIYI
 USER-AGENT,QIYI*
