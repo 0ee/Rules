@@ -69,6 +69,8 @@ if ($request.method === 'OPTIONS') {
                 return false;
             } else if(i.id === 'advertisement'){ // 特惠流量包
                 return false;
+            } else if(i.id === 'welfare'){ // 福利社
+                return false;
             }
             return true;
         });
@@ -134,7 +136,12 @@ if ($request.method === 'OPTIONS') {
 
     // https://member.alipan.com/v2/activity/sign_in_info
     if ($request.url.includes("/v2/activity/sign_in_info")) {
-        // body.result = [];
+        body.result.rewards = body.result.rewards.filter(i=>{
+            if(i.type === 'dailySignIn'){ // 今日签到
+                return true;
+            } 
+            return false;
+        });
     }
     // https://api.alipan.com/adrive/v2/backup/device_applet_list_summary
     if ($request.url.includes("/adrive/v2/backup/device_applet_list_summary")) {

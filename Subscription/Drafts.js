@@ -10,6 +10,7 @@ if ( - 1 != $request.url.indexOf('/api/v1/verification/account_status')) {
         body = {};
     } else {
         body = $response.body;
+        console.log(body)
     }
     body["is_subscription_active"] = true;
     body["active_expires_at"] = "2030-12-31T05:06:53Z";
