@@ -188,7 +188,13 @@ const DataBase = {
 													          "type": 1,
 													          "event": "nickname",
 													          "uri": "bilibili:\/\/space\/"+item.args.up_id,
-													          "text": "自己制作"
+													          "text": item.args.up_name
+													        }
+													        item.goto_icon = {
+													          "icon_url": "https:\/\/i0.hdslb.com\/bfs\/activity-plat\/static\/20230227\/0977767b2e79d8ad0a36a731068a83d7\/077GOeHOfO.png",
+													          "icon_night_url": "https:\/\/i0.hdslb.com\/bfs\/activity-plat\/static\/20230227\/0977767b2e79d8ad0a36a731068a83d7\/ldbCXtkoK2.png",
+													          "icon_width": 16,
+													          "icon_height": 16
 													        }
 														}
 
@@ -196,6 +202,7 @@ const DataBase = {
 															console.log(item.rcmd_reason_style)
 															delete item.rcmd_reason_style
 														}
+														item.three_point = {}
 														// delete item.top_rcmd_reason
 														// delete item.rcmd_reason
 														// delete item.rcmd_reason_style
