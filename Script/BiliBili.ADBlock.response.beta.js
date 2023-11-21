@@ -175,14 +175,16 @@ const DataBase = {
 														if (item.args.rid === 138){ // 分区 138.搞笑
 															return undefined;
 														}
-														// item.three_point_v2 = item.three_point_v2.filter((point)=>{
-															// if (point.type === 'watch_later'){
-																// return true;
-															// }
-														// });
-														if(item.title.includes('蔡徐坤')||item.title.includes('我本是高山')){
+														item.three_point_v2 = item.three_point_v2.filter((point)=>{
+															if (point.type === 'watch_later'){
+																return true;
+															}
+														});
+														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊' /* 其他需要排除的标题 */];
+														if(excludedTitles.some(excludedTitle => title.includes(excludedTitle))){
 															return undefined;	
 														}
+
 														if(!item.hasOwnProperty('desc_button')) {
 															item.desc_button = {
 													          "type": 1,
@@ -849,7 +851,7 @@ const DataBase = {
 															return false;
 														}
 														
-														return false;
+														return true;
 													});
 													body = PopularReply.toBinary(data);
 													// $.log(`热门首页`,JSON.stringify(data));
