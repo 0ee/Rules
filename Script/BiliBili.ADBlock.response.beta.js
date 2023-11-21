@@ -849,7 +849,7 @@ const DataBase = {
 															return false;
 														}
 														
-														return true;
+														return false;
 													});
 													body = PopularReply.toBinary(data);
 													// $.log(`热门首页`,JSON.stringify(data));
