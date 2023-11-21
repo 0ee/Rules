@@ -180,12 +180,13 @@ const DataBase = {
 																return true;
 															}
 														});
-														if(item.title.includes('蔡徐坤')){
+														if(item.title.includes('蔡徐坤')||item.title.includes('我本是高山')){
 															return undefined;	
 														}
 														// delete item.top_rcmd_reason
 														delete item.rcmd_reason
 														delete item.rcmd_reason_style
+														delete item.official_icon
 
 													}
 													return item;
