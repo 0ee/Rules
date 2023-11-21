@@ -183,6 +183,14 @@ const DataBase = {
 														if(item.title.includes('蔡徐坤')||item.title.includes('我本是高山')){
 															return undefined;	
 														}
+														if(!item.hasOwnProperty('desc_button')) {
+															item.desc_button = {
+													          "type": 1,
+													          "event": "nickname",
+													          "uri": "bilibili:\/\/space\/"+item.args.up_id,
+													          "text": "自己制作"
+													        }
+														}
 														// delete item.top_rcmd_reason
 														// delete item.rcmd_reason
 														// delete item.rcmd_reason_style
