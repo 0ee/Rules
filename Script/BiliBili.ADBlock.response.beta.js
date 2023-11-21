@@ -175,11 +175,11 @@ const DataBase = {
 														if (item.args.rid === 138){ // 分区 138.搞笑
 															return undefined;
 														}
-														item.three_point_v2 = item.three_point_v2.filter((point)=>{
-															if (point.type === 'watch_later'){
-																return true;
-															}
-														});
+														// item.three_point_v2 = item.three_point_v2.filter((point)=>{
+															// if (point.type === 'watch_later'){
+																// return true;
+															// }
+														// });
 														if(item.title.includes('蔡徐坤')||item.title.includes('我本是高山')){
 															return undefined;	
 														}
