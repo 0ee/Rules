@@ -191,6 +191,9 @@ const DataBase = {
 													          "text": "自己制作"
 													        }
 														}
+														if(!item.hasOwnProperty('rcmd_reason_style') && item.rcmd_reason_style.bg_style == 1) {
+															delete item.rcmd_reason_style
+														}
 														// delete item.top_rcmd_reason
 														// delete item.rcmd_reason
 														// delete item.rcmd_reason_style
