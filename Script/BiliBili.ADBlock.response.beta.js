@@ -844,7 +844,7 @@ const DataBase = {
 																$.log("过滤短视频");
 																return false;
 															}
-														}elseif(item?.item?.oneofKind === "popularTopEntrance"){
+														}else if(item?.item?.oneofKind === "popularTopEntrance"){
 															$.log("过滤热门的头");
 															return false;
 														}
