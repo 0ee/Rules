@@ -181,7 +181,7 @@ const DataBase = {
 															}
 														});
 														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊' /* 其他需要排除的标题 */];
-														if(excludedTitles.some(excludedTitle => title.includes(excludedTitle))){
+														if(excludedTitles.some(excludedTitle => item.title.includes(excludedTitle))){
 															return undefined;	
 														}
 

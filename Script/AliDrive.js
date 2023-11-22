@@ -94,7 +94,6 @@ if ($request.method === 'OPTIONS') {
         body.titleNotice = "";
         body.description = "";
         body.titleImage = "https://gw.alicdn.com/imgextra/i2/O1CN01snE6rA1pVg95HyRBl_!!6000000005366-2-tps-214-49.png";
-        body.rightButtonText = "";
         body.activityText = "";
         body.activityAction = "";
     }
