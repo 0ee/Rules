@@ -96,6 +96,7 @@ if ($request.method === 'OPTIONS') {
         body.titleImage = "https://gw.alicdn.com/imgextra/i2/O1CN01snE6rA1pVg95HyRBl_!!6000000005366-2-tps-214-49.png";
         body.activityText = "";
         body.activityAction = "";
+        body.rightButtonText = "查看";
     }
     //  https://api.aliyundrive.com/business/v1.0/users/vip/info?_rx-s=mobile
     //  https://api.alipan.com/business/v1.0/users/vip/info
