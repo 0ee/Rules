@@ -53,9 +53,11 @@ if ($request.method === 'OPTIONS') {
     // https://member.aliyundrive.com/v1/users/tools
     if (-1 != $request.url.indexOf('/v1/users/tools')) {
         body.result.commonTools = body.result.commonTools.filter(i=>{
-        if(i.id === 'data'){return false;}
+            if(i.id === 'data'){
+                return false;
+            }
             return true;
-        })
+        });
         body.result.moreTools = body.result.moreTools.filter(i=>{
             if(i.id === 'darenCenter'){ // 达人中心
                 return false;
