@@ -6,6 +6,7 @@ if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
     delete $request.headers["X-RevenueCat-ETag"];
     res.headers = $request.headers;
+    flag = true;
 } else if (parsedData && parsedData.subscriber) {
     parsedData.subscriber.subscriptions = parsedData.subscriber.subscriptions || {};
     parsedData.subscriber.entitlements = parsedData.subscriber.entitlements || {};
@@ -31,7 +32,7 @@ if (typeof $response == "undefined") {
         // PureLibro
         'Reader':{name:'pro', id: 'reader.lifetime.pro'},
         'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'},
-        'AudioPlayer':{name:'LifeTime-Offer', id:'xyz.lijun.www.AudioPlayer.premium.newuser'}
+        'AudioPlayer':{name:'annual', id:'xyz.lijun.www.AudioPlayer.vip.12'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
