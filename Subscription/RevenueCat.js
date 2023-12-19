@@ -32,7 +32,7 @@ if (typeof $response == "undefined") {
         // PureLibro
         'Reader':{name:'pro', id: 'reader.lifetime.pro'},
         'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'},
-        'AudioPlayer':{name:'annual', id:'xyz.lijun.www.AudioPlayer.vip.12'}
+        'AudioPlayer':{name:'lifetime', id:'xyz.lijun.www.AudioPlayer.premium'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
