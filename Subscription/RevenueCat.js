@@ -1,7 +1,7 @@
 const res = {};
 const parsedData = JSON.parse(typeof $response != "undefined" && $response.body || null);
-console.log(parsedData);
-const flag = false;
+console.log('response'+parsedData);
+let flag = false;
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
     delete $request.headers["X-RevenueCat-ETag"];
@@ -28,8 +28,10 @@ if (typeof $response == "undefined") {
         // 极简日记
         'MinimalDiary':{ name: 'pro', id: 'com.mad.MinimalDiary.lifetime'},
         'Spark': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
+        // PureLibro
         'Reader':{name:'pro', id: 'reader.lifetime.pro'},
-        'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'}
+        'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'},
+        'AudioPlayer':{name:'LifeTime-Offer', id:'xyz.lijun.www.AudioPlayer.premium.newuser'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
