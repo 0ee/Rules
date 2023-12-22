@@ -1,6 +1,5 @@
 const res = {};
 const parsedData = JSON.parse(typeof $response != "undefined" && $response.body || null);
-console.log('response'+parsedData);
 let flag = false;
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
@@ -23,6 +22,7 @@ if (typeof $response == "undefined") {
     const app = 'gd';
     const UAMappings = {
         'totowallet': {name: 'all', id: 'com.ziheng.totowallet.onetimepurchase'},
+        'apollo': {name: 'all', id: 'com'},
         'LUTCamera': {name: 'ProVersionLifeTime', id: 'com.uzero.funforcam.lifetimepurchase'},
         // 目标地图
         '%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9B%BE':{ name: 'pro', id: 'com.happydogteam.relax.lifetimePro'},
@@ -31,8 +31,12 @@ if (typeof $response == "undefined") {
         'Spark': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
         // PureLibro
         'Reader':{name:'pro', id: 'reader.lifetime.pro'},
-        'ActionMate':{name:'ActionMatePro', id:'com.potatsolab.actionmate.pro'},
-        'AudioPlayer':{name:'lifetime', id:'xyz.lijun.www.AudioPlayer.premium'}
+        'Percento':{name:'premium',id:'com'},
+        'AudioPlayer':{name:'Pro', id:'com'},
+        'Anybox':{name:'pro', id:'com'},
+        'MoneyThings': {name:'Premium', id:'com'},
+        // 花样文字
+        'UTC': {name:'Entitlement.Pro', id:'com'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
@@ -54,7 +58,7 @@ if (typeof $response == "undefined") {
     }
     res.body = JSON.stringify(parsedData);
 }
-console.log(UA);
+console.log($request.headers['user-agent']);
 if(flag){
     console.log(res);
     $done(res);    
