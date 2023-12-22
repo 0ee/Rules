@@ -37,6 +37,9 @@ USER-AGENT,Lark*
 // NopeCHA
 DOMAIN,api.nopecha.com
 
+// endel
+DOMAIN-SUFFIX,endel.io
+
 # Domestic
 DOMAIN-SUFFIX,cn
 DOMAIN-KEYWORD,alicdn
