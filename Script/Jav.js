@@ -1,10 +1,14 @@
-let body = $response.body;
 console.log($request.url)
 console.log($request.method)
-console.log(body)
-if ($request.method === 'OPTIONS') {
-    $done({});
-}else{
+if (typeof $response == "undefined") {
+    if (url.includes("/api/v1/movies/") && url.includes("/play?")) {
+        header.authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTc1NDMwLCJ1c2VybmFtZSI6IndlaWd1YW5naHQifQ.lyfGvtZcz0SjiKNx-k9Aoe_UgcMyxwG4Xqq3lzvbIao";
+        $done({ headers: header });
+    } else {
+      $done({});
+    }
+} else{
+    let body = $response.body;
     if (!body) $done({});
     console.log($request.url)
     console.log(body)
