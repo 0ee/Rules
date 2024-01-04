@@ -1,5 +1,6 @@
 // By RuCu6
-// 2023-09-15 11:20
+// 2023-11-28 16:30
+// https://github.com/RuCu6/QuanX/blob/main/Scripts/amap.js
 
 const url = $request.url;
 if (!$response.body) $done({});
@@ -9,9 +10,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   // 路线规划页
   if (obj?.data?.children?.length > 0) {
     // 有schema参数的为推广
-    obj.data.children = obj.data.children.filter(
-      (i) => !i?.hasOwnProperty("schema")
-    );
+    obj.data.children = obj.data.children.filter((i) => !i?.hasOwnProperty("schema"));
   }
 } else if (url.includes("/faas/amap-navigation/main-page")) {
   // 首页底部卡片
@@ -31,14 +30,14 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
 } else if (url.includes("/perception/drive/routePlan")) {
   // 路线规划页
   if (obj?.data?.front_end) {
-    const item = ["global_guide_data", "route_search"];
-    for (let i of item) {
+    const items = ["global_guide_data", "route_search"];
+    for (let i of items) {
       delete obj.data.front_end[i];
     }
   }
 } else if (url.includes("/promotion-web/resource")) {
   // 打车页面
-  let item = [
+  const items = [
     "alpha", // 出行优惠套餐
     "banner",
     "bravo", // 第三方推广 喜马拉雅月卡
@@ -51,7 +50,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "tips"
   ];
   if (obj?.data) {
-    for (let i of item) {
+    for (let i of items) {
       delete obj.data[i];
     }
   }
@@ -63,9 +62,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
 } else if (url.includes("/shield/dsp/profile/index/nodefaasv3")) {
   // 我的页面
   if (obj?.data?.cardList?.length > 0) {
-    obj.data.cardList = obj.data.cardList.filter(
-      (i) => i.dataKey === "MyOrderCard"
-    );
+    obj.data.cardList = obj.data.cardList.filter((i) => i.dataKey === "MyOrderCard");
   }
   if (obj?.data?.tipData) {
     delete obj.data.tipData;
@@ -80,7 +77,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   }
 } else if (url.includes("/shield/frogserver/aocs")) {
   // 整体图层
-  const item = [
+  const items = [
     // "ARWalkNavi", // AR导航
     // "Clipboard", // 剪贴板
     // "DIYMap", // DIY地图
@@ -176,9 +173,11 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "vip"
     // "weather_restrict_config",
   ];
-  for (let i of item) {
-    if (obj?.data?.[i]) {
-      obj.data[i] = { status: 1, version: "", value: "" };
+  if (obj?.data) {
+    for (let i of items) {
+      if (obj?.data?.[i]) {
+        obj.data[i] = { status: 1, version: "", value: "" };
+      }
     }
   }
   /**
@@ -200,12 +199,15 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
 } else if (url.includes("/shield/search/nearbyrec_smart")) {
   // 附近页面
   if (obj?.data?.modules?.length > 0) {
-    const item = ["head", "search_hot_words", "feed_rec"];
-    obj.data.modules = obj.data.modules.filter((i) => item?.includes(i));
+    const items = ["head", "search_hot_words", "feed_rec"];
+    if (obj?.data?.modules?.length > 0) {
+      obj.data.modules = obj.data.modules.filter((i) => items?.includes(i));
+    }
   }
 } else if (url.includes("/shield/search/poi/detail")) {
   // 搜索结果 模块详情
-  const item = [
+  const items = [
+    "CouponBanner", // 高德红包
     // "anchor",
     "adv_compliance_info", // 服务提供方
     "adv_gift",
@@ -335,6 +337,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     // "scenic_ticket", // 购票
     // "scenic_ticket_activity", // 购票活动
     "scenic_voice", // 语音讲解 付费的项目
+    "searchPlaMap", // 周边推荐
     "second_surround_estate_tab", // 周边房产
     "service_shop", // 中介门店
     // "shop_news",
@@ -358,19 +361,24 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "waterFallFeedTitle" // 更多好去处
   ];
   if (obj?.data?.modules) {
-    for (let i of item) {
+    for (let i of items) {
       delete obj.data.modules[i];
     }
+  }
+} else if (url.includes("/shield/search_business/process/marketingOperationStructured")) {
+  // 详情页 顶部优惠横幅
+  if (obj?.data?.tipsOperationLocation) {
+    delete obj.data.tipsOperationLocation;
+  }
+  if (obj?.data?.resourcePlacement) {
+    delete obj.data.resourcePlacement;
   }
 } else if (url.includes("/shield/search_poi/homepage")) {
   // 首页 搜索框历史记录 推广标签
   if (obj?.history_tags) {
     delete obj.history_tags;
   }
-} else if (
-  url.includes("/shield/search_poi/search/sp") ||
-  url.includes("/shield/search_poi/mps")
-) {
+} else if (url.includes("/shield/search_poi/search/sp") || url.includes("/shield/search_poi/mps")) {
   if (obj?.data?.list_data) {
     let list = obj.data.list_data.content[0];
     // 详情页 底部 房产推广
@@ -401,22 +409,13 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
       delete list.bottom.bottombar_button.hotel;
     }
     // 搜索页 顶部卡片
-    if (
-      list?.card?.card_id === "SearchCardBrand" &&
-      list?.item_type === "brandAdCard"
-    ) {
+    if (list?.card?.card_id === "SearchCardBrand" && list?.item_type === "brandAdCard") {
       delete list.card;
     }
-    if (
-      list?.card?.card_id === "NearbyGroupBuy" &&
-      list?.item_type === "toplist"
-    ) {
+    if (list?.card?.card_id === "NearbyGroupBuy" && list?.item_type === "toplist") {
       delete list.card;
     }
-    if (
-      list?.card?.card_id === "ImageBanner" &&
-      list?.item_type === "ImageBanner"
-    ) {
+    if (list?.card?.card_id === "ImageBanner" && list?.item_type === "ImageBanner") {
       delete list.card;
     }
   } else if (obj?.data?.district?.poi_list) {
@@ -462,6 +461,14 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
         delete list.bottom.bottombar_button.hotel;
       }
     }
+    if (obj?.data?.modules?.list_data?.data) {
+      // 搜索列表
+      let list = obj.data.modules.list_data.data;
+      if (list?.content?.length > 0) {
+        // brandAdCard广告卡片 toplist_al人气榜单 高德指南
+        list.content = list.content.filter((i) => !["brandAdCard", "toplist_al"]?.includes(i?.item_type));
+      }
+    }
   }
 } else if (url.includes("/shield/search_poi/sug")) {
   if (obj?.tip_list) {
@@ -471,12 +478,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
         if (
           ["12"].includes(item?.tip?.datatype_spec) ||
           ["ad", "poi_ad", "toplist"].includes(item?.tip?.result_type) ||
-          [
-            "ad",
-            "exct_query_sug_merge_theme",
-            "query_sug_merge_theme",
-            "sp"
-          ].includes(item?.tip?.task_tag)
+          ["ad", "exct_query_sug_merge_theme", "query_sug_merge_theme", "sp"].includes(item?.tip?.task_tag)
         ) {
           continue;
         } else {
@@ -512,7 +514,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   if (obj?.data?.coupon) {
     delete obj.data.coupon;
   }
-  const item = [
+  const items = [
     "belt",
     "common_float_bar",
     "common_image_banner",
@@ -526,7 +528,7 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
     "tips_top_banner"
   ];
   if (obj?.data?.modules) {
-    for (let i of item) {
+    for (let i of items) {
       delete obj.data.modules[i];
     }
   }
@@ -535,8 +537,8 @@ if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   if (obj?.data?.ad?.length > 0) {
     for (let item of obj.data.ad) {
       item.set.setting.display_time = 0;
-      item.creative[0].start_time = 2208960000; // Unix 时间戳 2040-01-01 00:00:00
-      item.creative[0].end_time = 2209046399; // Unix 时间戳 2040-01-01 23:59:59
+      item.creative[0].start_time = 3818332800; // Unix 时间戳 2090-12-31 00:00:00
+      item.creative[0].end_time = 3818419199; // Unix 时间戳 2090-12-31 23:59:59
     }
   }
 }
