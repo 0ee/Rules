@@ -771,3 +771,16 @@ IP-CIDR,74.86.0.0/16,no-resolve
 IP-CIDR,75.126.0.0/16,no-resolve
 IP-CIDR,174.37.0.0/16,no-resolve
 IP-CIDR,208.43.0.0/16,no-resolve
+
+// pinkcore
+DOMAIN-SUFFIX,pinkcore.com
+DOMAIN-SUFFIX,pinkcore.net
+
+// erolabs
+DOMAIN-SUFFIX,ero-labs.com
+DOMAIN-SUFFIX,ero-labs.net
+DOMAIN-SUFFIX,ero-labs.online
+DOMAIN-SUFFIX,erolabs.cloud
+DOMAIN-SUFFIX,erolabs.com
+DOMAIN-SUFFIX,erolabs.game
+DOMAIN-SUFFIX,erolabs.net
