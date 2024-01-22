@@ -1,5 +1,6 @@
 #!name=高德地图去广告
 #!desc=高德地图APP净化
+#!category=Custom
 
 [Rule]
 # 根据User-Agent精准屏蔽amdc、这条必须添加否则脚本失效

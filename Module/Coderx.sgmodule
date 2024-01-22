@@ -1,6 +1,7 @@
 #!name=Coderx
 #!desc=Github location to Coderx App
 #!system=ios
+#!category=Feature
 
 [URL Rewrite]
 ^https?:\/\/github\.com\/(?!.*users)(?!.*trending)(.+?)\/commit\/(.*)$ grape://commit?id=$2&reponame=$1 307

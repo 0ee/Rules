@@ -1,6 +1,7 @@
 #!name=Subscription
 #!desc=Fake Subscription
 #!system=ios
+#!category=Subscription
 
 
 [Script]

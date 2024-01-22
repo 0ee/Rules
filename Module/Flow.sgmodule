@@ -12,7 +12,7 @@
 # https://raw.githubusercontent.com/zZPiglet/Task/master/UnblockURLinWeChat.sgmodule
 # 作用: 去除开屏广告
 # https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/startup/startup.sgmodule
-
+#!category=Feature
 
 [General]
 skip-proxy = %APPEND% www.baidu.com, yunbusiness.ccb.com, gate.lagou.com, injections.adguard.org, local.adguard.org, cable.auth.com 

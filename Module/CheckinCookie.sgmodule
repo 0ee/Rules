@@ -1,6 +1,7 @@
 #!name=Checkin
 #!desc=Get Checkin Cookie
 #!system=ios
+#!category=Checkin
 
 
 [Script]

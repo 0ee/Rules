@@ -1,6 +1,7 @@
 #!name=Checkin
 #!desc=Auto Checkin
 #!system=ios
+#!category=Checkin
 
 
 [Script]

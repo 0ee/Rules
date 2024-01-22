@@ -6,6 +6,7 @@
 #!homepage=https://adblock.biliuniverse.io
 #!manual=https://manual.biliuniverse.io
 #!icon=https://github.com/BiliUniverse/ADBlock/raw/main/database/icon_108x.png
+#!category=Custom
 
 #https://github.com/BiliUniverse/ADBlock/blob/main/modules/BiliBili.ADBlock.beta.sgmodule
 [URL Rewrite]

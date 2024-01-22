@@ -1,5 +1,6 @@
 #!name=小红书去广告 
 #!desc=小红书APP去开屏、信息流、搜索页广告、照片视频去水印
+#!category=Custom
 
 [Script]
 # 详情页、小部件
