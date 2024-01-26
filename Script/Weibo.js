@@ -1,5 +1,5 @@
 // By RuCu6
-// 2024-01-04 09:20
+// 2024-01-24 16:25
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/weibo.js
 
 const url = $request.url;
