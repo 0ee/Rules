@@ -16,5 +16,8 @@ if (-1 != $request.url.indexOf('/game_record/app/genshin/aapi/widget/v2')) {
     if(!body.data.is_extra_task_reward_received){
         $notification.post('每日委托奖励没领~~~','快去领一下奖励啊~~~','')   
     }
+    if(body.data.finished_task_num < body.data.total_task_num){
+        $notification.post('每日委托都没做啊','每日委托都没做啊~~~','')
+    }
 }
 $done({});
