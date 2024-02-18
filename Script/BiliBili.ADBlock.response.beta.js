@@ -139,6 +139,8 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 																await fixPosition().then(result => item = result);//小广告补位
 															}
 														} else if (cardGoto === 'live' && cardType === 'small_cover_v9') {
+															$.log(`🎉 ${$.name}`, `屏蔽直播推广`);
+															return undefined;//大广告直接去除
 															let blockUpLiveList = Settings?.Detail?.blockUpLiveList;
 															if (typeof blockUpLiveList === 'number') {
 																blockUpLiveList = blockUpLiveList.toString();
