@@ -50,6 +50,7 @@ DOMAIN-SUFFIX,chaospace.fun
 // 
 DOMAIN-SUFFIX,substack.com
 DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,github.com
 DOMAIN-SUFFIX,binance.com
 DOMAIN-KEYWORD,epic
