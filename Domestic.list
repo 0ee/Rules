@@ -3,6 +3,7 @@ PROCESS-NAME,Lark*
 PROCESS-NAME,企业微信*
 PROCESS-NAME,wechatwebdevtools*
 // 飞书
+DOMAIN,open.feishu.cn
 DOMAIN-SUFFIX,feishu.cn
 // Game
 USER-AGENT,rabbit*
@@ -33,6 +34,7 @@ USER-AGENT,WebTorrent*
 USER-AGENT,WeChat*
 USER-AGENT,MicroMessenger Client*
 USER-AGENT,Lark*
+USER-AGENT,letsgo*
 
 // NopeCHA
 DOMAIN,api.nopecha.com
