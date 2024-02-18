@@ -871,6 +871,14 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 																$.log("过滤短视频");
 																return false;
 															}
+															if(item?.item?.smallCoverV5?.base?.threePointV4?.authorId == 23423168){
+																$.log("过滤up主视频");
+																return false;
+															}
+
+														}else if(item?.item?.oneofKind === "rcmdOneItem"){
+															$.log("过滤推荐小条目");
+															return false;
 														}else if(item?.item?.oneofKind === "popularTopEntrance"){
 															$.log("过滤热门的头");
 															return false;
