@@ -198,6 +198,7 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 														});
 														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊', '少女前线', '战鹰', '白敬亭', '春山' /* 其他需要排除的标题 */];
 														if(excludedTitles.some(excludedTitle => item.title.includes(excludedTitle))){
+															$.log(`🎉 ${$.name}`, `${item?.title} 命中关键词`);
 															return undefined;	
 														}
 
