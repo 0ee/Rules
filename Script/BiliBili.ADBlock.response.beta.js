@@ -129,7 +129,7 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 																	}
 																	break;
 															}
-														} else if (['cm_v2', 'cm_v1'].includes(cardType) && ['ad_web_s', 'ad_av', 'ad_web_gif'].includes(cardGoto)) {
+														} else if (['cm_v2', 'cm_v1'].includes(cardType) && ['ad_web_s', 'ad_av', 'ad_web_gif', 'picture'].includes(cardGoto)) {
 															// ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d  上方大的视频3d广告 ad_inline_eggs 上方大的视频广告 ad_inline_live 华为问界
 															$.log(`🎉 ${$.name}`, `${cardGoto}广告去除`);
 															return undefined;
@@ -196,7 +196,7 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 																return true;
 															}
 														});
-														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊', '少女前线', '战鹰' /* 其他需要排除的标题 */];
+														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊', '少女前线', '战鹰', '白敬亭', '春山' /* 其他需要排除的标题 */];
 														if(excludedTitles.some(excludedTitle => item.title.includes(excludedTitle))){
 															return undefined;	
 														}
