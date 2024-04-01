@@ -1,5 +1,5 @@
 // By RuCu6
-// 2024-01-11 17:45
+// 2024-02-20 19:55
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/amap.js
 // 暂未修改过，直接替换
 const url = $request.url;
@@ -41,13 +41,45 @@ if (url.includes("/boss/car/order/content_info")) {
       (i) => i?.dataKey === "FindCarVirtualCard" // 显示关联车辆位置
     );
   }
+} else if (url.includes("/perception/drive/routeInfo")) {
+  // 导航详情页
+  if (obj?.data?.tbt?.event?.length > 0) {
+    obj.data.tbt.event = obj.data.tbt.event.filter((i) => !/ads-\d+/.test(i?.dynamic_id_s));
+  }
+  if (obj?.data?.front_end) {
+    if (obj?.data?.front_end?.guide_tips?.length > 0) {
+      // 音乐底栏
+      obj.data.front_end.guide_tips = obj.data.front_end.guide_tips.filter((i) => i?.biz_type !== "music");
+    }
+    if (obj?.data?.front_end?.assistant) {
+      // 助手皮肤
+      delete obj.data.front_end.assistant;
+    }
+    if (obj?.data?.front_end?.download?.length > 0) {
+      // 导航插播语音广告
+      obj.data.front_end.download = obj.data.front_end.download.filter((i) => !/ads-\d+/.test(i?.dynamic_id_s));
+    }
+  }
 } else if (url.includes("/perception/drive/routePlan")) {
   // 路线规划页
   if (obj?.data?.front_end) {
-    const items = ["global_guide_data", "route_search"];
+    const items = [
+      "assistant", // 左上角悬浮动图
+      "global_guide_data",
+      "route_search",
+      "start_button_tips" // 开始导航 悬浮提示 全国车道级
+    ];
     for (let i of items) {
       delete obj.data.front_end[i];
     }
+  }
+  if (obj?.data?.tbt?.event?.length > 0) {
+    // 导航插播语音广告
+    obj.data.tbt.event = obj.data.tbt.event.filter((i) => !/ads-\d+/.test(i?.dynamic_id_s));
+  }
+  if (obj?.data?.front_end?.download?.length > 0) {
+    // 导航插播语音广告
+    obj.data.front_end.download = obj.data.front_end.download.filter((i) => !/ads-\d+/.test(i?.dynamic_id_s));
   }
 } else if (url.includes("/promotion-web/resource")) {
   // 打车页面
@@ -221,6 +253,8 @@ if (url.includes("/boss/car/order/content_info")) {
     // "brand_story",
     "checkIn",
     "check_in", // 足迹打卡
+    "cityCardFeed", // 景点卡片
+    // "cityPhoto", // 城市照片
     "city_discount", // 专业老师在线答疑
     "claim", // 立即认领 管理店铺
     "co_branded_card",
@@ -252,6 +286,7 @@ if (url.includes("/boss/car/order/content_info")) {
     // "ggc_entry",
     // "hkfMiniPortal", // 订票页面 飞机 火车 汽车
     "horizontalGoodsShelf",
+    "hotPlay", // 热门玩法
     "hot_new_house_estate",
     "hot_shop",
     "hotelCoupon",
@@ -309,6 +344,7 @@ if (url.includes("/boss/car/order/content_info")) {
     // "poi_intercept",
     "portal_entrance", // 高德旅游版块 引流到旅游频道
     // "question_answer_card", // 问问 地点附近的热门问题
+    "quickLink", // 地点详情页图标 酒店 景点 热榜
     "relatedRecommends", // 附近同类型酒店
     // "realtorRealStep",
     "renthouse",
@@ -355,6 +391,7 @@ if (url.includes("/boss/car/order/content_info")) {
     "surround_rentoffice",
     "surround_selloffice",
     // "traffic", // 交通出行 地铁站 公交站 停车场
+    "travelGuideRec", // 人气景点 路线 购票
     "uploadBar",
     "upload_bar", // 上传照片
     "verification", // 商家已入驻

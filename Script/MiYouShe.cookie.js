@@ -23,12 +23,11 @@ function main() {
         if (result === BBS_URL) {
             // 米游币任务的 url
             if ($.setdata(JSON.stringify(headers), BBS_HEADERS_KEY)) {
-                $.msg('米游社小助手-headers', '米游币任务所需的 headers 获取成功!')
             }
         } else if (result === SIGN_URL) {
             // 签到任务的 url
             if ($.setdata(JSON.stringify(headers), SIGN_HEADERS_KEY)) {
-                $.msg('米游社小助手-headers', '签到任务所需的 headers 获取成功!')
+                // $.msg('米游社小助手-headers', '签到任务所需的 headers 获取成功!')
             }
         }
     }
