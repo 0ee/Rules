@@ -37,7 +37,8 @@ if (typeof $response == "undefined") {
         'Anybox':{name:'pro', id:'com'},
         'MoneyThings': {name:'Premium', id:'com'},
         // 花样文字
-        'UTC': {name:'Entitlement.Pro', id:'com'}
+        'UTC': {name:'Entitlement.Pro', id:'com'},
+        'Structured': {name:'pro', id:'com'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
