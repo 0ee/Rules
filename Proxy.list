@@ -727,6 +727,7 @@ DOMAIN-SUFFIX,waveprotocol.org
 DOMAIN-SUFFIX,webmproject.org
 DOMAIN-SUFFIX,webrtc.org
 DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,yufan.me
 
 // Amazon
 IP-CIDR,13.32.0.0/16,no-resolve

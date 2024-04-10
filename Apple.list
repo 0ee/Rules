@@ -5,6 +5,8 @@ USER-AGENT,itunesstored*
 USER-AGENT,AppStore*
 USER-AGENT,cloudd*
 USER-AGENT,TestFlight*
+DOMAIN,lookup-api.apple.com
+DOMAIN,lookup-api.apple.com.edgekey.net
 DOMAIN-SUFFIX,aaplimg.com
 DOMAIN-SUFFIX,apple.co
 DOMAIN-SUFFIX,apple.com
