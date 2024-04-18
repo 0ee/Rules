@@ -177,10 +177,10 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 														} else if (cardGoto === 'search_subscribe') {
 															$.log(`🎉 ${$.name}`, "人气UP主推荐去除");
 															return undefined;
-														} else if (item.goto === 'vertical_av') {
-															$.log(`🎉 ${$.name}`, "竖屏去除");
+														} else if (cardGoto === 'picture' && cardType === 'small_cover_v2') {
+															$.log(`🎉 ${$.name}`, "图文去除");
 															return undefined;
-														}
+														} 
 														const {player_args: playerArgs } = item;
 														if (playerArgs) {
 													        if (playerArgs.duration < 60){
@@ -196,7 +196,7 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 																return true;
 															}
 														});
-														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊', '少女前线', '战鹰', '白敬亭', '春山' /* 其他需要排除的标题 */];
+														const excludedTitles = ['蔡徐坤', '我本是高山', '白荆回廊', '少女前线', '战鹰', '白敬亭', '春山', '无限超越班', '猫一杯', '归龙潮', '棉白有点笨','不要笑挑战' /* 其他需要排除的标题 */];
 														if(excludedTitles.some(excludedTitle => item.title.includes(excludedTitle))){
 															$.log(`🎉 ${$.name}`, `${item?.title} 命中关键词`);
 															return undefined;	
