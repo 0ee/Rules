@@ -116,8 +116,6 @@ URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_tra
 URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/step_detail_ad\?
 URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/training_video_ad\?
 // 美团
-URL-REGEX,^https?:\/\/img\.meituan\.net\/midas\/
-URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/.+\/linglong\/
 // 高德地图
 URL-REGEX,^https?:\/\/m\d{1}\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\/
 URL-REGEX,^https?:\/\/optimus-ads.amap.com\/uploadimg\/

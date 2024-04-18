@@ -2,6 +2,10 @@ PROCESS-NAME,WeChat
 PROCESS-NAME,Lark*
 PROCESS-NAME,企业微信*
 PROCESS-NAME,wechatwebdevtools*
+// Tencent Cloud
+IP-CIDR,162.14.0.0/18,no-resolve
+// Aliyun
+IP-CIDR,140.205.1.0/24,no-resolve
 // 飞书
 DOMAIN,open.feishu.cn
 DOMAIN-SUFFIX,feishu.cn
