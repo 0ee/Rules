@@ -230,7 +230,8 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 													}
 													return item;
 												}));
-												body.data.items = body.data.items.filter(fix => fix !== undefined);
+												// body.data.items = body.data.items.filter(fix => fix !== undefined);
+												body.data.items = []
 											}
 											async function fixPosition() {
 												let itemsCache = $.getdata("@BiliBili.Index.Caches","");
