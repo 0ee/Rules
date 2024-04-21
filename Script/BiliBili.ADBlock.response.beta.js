@@ -230,8 +230,7 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 													}
 													return item;
 												}));
-												// body.data.items = body.data.items.filter(fix => fix !== undefined);
-												body.data.items = []
+												body.data.items = body.data.items.filter(fix => fix !== undefined);
 											}
 											async function fixPosition() {
 												let itemsCache = $.getdata("@BiliBili.Index.Caches","");
@@ -310,6 +309,9 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 											$.log(`🚧 ${$.name}`, "用户设置首页短视频流广告不去除");
 											break;
 									};
+									break;
+								case "x/v2/feed/index/vertical/tab": // 动画
+									body.data?.items = []
 									break;
 								case "x/v2/search/square": // 搜索页
 									switch (Settings?.Detail?.Hot_search) {
