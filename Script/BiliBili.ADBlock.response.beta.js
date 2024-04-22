@@ -310,6 +310,9 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 											break;
 									};
 									break;
+								case "x/v2/feed/index/vertical/tab": // 搞笑
+									body.data = {};
+									break;
 								case "x/v2/search/square": // 搜索页
 									switch (Settings?.Detail?.Hot_search) {
 										case true:
