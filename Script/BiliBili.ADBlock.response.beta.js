@@ -311,7 +311,9 @@ $.log(`⚠ ${$.name}`, `FORMAT: ${FORMAT}`, "");
 									};
 									break;
 								case "x/v2/feed/index/vertical/tab": // 搞笑
-									body.data = {};
+									if (URL.query?.channel_id === "1833") {
+										body.data.items = []
+									}
 									break;
 								case "x/v2/search/square": // 搜索页
 									switch (Settings?.Detail?.Hot_search) {
