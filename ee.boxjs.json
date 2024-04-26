@@ -141,18 +141,6 @@
       ]
     },
     {
-      "id": "chavyleung.bilibili.live",
-      "name": "bilibili直播",
-      "keys": ["chavy_cookie_bilibili"],
-      "author": "@chavyleung",
-      "repo": "https://github.com/chavyleung/scripts/blob/master/bilibili/bilibili.js",
-      "script": "https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.js",
-      "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/bilibili.png",
-        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/bilibili.png"
-      ]
-    },
-    {
       "id": "V2EX",
       "name": "V2EX",
       "keys": ["chavy_cookie_v2ex"],
@@ -240,18 +228,6 @@
       "icons": [
         "https://raw.githubusercontent.com/RayPS/WeChat-Logo/master/shape_white.svg",
         "https://raw.githubusercontent.com/RayPS/WeChat-Logo/master/icon1024x1024.svg"
-      ]
-    },
-    {
-      "id": "geekhub",
-      "name": "Geekhub",
-      "keys": ["id77_geekhub"],
-      "script": "https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.js",
-      "author": "@id77",
-      "repo": "https://raw.githubusercontent.com/id77/QuantumultX/master/task/geekhub.js",
-      "icons": [
-        "https://raw.githubusercontent.com/Orz-3/mini/master/geekhub.png",
-        "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/geekhub.png"
       ]
     },
     {
