@@ -30,6 +30,14 @@ DOMAIN-SUFFIX,office.com
 DOMAIN-SUFFIX,office.net
 DOMAIN-SUFFIX,outlook.com
 DOMAIN-SUFFIX,appcenter.ms
+DOMAIN-SUFFIX,visualstudio.com
+DOMAIN-SUFFIX,exp-tas.com
+
+
+DOMAIN-SUFFIX,getrevue.co
+
+DOMAIN-SUFFIX,felo.ai
+DOMAIN-SUFFIX,felo.me
 
 // Spark
 DOMAIN-SUFFIX,api.amplitude.com
@@ -46,6 +54,10 @@ DOMAIN-SUFFIX,agilebits.com
 
 // Movie
 DOMAIN-SUFFIX,chaospace.fun
+
+// Tmdb.list
+DOMAIN-SUFFIX,themoviedb.org
+DOMAIN-SUFFIX,tmdb.org
 
 // 
 DOMAIN-SUFFIX,substack.com
@@ -67,6 +79,12 @@ DOMAIN-SUFFIX,binance.com
 DOMAIN-SUFFIX,anaconda.com
 DOMAIN-SUFFIX,rsshub.app
 DOMAIN-SUFFIX,mapbox.com
+DOMAIN-SUFFIX,rewind.ai
+DOMAIN-SUFFIX,x.com
+
+DOMAIN-SUFFIX,devmate.com
+DOMAIN-SUFFIX,surge-activation.com
+DOMAIN-SUFFIX,immersivetranslate.com // 沉浸式翻译
 
 
 // blocked sites
@@ -172,6 +190,11 @@ DOMAIN-SUFFIX,chromestatus.com
 DOMAIN-SUFFIX,chromium.org
 DOMAIN-SUFFIX,cl.ly
 DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,cloudflare.net
+DOMAIN-SUFFIX,cloudflare.tv
+DOMAIN-SUFFIX,cloudflare-dns.com
+DOMAIN-SUFFIX,cloudflare-ipfs.com
+DOMAIN-SUFFIX,cloudflare-quic.com
 DOMAIN-SUFFIX,cloudfront.net
 DOMAIN-SUFFIX,cloudgarage.jp
 DOMAIN-SUFFIX,cloudmagic.com

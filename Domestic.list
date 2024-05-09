@@ -13,6 +13,13 @@ DOMAIN-SUFFIX,feishu.cn
 USER-AGENT,rabbit*
 DOMAIN-SUFFIX,yshelper.com
 
+DOMAIN-SUFFIX,bugsnag.com
+DOMAIN-SUFFIX,wins.cool
+// Fileball
+DOMAIN-SUFFIX,fileball.app
+// VidHub
+DOMAIN-SUFFIX,okaapps.com
+
 // IQIYI
 USER-AGENT,QIYI*
 USER-AGENT,iQiYi*
