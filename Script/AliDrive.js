@@ -92,7 +92,7 @@ if ($request.method === 'OPTIONS') {
     }
     // https://api.alipan.com/v2/file/get_video_preview_play_info
     if ($request.url.includes("/v2/file/get_video_preview_play_info")) {
-        body.live_transcoding_task_list.live_transcoding_task_list = body.live_transcoding_task_list.live_transcoding_task_list.filter(i=>{
+        body.video_preview_play_info.live_transcoding_task_list = body.video_preview_play_info.live_transcoding_task_list.filter(i=>{
             if(i.url == ''){
                 return false;
             }
