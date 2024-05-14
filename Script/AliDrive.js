@@ -92,15 +92,12 @@ if ($request.method === 'OPTIONS') {
     }
     // https://api.alipan.com/v2/file/get_video_preview_play_info
     if ($request.url.includes("/v2/file/get_video_preview_play_info")) {
-        // body.identity = "svip";
-        // body.features.forEach((element, index, array) => {
-        //     array[index].intercept = false;
-        //     if(array[index].hasOwnProperty('features')){
-        //         array[index].features.forEach((e,i,a)=>{
-        //             a[i].intercept = false;
-        //         })
-        //     }
-        // });
+        body.live_transcoding_task_list.live_transcoding_task_list = body.live_transcoding_task_list.live_transcoding_task_list.filter(i=>{
+            if(i.url == ''){
+                return false;
+            }
+            return true;
+        });
     }
     //  https://api.alipan.com/business/v1.1/users/me/vip/info
     if ($request.url.includes("/business/v1.1/users/me/vip/info")) {
