@@ -38,6 +38,15 @@ DOMAIN-SUFFIX,getrevue.co
 
 DOMAIN-SUFFIX,felo.ai
 DOMAIN-SUFFIX,felo.me
+DOMAIN-SUFFIX,glarityapi.com
+# 币
+DOMAIN-SUFFIX,crossbell.io
+# Adguard
+DOMAIN-SUFFIX,adtidy.org
+//
+DOMAIN-SUFFIX,swiftgram.app
+DOMAIN-SUFFIX,revenuecat.com
+
 
 // Spark
 DOMAIN-SUFFIX,api.amplitude.com
@@ -81,6 +90,8 @@ DOMAIN-SUFFIX,rsshub.app
 DOMAIN-SUFFIX,mapbox.com
 DOMAIN-SUFFIX,rewind.ai
 DOMAIN-SUFFIX,x.com
+DOMAIN-SUFFIX,npmjs.org
+DOMAIN-SUFFIX,tableplus.com
 
 DOMAIN-SUFFIX,devmate.com
 DOMAIN-SUFFIX,surge-activation.com

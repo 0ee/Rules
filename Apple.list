@@ -6,7 +6,9 @@ USER-AGENT,AppStore*
 USER-AGENT,cloudd*
 USER-AGENT,TestFlight*
 DOMAIN,lookup-api.apple.com
+DOMAIN,api.apple-cloudkit.com
 DOMAIN,lookup-api.apple.com.edgekey.net
+DOMAIN,c.apple.news
 DOMAIN-SUFFIX,aaplimg.com
 DOMAIN-SUFFIX,apple.co
 DOMAIN-SUFFIX,apple.com
