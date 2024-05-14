@@ -73,7 +73,6 @@ DOMAIN-SUFFIX,substack.com
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,github.com
-DOMAIN-SUFFIX,binance.com
 DOMAIN-KEYWORD,epic
 DOMAIN-SUFFIX,midjourney.com
 DOMAIN-SUFFIX,discord.gg
@@ -85,6 +84,7 @@ DOMAIN-SUFFIX,steamcommunity.com
 DOMAIN-SUFFIX,steampowered.com
 DOMAIN-SUFFIX,steamstatic.com
 DOMAIN-SUFFIX,binance.com
+DOMAIN,www.binance.info
 DOMAIN-SUFFIX,anaconda.com
 DOMAIN-SUFFIX,rsshub.app
 DOMAIN-SUFFIX,mapbox.com
