@@ -99,15 +99,12 @@ if ($request.method === 'OPTIONS') {
             return true;
         });
     }
-    //  https://api.alipan.com/business/v1.1/users/me/vip/info
-    if ($request.url.includes("/business/v1.1/users/me/vip/info")) {
-        body.identity = "svip";
-        body.titleNotice = "";
-        body.description = "";
-        body.titleImage = "https://gw.alicdn.com/imgextra/i2/O1CN01snE6rA1pVg95HyRBl_!!6000000005366-2-tps-214-49.png";
-        body.activityText = "";
-        body.activityAction = "";
-        body.rightButtonText = "查看";
+    //  https://api.alipan.com/business/v2/users/me/vip/info
+    if ($request.url.includes("/business/v2/users/me/vip/info")) {
+        body.result[0].identity = "svip";
+        body.result[0].activityText = "";
+        body.result[0].activityAction = "";
+        body.result[0].rightButtonText = "查看";
     }
     //  https://api.aliyundrive.com/business/v1.0/users/vip/info?_rx-s=mobile
     //  https://api.alipan.com/business/v1.0/users/vip/info

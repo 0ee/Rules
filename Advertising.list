@@ -21,6 +21,9 @@ DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,nbsdk-baichuan.alicdn.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,adash-c.ut.taobao.com
+DOMAIN-SUFFIX,h-adashx.ut.taobao.com
+DOMAIN,mdap.alipay.com
+DOMAIN,loggw-ex.alipay.com
 // 腾讯
 DOMAIN-SUFFIX,beacon.qq.com
 DOMAIN-SUFFIX,fusion.qq.com
