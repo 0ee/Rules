@@ -1,16 +1,16 @@
 // Advertising Block 去广告以及隐私追踪保护
-DOMAIN-SUFFIX,errlog.umeng.com
-
 DOMAIN-SUFFIX,bam.nr-data.net
+// Adjust
+DOMAIN-SUFFIX,adjust.com
+// AppsFlyer
+DOMAIN-SUFFIX,appsflyer.com
 
 // 芒果TV
 DOMAIN-SUFFIX,videojj.com
 
 // 哔哩哔哩
 DOMAIN,data.bilibili.com
-#DOMAIN,dataflow.biliapi.com
 DOMAIN,thirdparty.biliapi.com
-#DOMAIN,cm.bilibili.com
 // 百度
 DOMAIN-SUFFIX,hm.baidu.com
 // 阿里
@@ -36,7 +36,6 @@ DOMAIN-SUFFIX,xmpush.xiaomi.com
 DOMAIN-SUFFIX,newton-api.ele.me
 // 滴滴出行
 DOMAIN,gwp.xiaojukeji.com
-URL-REGEX,"^https?:\/\/res\.xiaojukeji\.com\/resapi\/activity\/get(Ruled|Preload)"
 // flurry
 DOMAIN-SUFFIX,flurry.com
 // DoubleClick
@@ -98,42 +97,3 @@ DOMAIN,crash.163.com
 DOMAIN,crashlytics.163.com
 
 // URL
-// 哔哩哔哩
-URL-REGEX,^https?:\/\/app\.bilibili\.com\/x\/v2\/dataflow\/report
-URL-REGEX,^https:\/\/api\.bilibili\.com\/open\/monitor\/report\?
-URL-REGEX,^https:\/\/app\.bilibili\.com\/x\/topic\/vert\/center\?access
-// 微信公众号
-URL-REGEX,^https?:\/\/mp\.weixin\.qq\.com\/mp\/(getappmsgad|appmsgreport|ad_repor|advertisement|readtemplate|ad_complaint|ad_video)
-// 京东
-URL-REGEX,^https?:\/\/api\.m\.jd.com\/client\.action\?functionId=start
-URL-REGEX,^https?:\/\/(bdsp-x|dsp-x)\.jd\.com\/adx\/
-URL-REGEX,^https?:\/\/ms\.jr\.jd\.com\/gw\/generic\/base\/na\/m\/adInfo
-// 小米运动
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/homepage_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sleep_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_summary_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/sport_training_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/step_detail_ad\?
-URL-REGEX,^https?:\/\/api-mifit\.huami\.com\/discovery\/mi\/discovery\/training_video_ad\?
-// 美团
-// 高德地图
-URL-REGEX,^https?:\/\/m\d{1}\.amap\.com\/ws\/valueadded\/alimama\/splash_screen\/
-URL-REGEX,^https?:\/\/optimus-ads.amap.com\/uploadimg\/
-// 中国联通
-URL-REGEX,^https?:\/\/m\.client\.10010\.com\/mobileService\/customer\/accountListData\.htm
-URL-REGEX,^https?:\/\/m\.client\.10010\.com\/uniAdmsInterface\/getWelcomeAd
-// 工商银行
-URL-REGEX,"http:\/\/v\.icbc\.com\.cn\/userfiles\/Resources\/WAP\/advertisement\/"
-// 招商银行
-URL-REGEX,"^https?:\/\/pic1cdn\.cmbchina\.com\/appinitads\/"
-// 掌上生活(招商银行)
-URL-REGEX,"^https?:\/\/mlife\.cmbchina\.com\/ClientFaceService\/preCacheAdvertise\.json$"
-// Thunder
-URL-REGEX,^https?:\/\/images\.client\.vip\.xunlei\.com\/.+\/advert\/
-// 随手记
-URL-REGEX,^https?:\/\/api\.feidee.net\/v1\/user_equity\/AdFree
-// Google
-URL-REGEX,^https?:\/\/googleads\.g\.doubleclick\.net\/mads\/
-// Pixiv
-AND,((USER-AGENT,pixiv*), (NOT,((DOMAIN-KEYWORD,pixiv))))
