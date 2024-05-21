@@ -39,6 +39,7 @@ DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
 // Game
 USER-AGENT,rabbit*
 DOMAIN-SUFFIX,yshelper.com
+DOMAIN-SUFFIX,kurogames.com
 
 DOMAIN-SUFFIX,bugsnag.com
 DOMAIN-SUFFIX,wins.cool
