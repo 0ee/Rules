@@ -114,9 +114,9 @@ if ($request.method === 'OPTIONS') {
         body.icon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
         body.mediumIcon= "https://gw.alicdn.com/imgextra/i4/O1CN01Mk916Y1c99aVBrgxM_!!6000000003557-2-tps-222-60.png";
         body.vipList.forEach((element, index, array) => {
-            if(element.code === "svip"){ // 20TB超级会员
-                array[index].expire = 1893427200;  
-            }
+            // if(element.code === "svip"){ // 20TB超级会员
+                // array[index].expire = 1893427200;  
+            // }
         });
     }
     // https://member.alipan.com/v1/users/me
