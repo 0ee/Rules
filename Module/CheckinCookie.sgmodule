@@ -34,6 +34,8 @@ Bili漫画Cookie = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/v
 原神签到Cookie = type=http-request,pattern=^https://api-takumi.mihoyo.com/event/luna/home,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.cookie.js
 米游币任务Cookie = type=http-request,pattern=^https://bbs-api.miyoushe.com/teenager/api/info,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.cookie.js
 
+库洛币任务Cookie = type=http-request,pattern=^https://api.kurobbs.com/user/login/log,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Kuro.cookie.js
+
 
 [MITM]
-hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com, m5.amap.com, dache.amap.com, app.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com
+hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com, m5.amap.com, dache.amap.com, app.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com
