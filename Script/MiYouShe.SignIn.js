@@ -138,7 +138,7 @@ const api = {
         // 获取用户任务完成状态
         getUserMissionState: 'https://bbs-api.miyoushe.com/apihub/sapi/getUserMissionsState',
         // 获取对应版块的帖子列表
-        getForumPostList: 'https://bbs-api.miyoushe.com/post/api/feeds/posts?algorithm_type=0&filter=&fresh_action=1&gids=2&is_first_initialize=true',
+        getForumPostList: 'https://bbs-api.miyoushe.com/post/api/feeds/posts?algorithm_type=0&filter=&fresh_action=1&gids=6&is_first_initialize=true',
         // 讨论区签到
         postSignIn: 'https://bbs-api.miyoushe.com/apihub/app/api/signIn',
         // 浏览帖子
