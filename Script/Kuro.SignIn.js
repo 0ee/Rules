@@ -443,7 +443,7 @@ function getPostFull(post) {
     }
     return $.http.post(option).then(res => {
         const { code } = JSON.parse(res.body)
-        return retcode === 200 ? 1 : 0
+        return code === 200 ? 1 : 0
     })
 }
 
