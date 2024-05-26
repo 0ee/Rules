@@ -460,8 +460,8 @@ function postUpVotePost(post) {
         body: "forumId="+forumId+"&gameId="+gameId+"&likeType=1&operateType=1&postCommentId=&postCommentReplyId=&postId="+postid+"&postType=1&toUserId="+toUserId
     }
     return $.http.post(option).then(res => {
-        const { retcode } = JSON.parse(res.body)
-        return retcode === 200 ? 1 : 0
+        const { code } = JSON.parse(res.body)
+        return code === 200 ? 1 : 0
     })
 }
 
