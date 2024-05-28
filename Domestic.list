@@ -94,6 +94,8 @@ DOMAIN,api.nopecha.com
 // endel
 DOMAIN-SUFFIX,endel.io
 
+DOMAIN-SUFFIX,ccrgt.com
+
 # Keep https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Keep/Keep.list
 DOMAIN-SUFFIX,calorietech.com
 DOMAIN-SUFFIX,gotokeep.com
