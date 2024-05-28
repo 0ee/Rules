@@ -26,6 +26,7 @@ DOMAIN-SUFFIX,ixiguavideo.com
 DOMAIN-SUFFIX,pstatp.com
 DOMAIN-SUFFIX,snssdk.com
 DOMAIN-SUFFIX,toutiao.com
+DOMAIN-SUFFIX,bytegecko.com
 // 字节
 DOMAIN-SUFFIX,volceapplog.com
 DOMAIN-SUFFIX,ibytedapm.com
@@ -370,6 +371,8 @@ DOMAIN-SUFFIX,yixia.com
 DOMAIN-SUFFIX,yshelper.com
 DOMAIN-SUFFIX,ykimg.com
 DOMAIN-SUFFIX,youdao.com
+DOMAIN-SUFFIX,bloghub.fun
+DOMAIN-SUFFIX,jddebug.com
 DOMAIN-SUFFIX,youku.com
 DOMAIN-SUFFIX,yunjiasu-cdn.net
 DOMAIN-SUFFIX,zealer.com
