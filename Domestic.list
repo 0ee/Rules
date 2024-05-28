@@ -26,7 +26,7 @@ DOMAIN-SUFFIX,ixiguavideo.com
 DOMAIN-SUFFIX,pstatp.com
 DOMAIN-SUFFIX,snssdk.com
 DOMAIN-SUFFIX,toutiao.com
-DOMAIN-SUFFIX,bytegecko.com
+DOMAIN-SUFFIX,searchpstatp.com
 // 字节
 DOMAIN-SUFFIX,volceapplog.com
 DOMAIN-SUFFIX,ibytedapm.com
@@ -34,8 +34,11 @@ DOMAIN-SUFFIX,volccdn.com
 DOMAIN-SUFFIX,zijieapi.com
 DOMAIN-SUFFIX,bytedance.com
 DOMAIN-SUFFIX,bytedance.net
+DOMAIN-SUFFIX,bytegecko.com
+DOMAIN-SUFFIX,bytemastatic.com
 DOMAIN-SUFFIX,volcanicengine.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
+DOMAIN-SUFFIX,pglstatp-toutiao.com
 
 // Game
 USER-AGENT,rabbit*
