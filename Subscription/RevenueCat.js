@@ -39,8 +39,7 @@ if (typeof $response == "undefined") {
         'MoneyThings': {name:'Premium', id:'com'},
         // 花样文字
         'UTC': {name:'Entitlement.Pro', id:'com'},
-        'Structured': {name:'pro', id:'com'},
-        'ChatGPT': {name:'plus',id:'oai_chatgpt_plus_1999_1m'}
+        'Structured': {name:'pro', id:'com'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
