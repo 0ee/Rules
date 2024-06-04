@@ -32,5 +32,7 @@ Bili漫画签到 Cron = type=cron,cronexp=0 9 * * *,wake-system=1,script-path=ht
 微博超话 Cookie = type=http-request,pattern=https://api.weibo.cn/2/page/button\?,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/WeiboSuper.js
 
 
-米游社任务 = type=cron,cronexp=1 0 * * *,wake-system=1,,timeout=600,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
+米游社任务 = type=cron,cronexp=1 0,9 * * *,wake-system=1,,timeout=600,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
 库社区任务 = type=cron,cronexp=5 0 * * *,wake-system=1,,timeout=600,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Kuro.SignIn.js
+
+所有女生 Cron = type=cron,cronexp=13 0 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/syns.js
