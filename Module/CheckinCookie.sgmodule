@@ -39,7 +39,7 @@ Bili漫画Cookie = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/v
 所有女生Cookie = type=http-request,pattern=https://7.wawo.cc/api/account/wx/member/assetsSlim,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/syns_cookie.js
 
 #所有女生 cron = type=cron,cronexp=1 0 * * *,wake-system=1,debug=1,script-path=syns.js,script-update-interval=0,timeout=10000
-#所有女生 = type=http-request,pattern=https://7.wawo.cc/api/account/wx/member/assetsSlim,requires-body=1,max-size=-1,debug=true,script-path=syns_cookie.js
+#所有女生 = type=http-request,pattern=https://7.wawo.cc/api/account/wx/member/assetsSlim,requires-body=1,max-size=-1,debug=true,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/syns_cookie.js
 
 
 [MITM]
