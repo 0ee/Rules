@@ -23,6 +23,7 @@ if (typeof $response == "undefined") {
     const UAMappings = {
         'totowallet': {name: 'all', id: 'com.ziheng.totowallet.onetimepurchase'},
         'apollo': {name: 'all', id: 'com'},
+        'dtdvibe': {name: 'pro', id: 'com.dtd.aroundu.year'},
         'LUTCamera': {name: 'ProVersionLifeTime', id: 'com.uzero.funforcam.lifetimepurchase'},
         // 目标地图
         '%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9B%BE':{ name: 'pro', id: 'com.happydogteam.relax.lifetimePro'},

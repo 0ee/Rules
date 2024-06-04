@@ -26,6 +26,8 @@ DOMAIN-SUFFIX,ixiguavideo.com
 DOMAIN-SUFFIX,pstatp.com
 DOMAIN-SUFFIX,snssdk.com
 DOMAIN-SUFFIX,toutiao.com
+DOMAIN-SUFFIX,searchpstatp.com
+DOMAIN-SUFFIX,ndcpp.com
 // 字节
 DOMAIN-SUFFIX,volceapplog.com
 DOMAIN-SUFFIX,ibytedapm.com
@@ -33,13 +35,17 @@ DOMAIN-SUFFIX,volccdn.com
 DOMAIN-SUFFIX,zijieapi.com
 DOMAIN-SUFFIX,bytedance.com
 DOMAIN-SUFFIX,bytedance.net
+DOMAIN-SUFFIX,bytegecko.com
+DOMAIN-SUFFIX,bytemastatic.com
 DOMAIN-SUFFIX,volcanicengine.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
+DOMAIN-SUFFIX,pglstatp-toutiao.com
 
 // Game
 USER-AGENT,rabbit*
 DOMAIN-SUFFIX,yshelper.com
 DOMAIN-SUFFIX,kurogames.com
+DOMAIN-SUFFIX,kurobbs.com
 
 DOMAIN-SUFFIX,bugsnag.com
 DOMAIN-SUFFIX,wins.cool
@@ -89,6 +95,9 @@ DOMAIN,api.nopecha.com
 
 // endel
 DOMAIN-SUFFIX,endel.io
+
+DOMAIN-SUFFIX,ccrgt.com
+DOMAIN-SUFFIX,ksyun.com
 
 # Keep https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Keep/Keep.list
 DOMAIN-SUFFIX,calorietech.com
@@ -370,6 +379,8 @@ DOMAIN-SUFFIX,yixia.com
 DOMAIN-SUFFIX,yshelper.com
 DOMAIN-SUFFIX,ykimg.com
 DOMAIN-SUFFIX,youdao.com
+DOMAIN-SUFFIX,bloghub.fun
+DOMAIN-SUFFIX,jddebug.com
 DOMAIN-SUFFIX,youku.com
 DOMAIN-SUFFIX,yunjiasu-cdn.net
 DOMAIN-SUFFIX,zealer.com

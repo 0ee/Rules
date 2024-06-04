@@ -197,8 +197,8 @@ const config = {
     tasks: [1],
     micoin: {
         sections: [34],
-        // actions: ["浏览3篇帖子", "点赞5次", "分享1次帖子", "用户签到"]
-        actions: [ "用户签到"]
+        actions: ["浏览3篇帖子", "点赞5次", "分享1次帖子", "用户签到"]
+        //actions: [ "用户签到"]
     }
 }
 //==== 主入口 ====
@@ -443,7 +443,7 @@ function getPostFull(post) {
     }
     return $.http.post(option).then(res => {
         const { code } = JSON.parse(res.body)
-        return retcode === 200 ? 1 : 0
+        return code === 200 ? 1 : 0
     })
 }
 
@@ -460,8 +460,8 @@ function postUpVotePost(post) {
         body: "forumId="+forumId+"&gameId="+gameId+"&likeType=1&operateType=1&postCommentId=&postCommentReplyId=&postId="+postid+"&postType=1&toUserId="+toUserId
     }
     return $.http.post(option).then(res => {
-        const { retcode } = JSON.parse(res.body)
-        return retcode === 200 ? 1 : 0
+        const { code } = JSON.parse(res.body)
+        return code === 200 ? 1 : 0
     })
 }
 
