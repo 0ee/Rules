@@ -74,65 +74,8 @@ const msgText = {
 }
 
 /** 米游社 api 相关 */
-
-// 米游社的版块
-const boards = {
-    honkai3rd: {
-        forumid: 1,
-        key: 'honkai3rd',
-        biz: 'bh3_cn',
-        actid: 'e202207181446311',
-        name: '崩坏3rd',
-        url: "https://bbs.mihoyo.com/bh3/",
-        getReferer() {
-            return `https://webstatic.mihoyo.com/bbs/event/signin/bh3/index.html?bbs_auth_required=true&act_id=${this.actid}&bbs_presentation_style=fullscreen&utm_source=bbs&utm_medium=mys&utm_campaign=icon`
-        }
-    },
-    genshin: {
-        forumid: 26,
-        key: 'genshin',
-        biz: 'hk4e_cn',
-        actid: 'e202311201442471',
-        name: '原神',
-        url: "https://bbs.mihoyo.com/ys/",
-        getReferer() {
-            return `https://webstatic.mihoyo.com/bbs/event/signin-ys/index.html?bbs_auth_required=true&act_id=${this.actid}&utm_source=bbs&utm_medium=mys&utm_campaign=icon`
-        }
-    },
-    honkai2: {
-        forumid: 30,
-        biz: 'bh2_cn',
-        actid: 'e202203291431091',
-        name: '崩坏学园2',
-        url: "https://bbs.mihoyo.com/bh2/"
-    },
-    tears: {
-        forumid: 37,
-        biz: 'nxx_cn',
-        name: '未定事件簿',
-        url: "https://bbs.mihoyo.com/wd/"
-    },
-    house: {
-        forumid: 34,
-        name: '大别野',
-        url: "https://bbs.mihoyo.com/dby/"
-    },
-    honkaisr: {
-        forumid: 52,
-        name: '崩坏: 星穹铁道',
-        actid: 'e202304121516551',
-        url: "https://bbs.mihoyo.com/sr/"
-    },
-    zzz: {
-        forumid: 57,
-        name: '绝区零',
-        url: "https://bbs.mihoyo.com/zzz/"
-    }
-}
 /** 请求 url 相关 */
 const api = {
-    // 获取用户信息(所有游戏通用, 通过不同的游戏 biz 获取绑定的账号信息)
-    getUserInfo: 'https://api-takumi.miyoushe.com/binding/api/getUserGameRolesByStoken?game_biz={0}',
     // bbs 论坛
     micoin: {
         // 获取用户任务完成状态
@@ -147,24 +90,6 @@ const api = {
         postUpVotePost: 'https://api.kurobbs.com/forum/like',
         // 分享
         getShareConf: 'https://api.kurobbs.com/encourage/level/shareTask'
-    },
-    // 原神签到
-    genshin: {
-        // 签到状态
-        getSignInfo: 'https://api-takumi.mihoyo.com/event/luna/info?lang=zh-cn&act_id={1}&region={0}&uid={2}',
-        // 签到奖励
-        getSignAwards: 'https://api-takumi.mihoyo.com/event/luna/home?lang=zh-cn&act_id={0}',
-        // 签到操作
-        postSign: 'https://api-takumi.mihoyo.com/event/luna/sign'
-    },
-    // 没绑定号,不测试了
-    honkai3rd: {
-        // 签到状态
-        getSignInfo: 'https://api-takumi.mihoyo.com/event/luna/info?lang=zh-cn&region={0}&act_id={1}&uid={2}',
-        // 奖励信息
-        getSignAwards: 'https://api-takumi.mihoyo.com/event/luna/home?lang=zh-cn&act_id={0}',
-        // 签到操作
-        postSign: 'https://api-takumi.mihoyo.com/event/luna/sign'
     },
     getApi(type) {
         return this[type]
@@ -215,16 +140,6 @@ async function main() {
                     const micoinResult = await micoinTask()
                     results += micoinResult
                     break
-                case 2:
-                    await checkSignHeaders()
-                    const genshinResult = await genshinSignTask()
-                    results += genshinResult
-                    break
-                case 3:
-                    await checkSignHeaders()
-                    const honkai3rdResult = await honkai3rdSignTask()
-                    results += honkai3rdResult
-                    break
                 default:
                     break
             }
@@ -245,13 +160,6 @@ async function main() {
 }
 
 //==== headers 检查 ====
-function checkSignHeaders() {
-    console.log(signHeadersString)
-    if (!signHeadersString) {
-        return Promise.reject(msgText.cookie.empty)
-    }
-}
-
 function checkBBSHeaders() {
     console.log(checkBBSHeaders)
     if (!bbsHeadersString) {
@@ -259,28 +167,18 @@ function checkBBSHeaders() {
     }
 }
 
-//==== 米游币任务 ====
-// 这里少请求一个米游社用户信息的接口, 获取不到 cookie 的 nickname, 最后脚本提醒时无法显示用户名字
-// 不过无关紧要, 尽量减少请求接口的数量, 这个 todo 消除
+//==== 库洛币任务 ====
 async function micoinTask() {
     try {
-        // 获取执行任务的 board
-        const forumid = config.micoin.sections?.[0] ?? 10000
-        console.log(forumid)
-        const board = findBoardByID(forumid)
-        console.log(board)
-        if (board === undefined) {
-            return Promise.resolve(String.format(msgText.micoin.error, msgText.micoin.forumid))
-        }
         // 获取任务列表
         const tasks = await getUserMissionState()
-        // console.log(tasks)
+        console.log(tasks)
         // 在执行任务之前, 先获取帖子列表
         const lists = await getForumPostList(9)
         
         await randomSleepAsync()
 
-        let results = String.format(msgText.micoin.list, board.name)
+        let results = String.format(msgText.micoin.list, '库洛')
         // 开始循环执行任务
         for (const task of tasks) {
             console.log(task)
@@ -296,7 +194,7 @@ async function micoinTask() {
                 case "用户签到":
                     //讨论区签到
                     console.log(33333)
-                    const signResult = await postSignIn(forumid)
+                    const signResult = await postSignIn()
                     results += signResult
                     console.log('这里')
                     await randomSleepAsync()
@@ -330,7 +228,7 @@ async function micoinTask() {
                     break
             }
         }
-        if (results === String.format(msgText.micoin.list, board.name)) {
+        if (results === String.format(msgText.micoin.list, '库洛')) {
             results = msgText.micoin.taskEmpty
         }
         return Promise.resolve(String.format(msgText.micoin.success, results))
@@ -412,7 +310,7 @@ function getForumPostList(forumid) {
 }
 
 // 讨论区签到
-function postSignIn(forumid) {
+function postSignIn() {
     const option = {
         url: api.micoin.postSignIn,
         headers: getBBSHeaders(),
@@ -482,202 +380,6 @@ function getShareConf(post) {
     })
 }
 
-
-//==== 原神签到 ====
-
-// 主入口
-async function genshinSignTask() {
-    try {
-        // 获取 cookie 所属的账号信息
-        const { game_uid, region, nickname } = await getUserInfo(boards.genshin)
-        // 获取账号签到信息 (签到次数)
-        const total = await getGenshinSignInfo(game_uid, region, nickname)
-        // 获取奖励列表信息
-        const { name, count } = await getGenshinSignAwards(total)
-        // 签到操作
-        await postSign(boards.genshin, game_uid, region)
-        return Promise.resolve(String.format(msgText.genshin.success, nickname, name, count))
-    } catch (error) {
-        return Promise.resolve(String.format(msgText.genshin.error, error.message || (error instanceof Object ? JSON.stringify(error) : error)))
-    }
-}
-
-// 获取账号签到信息
-function getGenshinSignInfo(game_uid, region, nickname) {
-    const option = {
-        url: String.format(api.genshin.getSignInfo, region, boards.genshin.actid, game_uid),
-        headers: getHeaders(boards.genshin)
-    }
-    return $.http.get(option).then(res => {
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.sign, message))
-        }
-        const total_sign_day = data?.['total_sign_day']
-        const is_sign = data?.['is_sign']
-        if (total_sign_day !== undefined && is_sign !== undefined) {
-            // 已签到
-            if (is_sign) {
-                return Promise.reject(String.format(msgText.genshin.signed, nickname))
-            }
-            // 返回总签到次数
-            return total_sign_day
-        } else {
-            return Promise.reject(msgText.common.today)
-        }
-    })
-}
-
-// 获取签到奖励信息
-function getGenshinSignAwards(total) {
-    const option = {
-        url: String.format(api.genshin.getSignAwards, boards.genshin.actid),
-        headers: getHeaders(boards.genshin)
-    }
-    return $.http.get(option).then(res => {
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.awards, message))
-        }
-        const name = data?.awards?.[total]?.name
-        const cnt = data?.awards?.[total]?.cnt
-        if (name && cnt) {
-            return {
-                name,
-                count: cnt
-            }
-        } else {
-            return Promise.reject(msgText.common.award)
-        }
-    })
-}
-
-//==== 崩坏 3rd 签到 ====
-
-// 主入口
-async function honkai3rdSignTask() {
-    try {
-        // 获取账号信息
-        const { game_uid, region, nickname } = await getUserInfo(boards.honkai3rd)
-        // 获取签到信息
-        const total = await getHonkai3rdSignInfo(game_uid, region, nickname)
-        // 获取奖励信息
-        const { name, count } = await getHonkai3rdSignAwards(total)
-        // 签到操作
-        await postSign(boards.honkai3rd, game_uid, region)
-        return Promise.resolve(String.format(msgText.honkai3rd.success, nickname, name, count))
-    } catch (error) {
-        return Promise.resolve(String.format(msgText.honkai3rd.error, error.message || (error instanceof Object ? JSON.stringify(error) : error)))
-    }
-}
-
-// 获取签到状态
-function getHonkai3rdSignInfo(game_uid, region, nickname) {
-    const option = {
-        url: String.format(api.honkai3rd.getSignInfo, region, boards.honkai3rd.actid, game_uid),
-        headers: getHeaders(boards.honkai3rd)
-    }
-    return $.http.get(option).then(res => {
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.sign, message))
-        }
-        const isSign = data?.['is_sign'] ?? false
-        if (isSign) {
-            // 已经签到完成
-            return Promise.reject(String.format(msgText.honkai3rd.signed, nickname))
-        }
-        const total = data?.['total_sign_day']
-        if (total !== undefined) {
-            return total
-        } else {
-            return Promise.reject(msgText.common.today)
-        }
-    })
-}
-
-// 获取奖励信息
-function getHonkai3rdSignAwards(total) {
-    const option = {
-        url: String.format(api.honkai3rd.getSignAwards, boards.honkai3rd.actid),
-        headers: getHeaders(boards.honkai3rd)
-    }
-    return $.http.get(option).then(res => {
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.awards, message))
-        }
-        const name = data?.awards?.[total]?.name
-        const cnt = data?.awards?.[total]?.cnt
-        if (name && cnt) {
-            return {
-                name,
-                count: cnt
-            }
-        } else {
-            return Promise.reject(msgText.common.award)
-        }
-    })
-}
-
-//==== 签到任务 ====
-// @todo 签到任务大概率是接口通用的, 只是部分参数不一样, 可以构造通用方法, 方便后续整合崩2, 事件簿, 铁道等
-
-// 获取账号信息 通用
-function getUserInfo(board) {
-    const option = {
-        url: String.format(api.getUserInfo, board.biz),
-        headers: getMiYouSheHeaders(board)
-    }
-    return $.http.get(option).then(res => {
-        console.log(res.body)
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.user, message))
-        }
-        const game_uid = data?.list?.[0]?.game_uid
-        const region = data?.list?.[0]?.region
-        const nickname = data?.list?.[0]?.nickname
-        // 取出必要数据
-        if (game_uid && region && nickname) {
-            return {
-                game_uid,
-                region,
-                nickname
-            }
-        } else {
-            // 无法获取到正确的 uid, region, nickname
-            return Promise.reject(msgText.common.uid)
-        }
-    })
-}
-// 游戏签到操作 逻辑通用, 根据传入的 board 构建不同的参数
-function postSign(board, game_uid, region) {
-    const body = {
-        act_id: board.actid,
-        region,
-        uid: game_uid
-    }
-    const option = {
-        url: api.getApi(board.key).postSign,
-        headers: getHeaders(board),
-        body: JSON.stringify(body)
-    }
-    return $.http.post(option).then(res => {
-        const { retcode, message, data } = JSON.parse(res.body)
-        if (retcode !== 0) {
-            return Promise.reject(String.format(msgText.common.error, message))
-        }
-        if (board.forumid === 26) {
-            // 原神游戏签到需要进一步的判断是否触发风险验证码
-            const riskCode = data?.['risk_code'] ?? 0
-            if (riskCode !== 0) {
-                return Promise.reject(msgText.genshin.riskCode)
-            }
-        }
-    })
-}
-
 //============== 辅助函数 ==========================
 
 /** 调用系统通知 */
@@ -701,109 +403,12 @@ function random(min, max) {
     return Math.round(Math.random() * (max - min)) + min;
 }
 
-// 通过 id 获取对应的 board
-function findBoardByID(forumid) {
-    for (const key in boards) {
-        if (Object.prototype.hasOwnProperty.call(boards, key)) {
-            const board = boards[key]
-            if (board.forumid === forumid) {
-                return board
-            }
-        }
-    }
-}
-
-/** 米游社 api headers */
-// https://github.com/Womsxd/MihoyoBBSTools/blob/master/setting.py#L103
-// 随版本更新
-// 通用参数
-const headers = {
-    // 论坛米游币相关参数
-    clientType: '2',// 1为ios 2为安卓
-    salt: 'yajbb9O8TgQYOW7JVZYfUJhXN7mAeZPE',// mihoyobbs_salt
-    saltV2: 't0qEgfub6cvueAPgR5m9aQWWVciEer7v',// mihoyobbs_salt_x6
-    // 游戏签到相关, 内嵌 webview, 所以用的是 web 相关参数
-    clientTypeWeb: '5',// 4为pc web 5为mobile web
-    saltWeb: 'LyD1rXqMv2GJhnwdvCBjFOKGiKuLY3aO',// mihoyobbs_salt_web
-    // 通用参数
-    appVersion: '2.67.1'
-}
-
-function getBaseHeaders() {
-    return {
-        // DS可能和版本有关，不替换
-        // 'x-rpc-app_version': headers.appVersion
-    }
-}
-
-// 游戏签到的 headers, 用的是 webview , 所以用的是 web 相关的参数
-function getHeaders(board) {
-    let signHeaders = Object.assign(JSON.parse(signHeadersString), getBaseHeaders())
-    signHeaders['Referer'] = board.getReferer()
-    signHeaders['DS'] = getDS(headers.saltWeb)
-    signHeaders['x-rpc-client_type'] = headers.clientTypeWeb
-    return signHeaders
-}
-
-// 米游币任务的 headers
+// 库洛币任务的 headers
 function getBBSHeaders(json) {
     let bbsHeaders = Object.assign(JSON.parse(bbsHeadersString), getBaseHeaders())
-    // bbsHeaders['DS'] = json ? getDSV2(headers.saltV2, '', json) : getDS(headers.salt)
-    // bbsHeaders['x-rpc-client_type'] = headers.clientType
-    // bbsHeaders['Host'] = 'bbs-api.miyoushe.com'
     return bbsHeaders
 }
-
-// 获取用户信息的域名是 api-takumi.miyoushe.com
-function getMiYouSheHeaders(board)
-{
-    // 得用米游币的
-    let miYouSheHeaders = Object.assign(JSON.parse(bbsHeadersString), getBaseHeaders())
-    miYouSheHeaders['x-rpc-csm_source'] = 'home'
-    miYouSheHeaders['Host'] = 'api-takumi.miyoushe.com'
-    miYouSheHeaders['Referer'] = 'https://app.mihoyo.com'
-    miYouSheHeaders['DS'] = getDS(headers.saltWeb)
-    miYouSheHeaders['x-rpc-client_type'] = headers.clientTypeWeb
-    return miYouSheHeaders
-}
-
-/** ds 获取 */
-// 备注1: x-rpc-client_type 参数: 游戏签到是内嵌 webview 所以用 5 为 web mobile, 米游币为 api 请求 所以用 2 为 安卓
-// 备注2: salt 与 x-rpc-app_version 和 x-rpc-client_type 都是联动的
-function getDS(n) {
-    const i = Math.floor(new Date().getTime() / 1000) + ''
-    const r = getRandomString(6)
-    const c = md5(`salt=${n}&t=${i}&r=${r}`)
-    return `${i},${r},${c}`
-}
-
-// ds 的 v2 版本, 目前只有米游币任务签到接口用
-// n: salt
-// q: 目前暂时不清楚作用, 传空字符串
-// b: body 的 json 字符串
-function getDSV2(n, q, b) {
-    const i = Math.floor(new Date().getTime() / 1000) + ''
-    const r = `${getRandomInt(100001, 200000)}`
-    const c = md5(`salt=${n}&t=${i}&r=${r}&b=${b}&q=${q}`)
-    return `${i},${r},${c}`
-}
-
-/** 随机字符串获取 */
-function getRandomString(count) {
-    const d = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
-    const t = d.length
-    let n = ''
-    for (var i = 0; i < count; i++) n += d.charAt(Math.floor(Math.random() * t))
-    return n
-}
-
-/** 生成 [n, m] 的随机整数 */
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
 //============= 类与原型上添加方法 ======================
-
 /** 格式化字符串 */
 String.format = function (string, ...args) {
     let formatted = string
@@ -814,13 +419,6 @@ String.format = function (string, ...args) {
 }
 
 //============== 第三方辅助函数 =========================
-
-/**
- * 从 NobyDa 脚本里面获取到的原生 md5 函数
- * @see https://github.com/blueimp/JavaScript-MD5
- */
-function md5(string){function RotateLeft(lValue,iShiftBits){return(lValue<<iShiftBits)|(lValue>>>(32-iShiftBits))}function AddUnsigned(lX,lY){var lX4,lY4,lX8,lY8,lResult;lX8=(lX&0x80000000);lY8=(lY&0x80000000);lX4=(lX&0x40000000);lY4=(lY&0x40000000);lResult=(lX&0x3FFFFFFF)+(lY&0x3FFFFFFF);if(lX4&lY4){return(lResult^0x80000000^lX8^lY8)}if(lX4|lY4){if(lResult&0x40000000){return(lResult^0xC0000000^lX8^lY8)}else{return(lResult^0x40000000^lX8^lY8)}}else{return(lResult^lX8^lY8)}}function F(x,y,z){return(x&y)|((~x)&z)}function G(x,y,z){return(x&z)|(y&(~z))}function H(x,y,z){return(x^y^z)}function I(x,y,z){return(y^(x|(~z)))}function FF(a,b,c,d,x,s,ac){a=AddUnsigned(a,AddUnsigned(AddUnsigned(F(b,c,d),x),ac));return AddUnsigned(RotateLeft(a,s),b)};function GG(a,b,c,d,x,s,ac){a=AddUnsigned(a,AddUnsigned(AddUnsigned(G(b,c,d),x),ac));return AddUnsigned(RotateLeft(a,s),b)};function HH(a,b,c,d,x,s,ac){a=AddUnsigned(a,AddUnsigned(AddUnsigned(H(b,c,d),x),ac));return AddUnsigned(RotateLeft(a,s),b)};function II(a,b,c,d,x,s,ac){a=AddUnsigned(a,AddUnsigned(AddUnsigned(I(b,c,d),x),ac));return AddUnsigned(RotateLeft(a,s),b)};function ConvertToWordArray(string){var lWordCount;var lMessageLength=string.length;var lNumberOfWords_temp1=lMessageLength+8;var lNumberOfWords_temp2=(lNumberOfWords_temp1-(lNumberOfWords_temp1%64))/64;var lNumberOfWords=(lNumberOfWords_temp2+1)*16;var lWordArray=Array(lNumberOfWords-1);var lBytePosition=0;var lByteCount=0;while(lByteCount<lMessageLength){lWordCount=(lByteCount-(lByteCount%4))/4;lBytePosition=(lByteCount%4)*8;lWordArray[lWordCount]=(lWordArray[lWordCount]|(string.charCodeAt(lByteCount)<<lBytePosition));lByteCount++}lWordCount=(lByteCount-(lByteCount%4))/4;lBytePosition=(lByteCount%4)*8;lWordArray[lWordCount]=lWordArray[lWordCount]|(0x80<<lBytePosition);lWordArray[lNumberOfWords-2]=lMessageLength<<3;lWordArray[lNumberOfWords-1]=lMessageLength>>>29;return lWordArray};function WordToHex(lValue){var WordToHexValue="",WordToHexValue_temp="",lByte,lCount;for(lCount=0;lCount<=3;lCount++){lByte=(lValue>>>(lCount*8))&255;WordToHexValue_temp="0"+lByte.toString(16);WordToHexValue=WordToHexValue+WordToHexValue_temp.substr(WordToHexValue_temp.length-2,2)}return WordToHexValue};function Utf8Encode(string){string=string.replace(/\r\n/g,"\n");var utftext="";for(var n=0;n<string.length;n++){var c=string.charCodeAt(n);if(c<128){utftext+=String.fromCharCode(c)}else if((c>127)&&(c<2048)){utftext+=String.fromCharCode((c>>6)|192);utftext+=String.fromCharCode((c&63)|128)}else{utftext+=String.fromCharCode((c>>12)|224);utftext+=String.fromCharCode(((c>>6)&63)|128);utftext+=String.fromCharCode((c&63)|128)}}return utftext};var x=Array();var k,AA,BB,CC,DD,a,b,c,d;var S11=7,S12=12,S13=17,S14=22;var S21=5,S22=9,S23=14,S24=20;var S31=4,S32=11,S33=16,S34=23;var S41=6,S42=10,S43=15,S44=21;string=Utf8Encode(string);x=ConvertToWordArray(string);a=0x67452301;b=0xEFCDAB89;c=0x98BADCFE;d=0x10325476;for(k=0;k<x.length;k+=16){AA=a;BB=b;CC=c;DD=d;a=FF(a,b,c,d,x[k+0],S11,0xD76AA478);d=FF(d,a,b,c,x[k+1],S12,0xE8C7B756);c=FF(c,d,a,b,x[k+2],S13,0x242070DB);b=FF(b,c,d,a,x[k+3],S14,0xC1BDCEEE);a=FF(a,b,c,d,x[k+4],S11,0xF57C0FAF);d=FF(d,a,b,c,x[k+5],S12,0x4787C62A);c=FF(c,d,a,b,x[k+6],S13,0xA8304613);b=FF(b,c,d,a,x[k+7],S14,0xFD469501);a=FF(a,b,c,d,x[k+8],S11,0x698098D8);d=FF(d,a,b,c,x[k+9],S12,0x8B44F7AF);c=FF(c,d,a,b,x[k+10],S13,0xFFFF5BB1);b=FF(b,c,d,a,x[k+11],S14,0x895CD7BE);a=FF(a,b,c,d,x[k+12],S11,0x6B901122);d=FF(d,a,b,c,x[k+13],S12,0xFD987193);c=FF(c,d,a,b,x[k+14],S13,0xA679438E);b=FF(b,c,d,a,x[k+15],S14,0x49B40821);a=GG(a,b,c,d,x[k+1],S21,0xF61E2562);d=GG(d,a,b,c,x[k+6],S22,0xC040B340);c=GG(c,d,a,b,x[k+11],S23,0x265E5A51);b=GG(b,c,d,a,x[k+0],S24,0xE9B6C7AA);a=GG(a,b,c,d,x[k+5],S21,0xD62F105D);d=GG(d,a,b,c,x[k+10],S22,0x2441453);c=GG(c,d,a,b,x[k+15],S23,0xD8A1E681);b=GG(b,c,d,a,x[k+4],S24,0xE7D3FBC8);a=GG(a,b,c,d,x[k+9],S21,0x21E1CDE6);d=GG(d,a,b,c,x[k+14],S22,0xC33707D6);c=GG(c,d,a,b,x[k+3],S23,0xF4D50D87);b=GG(b,c,d,a,x[k+8],S24,0x455A14ED);a=GG(a,b,c,d,x[k+13],S21,0xA9E3E905);d=GG(d,a,b,c,x[k+2],S22,0xFCEFA3F8);c=GG(c,d,a,b,x[k+7],S23,0x676F02D9);b=GG(b,c,d,a,x[k+12],S24,0x8D2A4C8A);a=HH(a,b,c,d,x[k+5],S31,0xFFFA3942);d=HH(d,a,b,c,x[k+8],S32,0x8771F681);c=HH(c,d,a,b,x[k+11],S33,0x6D9D6122);b=HH(b,c,d,a,x[k+14],S34,0xFDE5380C);a=HH(a,b,c,d,x[k+1],S31,0xA4BEEA44);d=HH(d,a,b,c,x[k+4],S32,0x4BDECFA9);c=HH(c,d,a,b,x[k+7],S33,0xF6BB4B60);b=HH(b,c,d,a,x[k+10],S34,0xBEBFBC70);a=HH(a,b,c,d,x[k+13],S31,0x289B7EC6);d=HH(d,a,b,c,x[k+0],S32,0xEAA127FA);c=HH(c,d,a,b,x[k+3],S33,0xD4EF3085);b=HH(b,c,d,a,x[k+6],S34,0x4881D05);a=HH(a,b,c,d,x[k+9],S31,0xD9D4D039);d=HH(d,a,b,c,x[k+12],S32,0xE6DB99E5);c=HH(c,d,a,b,x[k+15],S33,0x1FA27CF8);b=HH(b,c,d,a,x[k+2],S34,0xC4AC5665);a=II(a,b,c,d,x[k+0],S41,0xF4292244);d=II(d,a,b,c,x[k+7],S42,0x432AFF97);c=II(c,d,a,b,x[k+14],S43,0xAB9423A7);b=II(b,c,d,a,x[k+5],S44,0xFC93A039);a=II(a,b,c,d,x[k+12],S41,0x655B59C3);d=II(d,a,b,c,x[k+3],S42,0x8F0CCC92);c=II(c,d,a,b,x[k+10],S43,0xFFEFF47D);b=II(b,c,d,a,x[k+1],S44,0x85845DD1);a=II(a,b,c,d,x[k+8],S41,0x6FA87E4F);d=II(d,a,b,c,x[k+15],S42,0xFE2CE6E0);c=II(c,d,a,b,x[k+6],S43,0xA3014314);b=II(b,c,d,a,x[k+13],S44,0x4E0811A1);a=II(a,b,c,d,x[k+4],S41,0xF7537E82);d=II(d,a,b,c,x[k+11],S42,0xBD3AF235);c=II(c,d,a,b,x[k+2],S43,0x2AD7D2BB);b=II(b,c,d,a,x[k+9],S44,0xEB86D391);a=AddUnsigned(a,AA);b=AddUnsigned(b,BB);c=AddUnsigned(c,CC);d=AddUnsigned(d,DD)}var temp=WordToHex(a)+WordToHex(b)+WordToHex(c)+WordToHex(d);return temp.toLowerCase()}
-
 /**
  * Env 各家应用环境适配
  * @see https://github.com/chavyleung/scripts/blob/master/Env.min.js
