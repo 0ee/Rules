@@ -194,6 +194,19 @@ function score() {
 	});
 }
 
+async function SendMsg(message) {
+	if (!message) return;
+	if (Notify > 0) {
+		if ($.isNode()) {
+			await notify.sendNotify($.name, message);
+		} else {
+			$.msg($.name, '', message);
+		}
+	} else {
+		console.log(message);
+	}
+}
+
 /**
  * Env 各家应用环境适配
  * @see https://github.com/chavyleung/scripts/blob/master/Env.min.js
