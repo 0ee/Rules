@@ -1,5 +1,3 @@
-// Modified from kayanouriko https://github.com/kayanouriko/quantumultx-mihoyobbs-auto-helper
-
 /** env.js 全局 */
 const $ = new Env('库社区小助手')
 
@@ -22,50 +20,27 @@ const msgText = {
     cookie: {
         empty: '请先打开该脚本配套重写规则更新后获取 headers, 再重新运行该脚本. 点击该通知将跳转获取 headers 的教程页面.',
     },
-    common: {
-        user: '获取账号信息有误, 错误信息: {0}.',
-        uid: '无法正确获取账号信息关键参数.',
-        sign: '获取账号签到信息有误, 错误信息: {0}.',
-        today: '无法正确获取账号签到信息关键参数.',
-        awards: '获取签到奖励信息有误, 错误信息: {0}.',
-        award: '无法正确获取签到奖励信息关键参数.',
-        error: '错误信息: {0}.'
-    },
     // 米游币相关
     micoin: {
         cookie: 'cookie 已过期, 请重新运行 cookie 获取脚本一次.',
-        finished: '今日可以获取的米游币已达上限.',
-        empty: '查询可执行的米游币任务出错.',
-        state: '获取米游社账号米游币任务完成状态出错, 错误信息: {0}.',
+        finished: '今日可以获取的库洛币已达上限.',
+        empty: '查询可执行的库洛币任务出错.',
+        state: '获取库社区账号库洛币任务完成状态出错, 错误信息: {0}.',
         forumid: '配置中的 sections 出错, 请参照脚本配置说明重新配置.',
-        list: '在{0}讨论区执行米游币任务:\n',
+        list: '在{0}讨论区执行库洛币任务:\n',
         listError: '获取帖子列表有误, 错误信息: {0}.',
         listEmpty: '获取到的帖子列表为空.',
         signError: '讨论区签到任务执行失败, 错误信息: {0}.\n',
-        sign: '讨论区签到任务完成(米游币+30).\n',
-        post: '浏览 3 个帖子任务完成(米游币+20).\n',
+        sign: '讨论区签到任务完成(库洛币+30).\n',
+        post: '浏览 3 个帖子任务完成(库洛币+20).\n',
         postFail: '浏览 3 个帖子任务未完成, 只成功浏览了 {0} 个帖子.\n',
-        vote: '5 次点赞任务完成(米游币+30).\n',
+        vote: '5 次点赞任务完成(库洛币+20).\n',
         voteFail: '5 次点赞任务未完成, 只成功点赞了 {0} 个帖子.\n',
-        shared: '分享帖子任务完成(米游币+10).\n',
+        shared: '分享帖子任务完成(库洛币+10).\n',
         sharedFail: '分享帖子任务未完成.\n',
-        taskEmpty: '不过貌似没有任何米游币任务执行了Orz\n',
-        success: '米游币任务操作完成!\n{0}\n',
-        error: '米游币任务操作未完成!\n{0}\n\n'
-    },
-    // 原神签到相关
-    genshin: {
-        bind: '请先前往米游社 App 手动签到一次!',
-        signed: '旅行者"{0}"今日已领取过奖励.',
-        success: '原神签到操作完成!\n旅行者"{0}"领取了奖励({1}x{2}).\n\n',
-        error: '原神签到操作未完成!\n{0}\n\n',
-        riskCode: '触发了风控验证码, 请前往米游社 app 手动签到.'
-    },
-    // 崩坏3rd签到相关
-    honkai3rd: {
-        signed: '舰长"{0}"今日已领取过奖励.',
-        success: '崩坏3rd签到操作完成!\n舰长"{0}"领取了奖励({1}x{2}).\n\n',
-        error: '崩坏3rd签到操作未完成!\n{0}\n\n'
+        taskEmpty: '不过貌似没有任何库洛币任务执行了Orz\n',
+        success: '库洛币任务操作完成!\n{0}\n',
+        error: '库洛币任务操作未完成!\n{0}\n\n'
     },
     // 根据类型获取对应的数据
     getMsg(type, key) {
@@ -405,7 +380,7 @@ function random(min, max) {
 
 // 库洛币任务的 headers
 function getBBSHeaders(json) {
-    let bbsHeaders = Object.assign(JSON.parse(bbsHeadersString), getBaseHeaders())
+    let bbsHeaders = Object.assign(JSON.parse(bbsHeadersString))
     return bbsHeaders
 }
 //============= 类与原型上添加方法 ======================
