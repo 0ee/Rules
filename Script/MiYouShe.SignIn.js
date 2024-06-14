@@ -273,6 +273,7 @@ async function micoinTask() {
         }
         // 获取任务列表
         const tasks = await getUserMissionState()
+        console.log('task detail')
         console.log(tasks)
         // 在执行任务之前, 先获取帖子列表
         const lists = await getForumPostList(forumid)
@@ -392,6 +393,8 @@ function getForumPostList(forumid) {
         headers: getBBSHeaders()
     }
     return $.http.get(option).then(res => {
+        console.log('post list')
+        console.log(res.body)
         const { retcode, message, data } = JSON.parse(res.body)
         if (retcode !== 0) { 
             return Promise.reject(String.format(msgText.micoin.listError, message))
@@ -415,6 +418,8 @@ function postSignIn(forumid) {
         body: JSON.stringify(json)
     }
     return $.http.post(option).then(res => {
+        console.log('postsign')
+        console.log(res.body)
         const { retcode, message } = JSON.parse(res.body)
         if (retcode !== 0) {
             if(retcode == 1034){
@@ -436,6 +441,8 @@ function getPostFull(post) {
         headers: getBBSHeaders()
     }
     return $.http.get(option).then(res => {
+        console.log('post full')
+        console.log(res.body)
         const { retcode } = JSON.parse(res.body)
         return retcode === 0 ? 1 : 0
     })
@@ -456,6 +463,8 @@ function postUpVotePost(post) {
         body: JSON.stringify(json)
     }
     return $.http.post(option).then(res => {
+        console.log('vote')
+        console.log(res.body)
         const { retcode } = JSON.parse(res.body)
         return retcode === 0 ? 1 : 0
     })
@@ -472,6 +481,8 @@ function getShareConf(post) {
         headers: getBBSHeaders()
     }
     return $.http.get(option).then(res => {
+        console.log('share')
+        console.log(res.body)
         const { retcode } = JSON.parse(res.body)
         return retcode
     })
