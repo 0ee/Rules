@@ -15,8 +15,6 @@ NGA Cookie = type=http-request,pattern=^https:\/\/ngabbs.com\/nuke.php\??,requir
 
 V2EX Cookie = type=http-request,pattern=^https:\/\/www\.v2ex\.com\/mission\/daily,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js
 
-什么值得买 Cookie = script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/smzdm/smzdm_daily.js,type=http-request,requires-body=false,pattern=^https?:\/\/user-api\.smzdm\.com\/checkin$
-
 叮咚买菜 Cookie = type=http-request,pattern=^https?:\/\/maicai\.api\.ddxq\.mobi\/point\/home\?api_version,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/dingdong/dingdong_checkin.js
 
 霸王茶姬 Token = type=http-request,pattern=^https?:\/\/webapi\.qmai\.cn\/web\/catering\/integral\/sign\/signIn,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Guding88/Script/main/bawangchaji/bwcj_token.js
@@ -42,4 +40,4 @@ Bili漫画Cookie = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/v
 
 
 [MITM]
-hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, www.v2ex.com,  user-api.smzdm.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com, m5.amap.com, dache.amap.com, app.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, 7.wawo.cc, api.weibo.cn
+hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, www.v2ex.com, maicai.api.ddxq.mobi, webapi.qmai.cn, app.bilibili.com, m.bilibili.com, m5.amap.com, dache.amap.com, app.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, 7.wawo.cc, api.weibo.cn
