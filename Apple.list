@@ -1,3 +1,4 @@
+IP-CIDR,17.0.0.0/8
 USER-AGENT,com.apple.appstored*
 USER-AGENT,com.apple.Maps*
 USER-AGENT,com.apple.trustd*
