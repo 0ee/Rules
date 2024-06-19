@@ -325,6 +325,9 @@ async function micoinTask() {
                     break
             }
         }
+        const tasks2 = await getUserMissionState()
+        console.log('task detail')
+        console.log(tasks2)
         if (results === String.format(msgText.micoin.list, board.name)) {
             results = msgText.micoin.taskEmpty
         }

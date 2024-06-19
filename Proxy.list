@@ -97,6 +97,8 @@ DOMAIN-SUFFIX,devmate.com
 DOMAIN-SUFFIX,surge-activation.com
 DOMAIN-SUFFIX,immersivetranslate.com // 沉浸式翻译
 
+DOMAIN-SUFFIX,seelie.inmagi.com
+
 
 // blocked sites
 DOMAIN-KEYWORD,slack
@@ -461,6 +463,7 @@ DOMAIN-SUFFIX,readdle.com
 DOMAIN-SUFFIX,redditmedia.com
 DOMAIN-SUFFIX,redditstatic.com
 DOMAIN-SUFFIX,reederapp.com
+DOMAIN-SUFFIX,recombee.com
 DOMAIN-SUFFIX,resilio.com
 DOMAIN-SUFFIX,reuters.com
 DOMAIN-SUFFIX,rfi.fr

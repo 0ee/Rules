@@ -1,9 +1,21 @@
 // Advertising Block 去广告以及隐私追踪保护
+// newrelic
 DOMAIN-SUFFIX,bam.nr-data.net
+
+
+DOMAIN-SUFFIX,adnxs.com
+// Adult Ad Network
+DOMAIN-SUFFIX,juicyads.com
+DOMAIN-SUFFIX,juicyads.me
+
+
+DOMAIN-SUFFIX,rmhfrtnd.com
 // Adjust
 DOMAIN-SUFFIX,adjust.com
+DOMAIN-SUFFIX,adjust.net.in
 // AppsFlyer
 DOMAIN-SUFFIX,appsflyer.com
+DOMAIN-SUFFIX,appsflyersdk.com
 
 // 芒果TV
 DOMAIN-SUFFIX,videojj.com
@@ -99,4 +111,5 @@ DOMAIN,clientlog3.music.163.com
 DOMAIN,crash.163.com
 DOMAIN,crashlytics.163.com
 
-// URL
+
+DOMAIN,go.rmhfrtnd.com
