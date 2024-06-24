@@ -39,7 +39,8 @@ if (typeof $response == "undefined") {
         'MoneyThings': {name:'Premium', id:'com'},
         // 花样文字
         'UTC': {name:'Entitlement.Pro', id:'com'},
-        'Structured': {name:'pro', id:'com'}
+        'Structured': {name:'pro', id:'com'},
+        'VSCO': {name: 'pro', id: 'vscopro_global_5999_annual_AutoFreeTrial'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
