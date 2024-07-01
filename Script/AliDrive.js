@@ -12,7 +12,7 @@ if ($request.method === 'OPTIONS') {
     body = JSON.parse(body);
     //  https://api.alipan.com/apps/v1/users/app_list
     if (-1 != $request.url.indexOf('/apps/v1/users/app_list')) {
-        blackApps = ["好运瓶","传图识字","通讯录","金山文档","喜阅星球"];
+        blackApps = ["好运瓶","传图识字","通讯录","金山文档","喜阅星球","在线打印"];
     body.result = body.result.filter(i=>{
             if(blackApps.includes(i.name)){
                 return false;
@@ -26,13 +26,17 @@ if ($request.method === 'OPTIONS') {
     }
 
     //  https://api.alipan.com/apps/v2/users/home/widgets
-    if (-1 != $request.url.indexOf('/apps/v2/users/home/widgets')) {
+    //  https://bizapi.alipan.com/apps/v1/user/home/widgets
+    if (-1 != $request.url.indexOf('/apps/v1/user/home/widgets')) {
         body.banners.items = body.banners.items.filter(i=>{
             console.log(i)
-            if(i.code === 'riqianhuodong'){ // 签到
+            if(i.code === 'print'){ // 签到
                 return false;
             }
-            if(i.code === 'lianxubaoyue'){
+            if(i.code === 'svip'){
+                return false;
+            }
+            if(i.code === '590xx'){
                 return false;
             }
             return true;
@@ -44,10 +48,8 @@ if ($request.method === 'OPTIONS') {
             }
             return true;
         });
-        delete body.minorBackup;
         delete body.mainBackup;
-        // body.minorBackup = {};
-        // body.mainBackup ={};
+        body.introduceAlipan = {};
     }
     // https://member.alipan.com/v1/users/tools
     // https://member.aliyundrive.com/v1/users/tools
@@ -150,6 +152,7 @@ if ($request.method === 'OPTIONS') {
     // https://api.alipan.com/adrive/v2/backup/device_applet_list_summary
     if ($request.url.includes("/adrive/v2/backup/device_applet_list_summary")) {
         body.deviceItems = [];
+        body.appletItems = [];
     }
     body = JSON.stringify(body);
     $done({body});
