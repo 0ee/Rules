@@ -29,7 +29,6 @@ if ($request.method === 'OPTIONS') {
     //  https://bizapi.alipan.com/apps/v1/user/home/widgets
     if (-1 != $request.url.indexOf('/apps/v1/user/home/widgets')) {
         body.banners.items = body.banners.items.filter(i=>{
-            console.log(i)
             if(i.code === 'print'){ // 签到
                 return false;
             }
@@ -48,7 +47,7 @@ if ($request.method === 'OPTIONS') {
             }
             return true;
         });
-        delete body.mainBackup;
+        // delete body.mainBackup;
         body.introduceAlipan = {};
     }
     // https://member.alipan.com/v1/users/tools
