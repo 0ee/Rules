@@ -104,7 +104,6 @@ if ($request.method === 'OPTIONS') {
         body.result[0].identity = "svip";
         body.result[0].activityText = "";
         body.result[0].activityAction = "";
-        body.result[0].rightButtonText = "查看";
     }
     //  https://api.aliyundrive.com/business/v1.0/users/vip/info?_rx-s=mobile
     //  https://api.alipan.com/business/v1.0/users/vip/info
@@ -123,12 +122,6 @@ if ($request.method === 'OPTIONS') {
     // https://member.aliyundrive.com/v1/users/me
     if ($request.url.includes("/v1/users/me")) {
         body.membershipIdentity = "svip";
-        body.badges.forEach((element, index, array) => {
-            if(element.code === "member-ship"){
-                array[index].defaultIcon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
-            }
-        });
-        body.badges = [];
     }
     // https://api.alipan.com/adrive/v1/app/logos
     if ($request.url.includes("/adrive/v1/app/logos")) {
