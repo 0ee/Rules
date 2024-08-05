@@ -1,5 +1,5 @@
 // By RuCu6
-// 2024-04-13 19:05
+// 2024-08-02 23:00
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/weibo.js
 
 const url = $request.url;
@@ -112,6 +112,9 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     // 首页签到
     if (obj?.show) {
       obj.show = 0;
+    }
+    if (obj?.show_time) {
+      obj.show_time = 0;
     }
   } else if (url.includes("/2/client/publisher_list")) {
     // 首页右上角按钮
@@ -652,8 +655,14 @@ if (url.includes("/interface/sdk/sdkad.php")) {
               newItems.push(item);
             }
           } else if (item?.category === "card") {
-            // 19热议等tab 118横版广告图片 206,249横版视频广告 208实况热聊 217错过了热词
-            if ([19, 118, 206, 208, 217, 249]?.includes(item?.data?.card_type)) {
+            // 19热议等tab 118横版广告图片 206,249横版视频广告 208实况热聊 217错过了热词 236微博趋势 261奥运滚动横幅
+            if ([19, 118, 206, 208, 217, 236, 249, 261]?.includes(item?.data?.card_type)) {
+              continue;
+            } else if (item?.data?.card_type === 101 && item?.data?.cate_id === "1114") {
+              // 微博趋势标题
+              continue;
+            } else if (item?.data?.card_type === 196 && item?.data?.hasOwnProperty("rank")) {
+              // 奥运等排行榜
               continue;
             } else {
               newItems.push(item);
@@ -712,8 +721,14 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                     newItems.push(item);
                   }
                 } else if (item?.category === "card") {
-                  // 19热议等tab 118横版广告图片 206,249横版视频广告 208实况热聊 217错过了热词
-                  if ([19, 118, 206, 208, 217, 249]?.includes(item?.data?.card_type)) {
+                  // 19热议等tab 118横版广告图片 206,249横版视频广告 208实况热聊 217错过了热词 236微博趋势 261奥运滚动横幅
+                  if ([19, 118, 206, 208, 217, 236, 249, 261]?.includes(item?.data?.card_type)) {
+                    continue;
+                  } else if (item?.data?.card_type === 101 && item?.data?.cate_id === "1114") {
+                    // 微博趋势标题
+                    continue;
+                  } else if (item?.data?.card_type === 196 && item?.data?.hasOwnProperty("rank")) {
+                    // 奥运等排行榜
                     continue;
                   } else {
                     newItems.push(item);
@@ -856,13 +871,17 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                 if (!isAd(ii?.data)) {
                   if (ii?.data) {
                     removeAvatar(ii?.data);
-                    // 22广告图 89商品推广视频
-                    if ([22, 89]?.includes(ii?.data?.card_type)) {
+                    // 17相关搜索 22广告图 42,236智搜问答 89商品推广视频
+                    if ([17, 22, 42, 89, 236]?.includes(ii?.data?.card_type)) {
                       continue;
                     }
                     // 商品推广desc
                     if (ii?.data?.card_type === 42 && ii?.data?.is_ads === true) {
                       continue;
+                    }
+                    // 商品橱窗
+                    if (ii?.data?.semantic_brand_params) {
+                      delete ii.data?.semantic_brand_params;
                     }
                   }
                   newII.push(ii);
@@ -1152,7 +1171,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         }
       }
     }
-  } else if (url.includes("/v1/ad/preload")) {
+  } else if (url.includes("/v1/ad/preload") || url.includes("/v2/ad/preload")) {
     // 开屏广告
     if (obj?.ads?.length > 0) {
       for (let item of obj.ads) {
@@ -1254,6 +1273,10 @@ function removeFeedAd(item) {
   // 移除信息流中的热评
   if (item?.comment_summary) {
     delete item.comment_summary;
+  }
+  // 商品橱窗
+  if (item?.semantic_brand_params) {
+    delete item.semantic_brand_params;
   }
 }
 

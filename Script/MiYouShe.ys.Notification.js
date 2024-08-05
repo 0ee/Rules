@@ -7,7 +7,7 @@ if (-1 != $request.url.indexOf('/game_record/app/genshin/aapi/widget/v2')) {
     if(body.data.current_home_coin >= 1800){
         $notification.post('壶快满了，快去收菜啊~~~','快去收菜啊~~~','',{'action':'open-url','url':'yuanshen://','auto-dismiss':300})
     }
-    if(body.data.current_resin >= 120){
+    if(body.data.current_resin >= 160){
         $notification.post('体力快满了~~~','快去合成一下啊~~~','',{'action':'open-url','url':'yuanshen://','auto-dismiss':300})
     }
     if(body.data.expeditions.some(item => item.status === 'Finished')){
