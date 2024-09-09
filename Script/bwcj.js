@@ -4,7 +4,7 @@ const bwtoken = $.getdata("bwhd2_token");
 //const bwbody = $.getdata("bw_body");
 
 const bw = {
-  url: "https://webapi.qmai.cn/web/cmk-center/sign/takePartInSign",
+  url: "https://webapi2.qmai.cn/web/cmk-center/sign/takePartInSign",
   headers: {
     'Accept-Encoding' : `gzip,compress,br,deflate`,
     'Qm-From' : `wechat`,
