@@ -1,12 +1,25 @@
 // By RuCu6
-// 2024-06-11 20:25
+// 2024-09-03 21:40
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/amap.js
-// 暂未修改过，直接替换
+
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
 
-if (url.includes("/boss/car/order/content_info")) {
+if (url.includes("/aos/perception/publicTravel/beforeNavi")) {
+  if (obj?.data?.common_data?.bus_plan_bottom_event?.data?.length > 0) {
+    // 公交出行 底部卡路里数值
+    obj.data.common_data.bus_plan_bottom_event.data = [];
+  }
+  if (obj?.data?.common_data?.bus_plan_segment_event?.data?.length > 0) {
+    // 公交出行 中转站 卡路里数值
+    obj.data.common_data.bus_plan_segment_event.data = [];
+  }
+  // 导航选择路线页面 左上角动图
+  if (obj?.data?.front_end?.assistant?.length > 0) {
+    obj.data.front_end.assistant = [];
+  }
+} else if (url.includes("/boss/car/order/content_info")) {
   // 打车页面
   if (obj?.data?.lubanData?.skin?.dataList?.length > 0) {
     // oss营销皮肤
@@ -19,6 +32,55 @@ if (url.includes("/boss/car/order/content_info")) {
     for (let i of items) {
       delete obj.data["105"][i];
     }
+  }
+} else if (url.includes("/bus/plan/integrate")) {
+  // 公交列表
+  if (obj?.data?.banner_lists?.data?.length > 0) {
+    // 公交列表 顶部滚动横图
+    obj.data.banner_lists.data = [];
+  }
+  if (obj?.data?.banner_lists?.tips?.length > 0) {
+    obj.data.banner_lists.tips = [];
+  }
+  if (obj?.data?.mixed_plans?.data?.taxiPlans?.length > 0) {
+    // 公交列表 推广打车出行
+    obj.data.mixed_plans.data.taxiPlans = [];
+  }
+} else if (url.includes("/c3frontend/af-hotel/page/main")) {
+  // 酒店/民宿 景区门票 火车/飞机
+  if (obj?.data?.modules?.CouponPortalCard) {
+    // 横幅推广
+    delete obj.data.modules.CouponPortalCard;
+  }
+  if (obj?.data?.modules?.CouponWidget) {
+    // 右下角活动悬浮窗
+    delete obj.data.modules.CouponWidget;
+  }
+  if (obj?.data?.modules?.recommended_list) {
+    // 高德建议
+    delete obj.data.modules.recommended_list;
+  }
+  if (obj?.data?.modules?.user_filter_card) {
+    const items = [
+      "banner", // 大横幅
+      "bannerList", // 滚动横幅推广
+      "service_data", // 全网比价 退订便捷 入住保障 资质规则
+      "sug_items_data" // 高德建议
+    ];
+    if (obj?.data?.modules?.user_filter_card?.data) {
+      for (let i of items) {
+        delete obj.data.modules.user_filter_card.data[i];
+      }
+      if (obj?.data?.modules?.user_filter_card?.data?.search_button_data?.rightbgText) {
+        // 查询按钮右上角角标
+        delete obj.data.modules.user_filter_card.data.search_button_data.rightbgText;
+      }
+    }
+  }
+} else if (url.includes("/c3frontend/af-launch/page/main")) {
+  // 步行导航结束推广卡片
+  if (obj?.data?.modules?.C1EndNaviEngine?.data) {
+    obj.data.modules.C1EndNaviEngine.data = {};
   }
 } else if (url.includes("/faas/amap-navigation/card-service-plan-home")) {
   // 路线规划页
@@ -121,75 +183,38 @@ if (url.includes("/boss/car/order/content_info")) {
   if (obj?.data?.memberInfo) {
     delete obj.data.memberInfo;
   }
-} else if (url.includes("/shield/frogserver/aocs")) {
+  if (obj?.data?.topMixedCard) {
+    // 顶部足迹、贡献卡片
+    delete obj.data.topMixedCard;
+  }
+} else if (url.includes("/shield/frogserver/aocs/updatable/")) {
   // 整体图层
   const items = [
-    // "ARWalkNavi", // AR导航
-    // "Clipboard", // 剪贴板
-    // "DIYMap", // DIY地图
-    // "GuiJi", // 轨迹
     "Naviendpage_Searchwords",
     "SplashScreenControl",
-    "TipsTaxiButton",
-    // "TrainOrderBanner", // 火车票订单
-    // "_testmark_info",
-    // "_user_profile_",
-    // "air_card",
-    // "amap_basemap_config", // 基本库
+    "TipsTaxiButton", // 选路线页面 打车图标
     "amapCoin",
-    // "aos_feedback",
-    // "app_improve", // app改进
-    // "apple_location_log_collect",
-    // "collect",
-    // "comment_info",
-    // "deviceml_force_recommend",
-    // "deviceml_update_apk_conf",
+    "favorites_info", // 收藏夹顶部横图推广
     "feedback_banner", // 店主专属通道
     "footprint", // 足迹
-    // "gd_code_cover",
-    // "gd_notch_logo",
     "his_input_tip",
     "home_business_position_config", // 首页右上角动图
-    // "homepage_resource_config",
-    // "hotcity", // 热门城市
     "hotel_activity",
     "hotel_fillin_opt",
     "hotel_loop",
-    "hotel_portal",
+    // "hotel_portal", // 附近-酒店-页面布局
     "hotel_tipsicon",
     "hotsaleConfig", // 酒店限时抢购
-    // "icon_show",
-    // "info_env_setting",
-    // "ip_square",
-    // "ip_square_share",
-    // "isNewSearchMapCard", // 可能是足迹
-    // "isPoiBubbleDisplay",
-    // "lab_beta",
-    // "lab_screenrecording",
     "landing_page_info", // 发现吃喝玩乐好去处
-    // "list_action_drawer",
-    // "listguide",
-    // "map_environment_air",
-    // "map_weather_switch", // 天气
-    // "maplayers", // 赏花地图
-    // "message_tab",
+    "map_weather_switch", // 天气
+    "maplayers", // 赏花地图
     "navi_end", // 导航结束 领油滴
-    // "nearby",
     "nearby_business_popup",
     "nearby_map_entry_guide",
     "nearby_map_pull_down_guide",
-    // "newcommentreply",
-    // "nore_rec",
     "operation_layer", // 首页右上角图层
-    // "photo_with_location",
-    // "poi_rec",
-    // "preword",
-    // "profileHeaderPic",
-    // "profiletTopBtn",
-    // "recommend_api",
-    // "recommend_key",
-    // "redesign_user",
-    // "renovate_control", // 今夜特价
+    "poi_rec",
+    "preword",
     "route_banner", // 搜索路线 免费抽机票
     "routeresult_banner",
     "search_homepage",
@@ -199,6 +224,12 @@ if (url.includes("/boss/car/order/content_info")) {
     "search_poi_recommend",
     "search_service_adcode",
     "search_word",
+    "sportsGroupConfig",
+    "sportsHealthConfig",
+    "sportsHomeConfig",
+    "sportsRouteConfig",
+    "sportsTaskConfig",
+    "sports_walk",
     "small_biz_b2b_kb", // 入驻高德
     "small_biz_case", // 推广
     "small_biz_fun",
@@ -208,16 +239,10 @@ if (url.includes("/boss/car/order/content_info")) {
     "splashview_config",
     "sur_bar", // 十一特惠
     "taxi_activity", // 打车活动
-    // "tel_retention_popup",
     "testflight_adiu",
     "tf_remind", // tf测试版
-    // "third_party_places",
     "tips_bar_black_list",
-    // "tips_hook",
-    // "trackupload",
-    // "user_insight", // 您对本次导航满意吗
     "vip"
-    // "weather_restrict_config",
   ];
   if (obj?.data) {
     for (let i of items) {
@@ -310,6 +335,9 @@ if (url.includes("/boss/car/order/content_info")) {
     "house_rent_sale_agency",
     // "human_traffic", // 人流量情况 有统计图
     "image_banner",
+    "kaMarketingCampaign", // 附近品牌动态
+    "kaProductMixServiceShelf", // 骑手送药上门
+    "ka_not_enter", // 移动办卡 套餐服务
     "legSameIndustryRecEntrance", // 全城最热景点推荐
     "legal_document", // 房源法律信息
     "listBizRec_1",
@@ -321,6 +349,7 @@ if (url.includes("/boss/car/order/content_info")) {
     "movie_info", // 优惠购票 景点宣传片
     "multi_page_anchor", // 二级导航菜单 门票 评论 推荐
     // "navbarMore", // 右上角三点
+    "nearbyGoodCar", // 附近热门新车
     "nearbyRecommendModule", // 周边推荐
     "nearby_house",
     "nearby_new_house_estate",
@@ -343,6 +372,10 @@ if (url.includes("/boss/car/order/content_info")) {
     "packageShelf", // 附近酒景推荐
     "parentBizRec",
     "parentPoiRecEntrance", // 所在商圈
+    "platformCustomerCommonModule", // 众安保险赔付
+    "platformCustomerComplianceInfo", // 保险公司信息
+    "poiDetailWaterFeed", // 附近景点瀑布流 新
+    "poiDetailWaterFeedTitle", // 更多人气好去处 新
     "poster_banner",
     // "poi_intercept",
     "portal_entrance", // 高德旅游版块 引流到旅游频道
@@ -384,6 +417,7 @@ if (url.includes("/boss/car/order/content_info")) {
     // "shop_news",
     "smallListBizRec", // 周边热门酒店
     "smallOrListBizRec",
+    "surroundHouseTab", //周边房源
     "surroundOldSellHouse", // 同城二手房
     "surroundRentHouse", // 附近租房
     "surround_facility",
@@ -393,6 +427,7 @@ if (url.includes("/boss/car/order/content_info")) {
     "surround_renthouse",
     "surround_rentoffice",
     "surround_selloffice",
+    "thirdparty_info", // 第三方信息
     // "traffic", // 交通出行 地铁站 公交站 停车场
     "travelGuideRec", // 人气景点 路线 购票
     "uploadBar",
@@ -401,12 +436,17 @@ if (url.includes("/boss/car/order/content_info")) {
     // "video",
     "waistRecEntrance", // 更多人气好去处
     "waterFallFeed", // 附近景点瀑布流
-    "waterFallFeedTitle" // 更多好去处
+    "waterFallFeedTitle" // 更多人气好去处
   ];
   if (obj?.data?.modules) {
     for (let i of items) {
       delete obj.data.modules[i];
     }
+  }
+} else if (url.includes("/shield/search_bff/hotword")) {
+  // 搜索框 热榜logo
+  if (obj?.data?.headerHotWord?.length > 0) {
+    obj.data.headerHotWord = [];
   }
 } else if (url.includes("/shield/search_business/process/marketingOperationStructured")) {
   // 详情页 顶部优惠横幅

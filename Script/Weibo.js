@@ -1,5 +1,5 @@
 // By RuCu6
-// 2024-08-02 23:00
+// 2024-08-26 10:20
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/weibo.js
 
 const url = $request.url;
@@ -234,6 +234,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         }
         if (item?.items?.length > 0) {
           for (let i of item.items) {
+            // 背景卡片
+            removeAvatar(i?.data);
             // 投票窗口
             removeVoteInfo(i?.data);
           }
@@ -252,6 +254,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
       for (let item of obj.items) {
         if (item?.items?.length > 0) {
           for (let i of item.items) {
+            // 背景卡片
+            removeAvatar(i?.data);
             // 投票窗口
             removeVoteInfo(i?.data);
           }
@@ -278,10 +282,14 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     if (obj?.items?.length > 0) {
       let newItems = [];
       for (let item of obj.items) {
+        if (item?.data?.itemid === "hot-search-push-notice") {
+          // 开启推送通知的提示
+          continue;
+        }
         if (item?.items?.length > 0) {
           let newII = [];
           for (let i of item.items) {
-            if (i?.data.hasOwnProperty("promotion")) {
+            if (i?.data?.hasOwnProperty("promotion")) {
               // 热搜列表中的推广项目
               continue;
             } else if (/_img_search_stick/.test(i?.data?.pic)) {
@@ -380,16 +388,22 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     if (obj?.items?.length > 0) {
       let newItems = [];
       for (let item of obj.items) {
+        if (item?.data?.left_hint?.[0]?.content === "全部微博(0)" && item?.data?.card_type === 216) {
+          // 全部微博为0的博主
+          break;
+        } else if (/内容/?.test(item?.data?.name) && item?.data?.card_type === 58) {
+          // 个人微博页刷完后的推荐微博
+          break;
+        } else {
         if (item?.category === "card") {
           // 58微博展示时间段提示 216筛选按钮
           if ([58, 216]?.includes(item?.data?.card_type)) {
             if (/没有公开博文，为你推荐以下精彩内容/.test(item?.data?.name)) {
               // 个人微博页刷完后的推荐信息流
               continue;
-            } else {
-            newItems.push(item);
             }
           }
+            newItems.push(item);
         } else if (item?.category === "group") {
           // 遍历group,保留置顶微博
           if (item?.header?.data?.icon) {
@@ -418,8 +432,9 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                 if (ii?.data?.enable_comment_guide) {
                   ii.data.enable_comment_guide = false;
                 }
+                  newII.push(ii);
               } else if (ii?.category === "card") {
-                if ([48, 176]?.includes(ii?.data?.card_type)) {
+                  if ([10, 48, 176]?.includes(ii?.data?.card_type)) {
                   // 最近关注与互动过的博主
                   continue;
                 }
@@ -431,14 +446,13 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                   // 新版置顶微博背景图
                   delete ii.data.backgroundImage;
                 }
-              }
               newII.push(ii);
             }
+              }
             item.items = newII;
           }
           newItems.push(item);
         } else if (item?.category === "feed") {
-          if (item?.data) {
             if (!isAd(item?.data)) {
               // 信息流推广
               removeFeedAd(item?.data);
@@ -450,10 +464,6 @@ if (url.includes("/interface/sdk/sdkad.php")) {
               }
               if (item?.data?.title?.text !== "热门" && item?.data?.title?.structs?.length > 0) {
                 // 移除赞过的微博 保留热门内容
-                continue;
-              }
-              if (item?.data?.cleaned !== true) {
-                // 个人微博页刷完后的推荐微博
                 continue;
               }
               newItems.push(item);
@@ -766,6 +776,25 @@ if (url.includes("/interface/sdk/sdkad.php")) {
         delete obj.header.data[i];
       }
     }
+    if (obj?.loadedInfo?.serviceMap?.layer?.pic) {
+      // 搜索结果 悬浮窗
+      delete obj.loadedInfo.serviceMap.layer;
+    }
+    if (obj?.footer) {
+      if (obj?.footer?.data?.bg_lottie) {
+        // 讨论区动画
+        delete obj.footer.data.bg_lottie;
+        delete obj.footer.data.bg_lottie_dark;
+      }
+      if (obj?.footer?.data?.discuss_avatars?.length > 0) {
+        // 进入讨论区气泡动画头像
+        delete obj.footer.data.discuss_avatars;
+      }
+      if (obj?.footer?.data?.menus?.length > 0) {
+        // 底部菜单
+        obj.footer.data.menus = obj.footer.data.menus.filter((i) => !/\d+_ai\./?.test(i?.pic));
+      }
+    }
     if (obj?.cards?.length > 0) {
       let newCards = [];
       for (let card of obj.cards) {
@@ -871,8 +900,8 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                 if (!isAd(ii?.data)) {
                   if (ii?.data) {
                     removeAvatar(ii?.data);
-                    // 17相关搜索 22广告图 42,236智搜问答 89商品推广视频
-                    if ([17, 22, 42, 89, 236]?.includes(ii?.data?.card_type)) {
+                    // 3推广卡片 17相关搜索 22广告图 30推荐博主 42,236智搜问答 89商品推广视频 206推广视频
+                    if ([3, 17, 22, 30, 42, 89, 206, 236]?.includes(ii?.data?.card_type)) {
                       continue;
                     }
                     // 商品推广desc
@@ -880,9 +909,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
                       continue;
                     }
                     // 商品橱窗
-                    if (ii?.data?.semantic_brand_params) {
-                      delete ii.data?.semantic_brand_params;
-                    }
+                    removeFeedAd(ii?.data);
                   }
                   newII.push(ii);
                 }
@@ -1087,7 +1114,7 @@ if (url.includes("/interface/sdk/sdkad.php")) {
     }
     if (obj.trend?.titles) {
       let title = obj.trend.titles.title;
-      if (["博主好物种草", "相关推荐"]?.includes(title)) {
+      if (/(博主好物种草|相关推荐|专区)/?.test(title)) {
         delete obj.trend;
       }
     }
@@ -1225,6 +1252,9 @@ function isAd(data) {
 
 // 移除头像挂件,关注按钮
 function removeAvatar(data) {
+  if (data?.block_card_bg) {
+    delete data.block_card_bg;
+  }
   if (data?.buttons) {
     delete data.buttons;
   }
