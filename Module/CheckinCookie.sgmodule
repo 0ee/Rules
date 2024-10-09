@@ -13,7 +13,7 @@ NGA Cookie = type=http-request,pattern=^https:\/\/ngabbs.com\/nuke.php\??,requir
 
 阿里云盘每日 Cookie = type=http-request, pattern=^https:\/\/(auth|aliyundrive)\.alipan\.com\/v2\/account\/token, script-path=https://gist.githubusercontent.com/Sliverkiss/33800a98dcd029ba09f8b6fc6f0f5162/raw/aliyun.js, requires-body=true, max-size=-1, timeout=60
 
-霸王茶姬活动 Token = type=http-request,pattern=^https?:\/\/webapi2\.qmai\.cn\/web\/cmk-center\/sign\/userSignStatistics,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/bwcj_cookie.js
+#霸王茶姬活动 Token = type=http-request,pattern=^https?:\/\/webapi2\.qmai\.cn\/web\/cmk-center\/sign\/userSignStatistics,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/bwcj_cookie.js
 
 B站Cookie(APP) = type=http-request,pattern=^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\?,script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js,requires-body=0
 
