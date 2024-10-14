@@ -5,9 +5,8 @@
 
 
 [Script]
-用药助手 = type=http-response,pattern=^https://newdrugs.dxy.cn,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drugs.js
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js
 Emby = type=http-response,pattern=https://mb3admin.com/(admin/service/registration/(validateDevice|validate|getStatus)|admin/service/appstore/register|emby/Plugins/SecurityInfo),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
 
 [MITM]
-hostname = %APPEND% newdrugs.dxy.cn, backend.getdrafts.com, mb3admin.com
+hostname = %APPEND% backend.getdrafts.com, mb3admin.com
