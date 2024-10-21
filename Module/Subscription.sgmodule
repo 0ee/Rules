@@ -6,8 +6,7 @@
 
 [Script]
 Drafts = type=http-response,pattern=https://backend.getdrafts.com/api/v1/verification/account_status,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Drafts.js
-QianJi = type=http-response,pattern=https://api.qianjiapp.com/vip/configios,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/QianJi.js
 Emby = type=http-response,pattern=https://mb3admin.com/(admin/service/registration/(validateDevice|validate|getStatus)|admin/service/appstore/register|emby/Plugins/SecurityInfo),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Subscription/Emby.js
 
 [MITM]
-hostname = %APPEND% backend.getdrafts.com, api.qianjiapp.com, mb3admin.com
+hostname = %APPEND% backend.getdrafts.com, mb3admin.com
