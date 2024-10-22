@@ -1,8 +1,3 @@
-/*
-WEBSITE: https://biliuniverse.io
-README: https://github.com/BiliUniverse
-Copy By https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.beta.js
-*/
 /* README: https://github.com/BiliUniverse */
 console.log('📺 BiliBili: ⚙️ Enhanced β Response')
 const $platform = platform();
@@ -3898,5 +3893,3 @@ log(`⚠ FORMAT: ${FORMAT}`, "");
 	}})()
 	.catch((e) => logError(e))
 	.finally(() => done($response));
-
-翻译
