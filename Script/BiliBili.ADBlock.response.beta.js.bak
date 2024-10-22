@@ -1,3 +1,10 @@
+/*
+WEBSITE: https://biliuniverse.io
+README: https://github.com/BiliUniverse
+rids https://github.com/lbw1998/bilibili-desktop/blob/32383cc7ee06c2988e279150c31d2813f5b3bee3/src/utils/rid.ts#L388
+rids https://github.com/OlafZhang/bilib/blob/0968c17507d9dc0749daa238746186aebfcaaba5/class.md?plain=1#L114
+rids https://github.com/aaa1115910/bv/blob/4241a93dc1abcf37c7845a24eb8652b90e954f5d/app/src/main/kotlin/dev/aaa1115910/bv/util/PartitionUtil.kt#L73
+*/
 /* README: https://github.com/BiliUniverse */
 /* https://www.lodashjs.com */
 class Lodash {
@@ -10829,18 +10836,22 @@ $.log(`⚠ FORMAT: ${FORMAT}`, "");
 														} else if (['cm_v2', 'cm_v1'].includes(cardType) && ['ad_web_s', 'ad_av', 'ad_web_gif'].includes(cardGoto)) {
 															// ad_player大视频广告 ad_web_gif大gif广告 ad_web_s普通小广告 ad_av创作推广广告 ad_inline_3d  上方大的视频3d广告 ad_inline_eggs 上方大的视频广告 ad_inline_live 华为问界
 															$.log(`🎉 ${cardGoto}广告去除`);
+															return undefined;
 															if (url.searchParams.get("device") !== "phone") {
 																return undefined;//pad直接去除
 															} else {
 																await fixPosition().then(result => item = result);//小广告补位
 															}
 														} else if (cardGoto === 'live' && cardType === 'small_cover_v9') {
+															$.log(`🎉 ${$.name}`, `屏蔽直播推广`);
+															return undefined;//大广告直接去除
 															let blockUpLiveList = Settings?.Detail?.blockUpLiveList;
 															if (typeof blockUpLiveList === 'number') {
 																blockUpLiveList = blockUpLiveList.toString();
 															}
 															if (blockUpLiveList && blockUpLiveList.includes(item?.args?.up_id?.toString())) {
 																$.log(`🎉 屏蔽Up主<${item?.args?.up_name}>直播推广`);
+																return undefined;
 																await fixPosition().then(result => item = result);//小广告补位
 															}
 														} else if (cardType === 'cm_v2' && ['ad_player', 'ad_inline_3d', 'ad_inline_eggs', 'ad_inline_live'].includes(cardGoto)) {
@@ -10949,6 +10960,10 @@ $.log(`⚠ FORMAT: ${FORMAT}`, "");
 											$.log(`🚧 用户设置首页短视频流广告不去除`);
 											break;
 									}									break;
+								case "/x/v2/feed/index/vertical/tab": // 搞笑
+									if (URL.query?.channel_id === "1833") {
+										body.data.items = []
+									}									break;
 								case "/x/v2/search/square": // 搜索页
 									switch (Settings?.Detail?.Hot_search) {
 										case true:
@@ -10960,6 +10975,11 @@ $.log(`⚠ FORMAT: ${FORMAT}`, "");
 											$.log(`🚧 用户设置搜索页热搜内容不去除`);
 											break;
 									}
+									break;
+								case "/x/resource/top/activity": // 首页活动标签
+									// body.data.hash = "";
+									// body.data.online = {};
+									body.data = {};
 									break;
 							}							break;
 						case "api.bilibili.com":
