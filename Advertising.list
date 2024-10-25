@@ -22,7 +22,7 @@ DOMAIN-SUFFIX,videojj.com
 
 // 哔哩哔哩
 // DOMAIN,data.bilibili.com
-DOMAIN,thirdparty.biliapi.com
+// DOMAIN,thirdparty.biliapi.com
 // 百度
 DOMAIN-SUFFIX,hm.baidu.com
 // 阿里
