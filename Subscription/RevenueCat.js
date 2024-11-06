@@ -42,8 +42,7 @@ if (typeof $response == "undefined") {
         'Structured': {name:'pro', id:'com'},
         'VSCO': {name: 'pro', id: 'vscopro_global_5999_annual_AutoFreeTrial'},
         // MoneyThings
-        'CashFlow': {name: 'Premium', id: 'com.lishaohui.cashflow.lifetime'},
-        'Cookie': { name: 'allaccess', id: 'app.ft.Bookkeeping.lifetime'}
+        'CashFlow': {name: 'Premium', id: 'com.lishaohui.cashflow.lifetime'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
