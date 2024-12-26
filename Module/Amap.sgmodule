@@ -15,7 +15,7 @@
 
 [Script]
 # 其他
-Amap.ADBlock.header = type=http-response,pattern=^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch,requires-body=1,script-update-interval=1,script-path=https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/header.js
+Amap.ADBlock.header = type=http-response,pattern=^http:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch,requires-body=1,script-update-interval=1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/header.js
 # 导航详情页,路线规划,地点详情页,搜索详情页,导航结束页
 Amap.ADBlock = type=http-response,pattern=^https:\/\/m5\.amap\.com\/ws\/perception\/drive\/routePlan\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Amap.js
 Amap.ADBlock = type=http-response,pattern=^https:\/\/m5\.amap\.com\/ws\/shield\/search\/(common\/coupon\/info|poi\/detail)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Amap.js
