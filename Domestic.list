@@ -403,6 +403,8 @@ DOMAIN-SUFFIX,zmzfile.com
 DOMAIN-SUFFIX,vuevideo.net
 DOMAIN-SUFFIX,cdnvue.com
 DOMAIN-SUFFIX,elemecdn.com
+// 中通快递
+DOMAIN-SUFFIX,zto.com
 
 // Accelerate direct sites
 DOMAIN-KEYWORD,torrent

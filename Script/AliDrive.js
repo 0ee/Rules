@@ -95,24 +95,23 @@ if ($request.method === 'OPTIONS') {
     }
     // https://api.alipan.com/v2/file/get_video_preview_play_info
     if ($request.url.includes("/v2/file/get_video_preview_play_info")) {
-        body.video_preview_play_info.live_transcoding_task_list = body.video_preview_play_info.live_transcoding_task_list.filter(i=>{
+        body.video_preview_play_info.quick_video_list = body.video_preview_play_info.quick_video_list.filter(i=>{
             if(i.url == ''){
                 return false;
             }
             return true;
         });
     }
-    //  https://api.alipan.com/business/v2/users/me/vip/info
+    //  https://bizapi.alipan.com/business/v2/users/me/vip/info
     if ($request.url.includes("/business/v2/users/me/vip/info")) {
-        body.result[0].identity = "svip";
         body.result[0].activityText = "";
         body.result[0].activityAction = "";
     }
     //  https://api.aliyundrive.com/business/v1.0/users/vip/info?_rx-s=mobile
     //  https://api.alipan.com/business/v1.0/users/vip/info
-    if ($request.url.includes("/business/v1.0/users/vip/info")) {
-        body.identity = "svip";
-        body.level = "svip";
+    // if ($request.url.includes("/business/v1.0/users/vip/info")) {
+        // body.identity = "svip";
+        // body.level = "svip";
         // body.icon = "https://gw.alicdn.com/imgextra/i3/O1CN01iPKCuZ1urjDgiry5c_!!6000000006091-2-tps-60-60.png";
         // body.mediumIcon= "https://gw.alicdn.com/imgextra/i4/O1CN01Mk916Y1c99aVBrgxM_!!6000000003557-2-tps-222-60.png";
         // body.vipList.forEach((element, index, array) => {
@@ -120,7 +119,7 @@ if ($request.method === 'OPTIONS') {
                 // array[index].expire = 1893427200;  
             // }
         // });
-    }
+    // }
     // https://member.alipan.com/v1/users/me
     // https://member.aliyundrive.com/v1/users/me
     if ($request.url.includes("/v1/users/me")) {
@@ -142,14 +141,14 @@ if ($request.method === 'OPTIONS') {
     }
 
     // https://member.alipan.com/v2/activity/sign_in_info
-    if ($request.url.includes("/v2/activity/sign_in_info")) {
-        body.result.rewards = body.result.rewards.filter(i=>{
-            if(i.type === 'dailySignIn'){ // 今日签到
-                return true;
-            } 
-            return false;
-        });
-    }
+    // if ($request.url.includes("/v2/activity/sign_in_info")) {
+    //     body.result.rewards = body.result.rewards.filter(i=>{
+    //         if(i.type === 'dailySignIn'){ // 今日签到
+    //             return true;
+    //         } 
+    //         return false;
+    //     });
+    // }
     // https://api.alipan.com/adrive/v2/backup/device_applet_list_summary
     if ($request.url.includes("/adrive/v2/backup/device_applet_list_summary")) {
         body.deviceItems = [];
