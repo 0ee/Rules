@@ -730,13 +730,13 @@ function findBoardByID(forumid) {
 const headers = {
     // 论坛米游币相关参数
     clientType: '2',// 1为ios 2为安卓
-    salt: 'yajbb9O8TgQYOW7JVZYfUJhXN7mAeZPE',// mihoyobbs_salt
+    salt: 'GuODIETRPuJxpiUQoZairQxHtmzZKYFl',// mihoyobbs_salt
     saltV2: 't0qEgfub6cvueAPgR5m9aQWWVciEer7v',// mihoyobbs_salt_x6
     // 游戏签到相关, 内嵌 webview, 所以用的是 web 相关参数
     clientTypeWeb: '5',// 4为pc web 5为mobile web
-    saltWeb: 'LyD1rXqMv2GJhnwdvCBjFOKGiKuLY3aO',// mihoyobbs_salt_web
+    saltWeb: 'ACDpsiiEFSqqLiEpzXMuXNsLNqGkrIQc',// mihoyobbs_salt_web
     // 通用参数
-    appVersion: '2.67.1'
+    appVersion: '2.78.1'
 }
 
 function getBaseHeaders() {
