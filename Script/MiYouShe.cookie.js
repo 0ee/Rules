@@ -2,8 +2,8 @@
 
 const $ = new Env('米游社小助手-headers')
 /** URL */
-const BBS_URL = 'https://bbs-api.miyoushe.com/teenager/api/info'
-const SIGN_URL = 'https://api-takumi.mihoyo.com/event/luna/home'
+const BBS_URL = 'https://bbs-api.miyoushe.com/timeline/api/getUnreadInfo'
+const SIGN_URL = 'https://api-takumi.mihoyo.com/event/luna/hk4e/home'
 /** 存储的 key */
 const BBS_HEADERS_KEY = 'kayanouriko_mihoyobbs_headers_bbs'
 const SIGN_HEADERS_KEY = 'kayanouriko_mihoyobbs_headers_sign'
