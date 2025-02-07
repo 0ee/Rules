@@ -1,12 +1,12 @@
 console.log($request.url)
 console.log($request.method)
 if (typeof $response == "undefined") {
-    if (url.includes("/api/v1/movies/") && url.includes("/play?")) {
-        header.authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTc1NDMwLCJ1c2VybmFtZSI6IndlaWd1YW5naHQifQ.lyfGvtZcz0SjiKNx-k9Aoe_UgcMyxwG4Xqq3lzvbIao";
-        $done({ headers: header });
-    } else {
+    // if (url.includes("/api/v1/movies/") && url.includes("/play?")) {
+        // header.authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6OTc1NDMwLCJ1c2VybmFtZSI6IndlaWd1YW5naHQifQ.lyfGvtZcz0SjiKNx-k9Aoe_UgcMyxwG4Xqq3lzvbIao";
+        // $done({ headers: header });
+    // } else {
       $done({});
-    }
+    // }
 } else{
     let body = $response.body;
     if (!body) $done({});
@@ -43,8 +43,8 @@ if (typeof $response == "undefined") {
     if (-1 != $request.url.indexOf('/api/v1/users')) {
         // 伪装会员
         if (body?.data?.user) {
-            body.data.user.vip_expired_at = "2090-12-31T23:59:59.000+08:00";
-            body.data.user.is_vip = true;
+            // body.data.user.vip_expired_at = "2090-12-31T23:59:59.000+08:00";
+            // body.data.user.is_vip = true;
         }
     }
     if (-1 != $request.url.indexOf('/api/v4/movies/')) {
