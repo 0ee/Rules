@@ -289,7 +289,7 @@ function postSignIn() {
     const option = {
         url: api.micoin.postSignIn,
         headers: getBBSHeaders(),
-        body: "gameId=3"
+        body: "gameId=2"
     }
     console.log(555555)
     return $.http.post(option).then(res => {

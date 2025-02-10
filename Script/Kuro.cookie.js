@@ -3,10 +3,10 @@
 const $ = new Env('库社区小助手-headers')
 /** URL */
 const BBS_URL = 'https://api.kurobbs.com/user/login/log'
-const SIGN_URL = 'https://api-takumi.mihoyo.com/event/luna/home'
+const SIGN_URL = 'https://api.kurobbs.com/user/login/log'
 /** 存储的 key */
 const BBS_HEADERS_KEY = 'kayanouriko_kurobbs_headers_bbs'
-const SIGN_HEADERS_KEY = 'kayanouriko_kuroyobbs_headers_sign'
+const SIGN_HEADERS_KEY = 'kayanouriko_kurobbs_headers_sign'
 
 /** 主入口 */
 main()
