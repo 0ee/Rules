@@ -17,9 +17,6 @@ B站Cookie(APP) = type=http-request,pattern=^https?:\/\/app\.bilibili\.com\/x\/r
 
 B站Cookie(网页) = type=http-request,pattern=^https?:\/\/m\.bilibili\.com/$,script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js,requires-body=0
 
-
-高德打车Cookie = type=http-response,pattern=^https?:\/\/(m5|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=),script-path=https://raw.githubusercontent.com/ClydeTime/Surge/main/Script/Task/amap.js,requires-body=1 
-
 原神签到Cookie = type=http-request,pattern=^https://api-takumi.mihoyo.com/event/luna/hk4e/home,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.cookie.js
 米游币任务Cookie = type=http-request,pattern=^https://bbs-api.miyoushe.com/timeline/api/getUnreadInfo,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.cookie.js
 
@@ -29,4 +26,4 @@ B站Cookie(网页) = type=http-request,pattern=^https?:\/\/m\.bilibili\.com/$,sc
 
 
 [MITM]
-hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, webapi2.qmai.cn, app.bilibili.com, m.bilibili.com, m5.amap.com, dache.amap.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn
+hostname = %APPEND% m.ctrip.com, ngabbs.com, auth.aliyundrive.com, auth.alipan.com, webapi2.qmai.cn, app.bilibili.com, m.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn

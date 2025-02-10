@@ -5,7 +5,6 @@
 
 
 [Script]
-高德打车签到 Cron = type=cron, cronexp=1 0 * * *, script-path=https://raw.githubusercontent.com/ClydeTime/Surge/main/Script/Task/amap.js, wake-system=1
 
 微博超话 Cron = type=cron,cronexp=3 0 * * *,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/WeiboSuper.js
 
