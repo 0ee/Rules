@@ -25,6 +25,7 @@ if (typeof $response == "undefined") {
         'apollo': {name: 'all', id: 'com'},
         'dtdvibe': {name: 'pro', id: 'com.dtd.aroundu.year'},
         'LUTCamera': {name: 'ProVersionLifeTime', id: 'com.uzero.funforcam.lifetimepurchase'},
+        '%E8%BD%A6%E7%A5%A8%E7%A5%A8':{ name: 'vip', id: 'eticket_6_life'},
         // 目标地图
         '%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9B%BE':{ name: 'pro', id: 'com.happydogteam.relax.lifetimePro'},
         // 极简日记

@@ -127,7 +127,11 @@ if (url.includes("/v1/search/banner_list")) {
       } else if (item?.hasOwnProperty("card_icon")) {
         // 信息流-带货
         continue;
-      } else if (item?.note_attributes?.includes("goods")) {
+      } else if (item.hasOwnProperty("note_attributes")){
+        // 信息流-带货
+        continue;
+      }
+      else if (item?.note_attributes?.includes("goods")) {
         // 信息流-商品
         continue;
       } else {
@@ -147,3 +151,5 @@ if (url.includes("/v1/search/banner_list")) {
 }
 
 $done({ body: JSON.stringify(obj) });
+// https://github.com/Chang9an/surge/blob/a9f73d8a0a9a714c32391b03fdbea499dac921f4/js/xhs.js#L126
+// https://github.com/qertyuy/YYDS/blob/08739ca0891a2fd8085467f4c7ce7a56789b60e1/surge/scripts/Xiaohongshu.js#L94
