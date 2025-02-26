@@ -44,6 +44,7 @@ if (typeof $response == "undefined") {
         'VSCO': {name: 'pro', id: 'vscopro_global_5999_annual_AutoFreeTrial'},
         // MoneyThings
         'CashFlow': {name: 'Premium', id: 'com.lishaohui.cashflow.lifetime'}
+        // 'FocusFlights':{name:'all', id:'net.cementpla.focusflights.lifetime'}
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",

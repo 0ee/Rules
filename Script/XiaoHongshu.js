@@ -8,12 +8,12 @@ let obj = JSON.parse($response.body);
 
 if (url.includes("/v1/search/banner_list")) {
   if (obj?.data) {
-    obj.data = {};
+    // obj.data = {};
   }
 } else if (url.includes("/v1/search/hot_list")) {
   // 热搜列表
   if (obj?.data?.items?.length > 0) {
-    obj.data.items = [];
+    // obj.data.items = [];
   }
 } else if (url.includes("/v1/system_service/config")) {
   // 整体配置
@@ -117,23 +117,30 @@ if (url.includes("/v1/search/banner_list")) {
     for (let item of obj.data) {
       if (item?.model_type === "live_v2") {
         // 信息流-直播
-        continue;
+        // continue;
+        item.title = "直播 · " + item.title
       } else if(item?.type === "video") {
          // 信息流视频
-          continue;
+          // continue;        
+        item.title = "视频 · " + item.title
+ 
       } else if (item?.hasOwnProperty("ads_info")) {
         // 信息流-赞助
-        continue;
+        // continue;
+        item.title = "赞助 · " + item.title
       } else if (item?.hasOwnProperty("card_icon")) {
         // 信息流-带货
-        continue;
+        // continue;
+        item.title = "带货 · " + item.title
       } else if (item.hasOwnProperty("note_attributes")){
         // 信息流-带货
-        continue;
+        // continue;
+        item.title = "带货 · " + item.title
       }
       else if (item?.note_attributes?.includes("goods")) {
         // 信息流-商品
-        continue;
+        // continue;
+        item.title = "商品 · " + item.title
       } else {
         if (item?.related_ques) {
           delete item.related_ques;
