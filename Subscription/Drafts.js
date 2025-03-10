@@ -4,7 +4,8 @@ http-response https://backend.getdrafts.com/api/v1/verification/account_status r
 [MITM]
 hostname = backend.getdrafts.com
 */
-if ( - 1 != $request.url.indexOf('/api/v1/verification/account_status')) {
+if ( -1 != $request.url.indexOf('/api/v1/verification/account_status')||
+    -1 != $request.url.indexOf('/api/v1/verification/verify_receipt') ) {
     let body = {};
     if ($response.status != 200) {
         body = {};
