@@ -99,6 +99,9 @@ DOMAIN-SUFFIX,immersivetranslate.com // 沉浸式翻译
 
 DOMAIN-SUFFIX,seelie.inmagi.com
 
+DOMAIN-SUFFIX,follow.is // Folo
+DOMAIN-SUFFIX,firecore.com // Infuse
+
 
 // blocked sites
 DOMAIN-KEYWORD,slack
