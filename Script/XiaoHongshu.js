@@ -32,7 +32,7 @@ if (url.includes("/v1/search/banner_list")) {
       delete obj.data[i];
     }
   }
-} else if (url.includes("/v2/note/feed")) {
+} else if (url.includes("/v2/note/feed") || url.includes("/api/sns/v1/note/imagefeed")) {
   // 信息流 图片
   if (obj?.data?.length > 0) {
     let data0 = obj.data[0];
