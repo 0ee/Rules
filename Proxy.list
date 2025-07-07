@@ -1,3 +1,53 @@
+DOMAIN-SUFFIX,googleapis.com
+// https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Cloudflare/Cloudflare.list
+DOMAIN-SUFFIX,cf-ipfs.com
+DOMAIN-SUFFIX,cf-ns.com
+DOMAIN-SUFFIX,cf-ns.net
+DOMAIN-SUFFIX,cf-ns.site
+DOMAIN-SUFFIX,cf-ns.tech
+DOMAIN-SUFFIX,cftest5.cn
+DOMAIN-SUFFIX,cftest6.cn
+DOMAIN-SUFFIX,cftest7.com
+DOMAIN-SUFFIX,cftest8.com
+DOMAIN-SUFFIX,cloudflare-cn.com
+DOMAIN-SUFFIX,cloudflare-dns.com
+DOMAIN-SUFFIX,cloudflare-ipfs.com
+DOMAIN-SUFFIX,cloudflare-quic.com
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,cloudflare.net
+DOMAIN-SUFFIX,cloudflare.tv
+DOMAIN-SUFFIX,cloudflareaccess.com
+DOMAIN-SUFFIX,cloudflareapps.com
+DOMAIN-SUFFIX,cloudflarebolt.com
+DOMAIN-SUFFIX,cloudflareclient.com
+DOMAIN-SUFFIX,cloudflarecn.net
+DOMAIN-SUFFIX,cloudflareinsights-cn.com
+DOMAIN-SUFFIX,cloudflareinsights.com
+DOMAIN-SUFFIX,cloudflareok.com
+DOMAIN-SUFFIX,cloudflarepreview.com
+DOMAIN-SUFFIX,cloudflareprod.com
+DOMAIN-SUFFIX,cloudflareresolve.com
+DOMAIN-SUFFIX,cloudflaressl.com
+DOMAIN-SUFFIX,cloudflarestaging.com
+DOMAIN-SUFFIX,cloudflarestatus.com
+DOMAIN-SUFFIX,cloudflarestorage.com
+DOMAIN-SUFFIX,cloudflarestoragegw.com
+DOMAIN-SUFFIX,cloudflarestream.com
+DOMAIN-SUFFIX,cloudflaretest.com
+DOMAIN-SUFFIX,cloudflarewarp.com
+DOMAIN-SUFFIX,every1dns.net
+DOMAIN-SUFFIX,one.one.one
+DOMAIN-SUFFIX,pacloudflare.com
+DOMAIN-SUFFIX,pages.dev
+DOMAIN-SUFFIX,trycloudflare.com
+DOMAIN-SUFFIX,videodelivery.net
+DOMAIN-SUFFIX,warp.plus
+DOMAIN-SUFFIX,workers.dev
+// Cursor
+DOMAIN-SUFFIX,cursor-cdn.com
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursorapi.com
 // Dropbox
 PROCESS-NAME,Dropbox
 PROCESS-NAME,Reeder
@@ -771,6 +821,8 @@ DOMAIN-SUFFIX,webmproject.org
 DOMAIN-SUFFIX,webrtc.org
 DOMAIN-SUFFIX,ytimg.com
 DOMAIN-SUFFIX,yufan.me
+
+DOMAIN-SUFFIX,havoc.app
 
 // Amazon
 IP-CIDR,13.32.0.0/16,no-resolve
