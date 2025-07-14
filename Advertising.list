@@ -37,7 +37,8 @@ DOMAIN-SUFFIX,h-adashx.ut.taobao.com
 DOMAIN,mdap.alipay.com
 DOMAIN,loggw-ex.alipay.com
 // 腾讯
-DOMAIN-SUFFIX,beacon.qq.com
+#容易引导腾讯视频在Chrome崩溃
+#DOMAIN-SUFFIX,beacon.qq.com
 DOMAIN-SUFFIX,fusion.qq.com
 DOMAIN-SUFFIX,pingma.qq.com
 DOMAIN-SUFFIX,bugly.qq.com
@@ -113,3 +114,5 @@ DOMAIN,crashlytics.163.com
 
 
 DOMAIN,go.rmhfrtnd.com
+
+DOMAIN-SUFFIX,ugdtimg.com
