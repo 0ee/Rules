@@ -1,6 +1,36 @@
 const res = {};
 const parsedData = JSON.parse(typeof $response != "undefined" && $response.body || null);
 let flag = false;
+// 添加版本检查函数
+function compareVersions(version1, version2) {
+  const v1parts = version1.split('.').map(Number);
+  const v2parts = version2.split('.').map(Number);
+
+  for (let i = 0; i < Math.max(v1parts.length, v2parts.length); i++) {
+      const v1Part = v1parts[i] || 0;
+      const v2Part = v2parts[i] || 0;
+
+      if (v1Part > v2Part) return 1;
+      if (v1Part < v2Part) return -1;
+  }
+  return 0;
+}
+// 获取 RevenueCat 版本和 UA
+const rcVersion = $request.headers['x-version'] || $request.headers['X-Version'] || 'unknown';
+const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || 'unknown';
+// 检查 Trusted Entitlements 支持和默认状态
+if (rcVersion !== 'unknown') {
+    if (compareVersions(rcVersion, '4.25.0') < 0) {
+        console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: no support`);
+    } else if (compareVersions(rcVersion, '5.15.0') < 0) {
+        console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported
+(默认禁用)`);
+    } else {
+        console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
+    }
+} else {
+    console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
+}
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
     delete $request.headers["X-RevenueCat-ETag"];
@@ -18,7 +48,6 @@ if (typeof $response == "undefined") {
             delete $request.headers[key];
         }
     }
-    var UA = $request.headers['user-agent'];
     const app = 'gd';
     const UAMappings = {
         'totowallet': {name: 'all', id: 'com.ziheng.totowallet.onetimepurchase'},
