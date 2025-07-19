@@ -42,7 +42,7 @@ if (typeof $response == "undefined") {
         'UTC': {name:'Entitlement.Pro', id:'com'},
         'Structured': {name:'pro', id:'com'},
         'VSCO': {name: 'pro', id: 'vscopro_global_5999_annual_AutoFreeTrial'},
-        'TravelAlbum':{name:'lifetime',id:'Forever2'},
+        'TravelAlbum':{name:'premium',id:'Forever2'},
         // MoneyThings
         'CashFlow': {name: 'Premium', id: 'com.lishaohui.cashflow.lifetime'}
         // 'FocusFlights':{name:'all', id:'net.cementpla.focusflights.lifetime'}
