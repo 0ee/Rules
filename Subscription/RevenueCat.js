@@ -22,13 +22,13 @@ const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || '
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: no support`);
-        $notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: no support`)
+        //$notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: no support`)
     } else if (compareVersions(rcVersion, '5.15.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (默认禁用)`);
-        $notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: supported (默认禁用)`)
+        //$notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: supported (默认禁用)`)
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
-        $notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: supported (可配置)`)
+        //$notification.post(UA: ${UA},`版本号: ${rcVersion} Trusted Entitlements: supported (可配置)`)
     }
 } else {
     console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
