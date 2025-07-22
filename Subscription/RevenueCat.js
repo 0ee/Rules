@@ -18,18 +18,18 @@ function compareVersions(version1, version2) {
 // 获取 RevenueCat 版本和 UA
 const rcVersion = $request.headers['x-version'] || $request.headers['X-Version'] || 'unknown';
 const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || 'unknown';
+const appName = UA.match(/^([a-zA-Z0-9_-]+)/)?.[1] || 'unknown';
 // 检查 Trusted Entitlements 支持和默认状态
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: no support`);
-        // $notification.post(`UA: ${UA}`,`版本号: ${rcVersion} Trusted Entitlements: no support`)
-        $notification.post(`UA: ${UA}`,`版本号: ${rcVersion} Trusted Entitlements: no support`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: no support`)
     } else if (compareVersions(rcVersion, '5.15.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (默认禁用)`);
-        $notification.post(`UA: ${UA}`,`版本号: ${rcVersion} Trusted Entitlements: supported (默认禁用)`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: supported (默认禁用)`)
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
-        $notification.post(`UA: ${UA}`,`版本号: ${rcVersion} Trusted Entitlements: supported (可配置)`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: supported (可配置)`)
     }
 } else {
     console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
