@@ -23,13 +23,13 @@ const appName = UA.match(/^([a-zA-Z0-9_-]+)/)?.[1] || 'unknown';
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: no support`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: no support`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `✅Trusted Entitlements: no support`)
     } else if (compareVersions(rcVersion, '5.15.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (默认禁用)`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: supported (默认禁用)`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `☑️Trusted Entitlements: supported (默认禁用)`)
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `Trusted Entitlements: supported (可配置)`)
+        $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
     }
 } else {
     console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
