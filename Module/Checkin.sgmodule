@@ -5,7 +5,6 @@
 
 
 [Script]
-
 微博超话 Cron = type=cron,cronexp=3 0 * * *,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/WeiboSuper.js
 
 库社区任务 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Kuro.SignIn.js
@@ -13,8 +12,6 @@
 米游社任务 = type=cron,cronexp=8 0 * * *,wake-system=1,timeout=1200,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
 米游社任务2 = type=cron,cronexp=18 0 * * *,wake-system=1,timeout=1200,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
 米游社任务3 = type=cron,cronexp=28 0 * * *,wake-system=1,timeout=1200,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
-
-NGA Cron = type=cron,cronexp=13 0 * * *,script-path=https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.js
 
 阿里云盘每日任务 = type=cron,cronexp=0 7 * * *,script-path=https://gist.githubusercontent.com/Sliverkiss/33800a98dcd029ba09f8b6fc6f0f5162/raw/aliyun.js,wake-system=1,timeout=120
 

@@ -5,8 +5,6 @@
 
 
 [Script]
-智行火车票 Cookie = type=http-request,pattern=^https:\/\/m\.ctrip\.com/restapi/soa2/14593/json/attendanceDay?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/zxhc/zxhc.cookie.js
-
 阿里云盘 Cookie = type=http-response,pattern=https:\/\/auth.aliyundrive.com\/v2\/account\/token,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js
 
 阿里云盘每日 Cookie = type=http-request, pattern=^https:\/\/(auth|aliyundrive)\.alipan\.com\/v2\/account\/token, script-path=https://gist.githubusercontent.com/Sliverkiss/33800a98dcd029ba09f8b6fc6f0f5162/raw/aliyun.js, requires-body=true, max-size=-1, timeout=60
@@ -24,4 +22,4 @@ B站Cookie(网页) = type=http-request,pattern=^https?:\/\/m\.bilibili\.com/$,sc
 
 
 [MITM]
-hostname = %APPEND% ngabbs.com, auth.aliyundrive.com, auth.alipan.com, webapi2.qmai.cn, app.bilibili.com, m.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn
+hostname = %APPEND% auth.aliyundrive.com, auth.alipan.com, app.bilibili.com, m.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn
