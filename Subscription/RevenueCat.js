@@ -19,17 +19,31 @@ function compareVersions(version1, version2) {
 const rcVersion = $request.headers['x-version'] || $request.headers['X-Version'] || 'unknown';
 const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || 'unknown';
 const appName = UA.match(/^([a-zA-Z0-9_-]+)/)?.[1] || 'unknown';
+const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
 // 检查 Trusted Entitlements 支持和默认状态
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: no support`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `✅Trusted Entitlements: no support`)
+        if (typeof $response != 'undefined'){
+           $notification.post(`${appName} 版本号: ${rcVersion}`, `✅Trusted Entitlements: no support`)
+        }
     } else if (compareVersions(rcVersion, '5.15.0') < 0) {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (默认禁用)`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `☑️Trusted Entitlements: supported (默认禁用)`)
+        if (typeof $response != 'undefined'){
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `☑️Trusted Entitlements: supported (默认禁用)`)
+        }
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
-        $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
+        const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
+        if (nonce && nonce.trim() !== '') {
+            console.log(`x-nonce detected: ${nonce}`);
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴`)
+            $done({});
+        }
+        if (typeof $response != 'undefined'){
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
+        }
+        if $request.headers 中包含 x-nonce 且不为空。 直接 $done({});
     }
 } else {
     console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
