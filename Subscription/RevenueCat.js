@@ -20,6 +20,7 @@ const rcVersion = $request.headers['x-version'] || $request.headers['X-Version']
 const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || 'unknown';
 const appName = UA.match(/^([a-zA-Z0-9_-]+)/)?.[1] || 'unknown';
 const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
+const signature = $request.headers['x-signature'] || $request.headers['X-Signature'];
 // 检查 Trusted Entitlements 支持和默认状态
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
@@ -32,6 +33,15 @@ if (rcVersion !== 'unknown') {
         if (typeof $response != 'undefined'){
             $notification.post(`${appName} 版本号: ${rcVersion}`, `☑️Trusted Entitlements: supported (默认禁用)`)
         }
+        if (nonce && nonce.trim() !== '') {
+            console.log(`x-nonce detected: ${nonce}`);
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴`)
+            $done({});
+        }
+        if (signature && signature != ''){
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴响应签名验证`)
+            $done({});
+        }
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
         const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
@@ -42,6 +52,10 @@ if (rcVersion !== 'unknown') {
         }
         if (typeof $response != 'undefined'){
             $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
+        }
+        if (signature && signature != ''){
+            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴响应签名验证`)
+            $done({});
         }
     }
 } else {
@@ -78,7 +92,7 @@ if (typeof $response == "undefined") {
         'Spark%20Desktop': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
         'Spark': {name: 'premium', id: 'spark_b_4199_1y_1w0'},
         // PureLibro
-        'Reader':{name:'pro', id: 'reader.lifetime.pro'},
+        // 'Reader':{name:'pro', id: 'reader.lifetime.pro'},
         'Percento':{name:'premium',id:'com'},
         'AudioPlayer':{name:'Pro', id:'com'},
         'Anybox':{name:'pro', id:'com'},
