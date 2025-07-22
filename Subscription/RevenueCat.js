@@ -43,7 +43,6 @@ if (rcVersion !== 'unknown') {
         if (typeof $response != 'undefined'){
             $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
         }
-        if $request.headers 中包含 x-nonce 且不为空。 直接 $done({});
     }
 } else {
     console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
