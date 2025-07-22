@@ -18,9 +18,18 @@ function compareVersions(version1, version2) {
 // 获取 RevenueCat 版本和 UA
 const rcVersion = $request.headers['x-version'] || $request.headers['X-Version'] || 'unknown';
 const UA = $request.headers['user-agent'] || $request.headers['User-Agent'] || 'unknown';
-const appName = UA.match(/^([a-zA-Z0-9_-]+)/)?.[1] || 'unknown';
+const appName = UA.split('/')[0] || 'unknown';
 const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
 const signature = $request.headers['x-signature'] || $request.headers['X-Signature'];
+if (nonce && nonce.trim() !== '') {
+    console.log(`x-nonce detected: ${nonce}`);
+    $notification.post(`${appName} 版本号: ${rcVersion}`, `📴`)
+    $done({});
+}
+if (signature && signature != ''){
+    $notification.post(`${appName} 版本号: ${rcVersion}`, `📴响应签名验证`)
+    $done({});
+}
 // 检查 Trusted Entitlements 支持和默认状态
 if (rcVersion !== 'unknown') {
     if (compareVersions(rcVersion, '4.25.0') < 0) {
@@ -33,33 +42,12 @@ if (rcVersion !== 'unknown') {
         if (typeof $response != 'undefined'){
             $notification.post(`${appName} 版本号: ${rcVersion}`, `☑️Trusted Entitlements: supported (默认禁用)`)
         }
-        if (nonce && nonce.trim() !== '') {
-            console.log(`x-nonce detected: ${nonce}`);
-            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴`)
-            $done({});
-        }
-        if (signature && signature != ''){
-            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴响应签名验证`)
-            $done({});
-        }
     } else {
         console.log(`版本号: ${rcVersion}, UA: ${UA}, Trusted Entitlements: supported (可配置)`);
-        const nonce = $request.headers['x-nonce'] || $request.headers['X-Nonce'];
-        if (nonce && nonce.trim() !== '') {
-            console.log(`x-nonce detected: ${nonce}`);
-            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴`)
-            $done({});
-        }
         if (typeof $response != 'undefined'){
             $notification.post(`${appName} 版本号: ${rcVersion}`, `❌Trusted Entitlements: supported (可配置)`)
         }
-        if (signature && signature != ''){
-            $notification.post(`${appName} 版本号: ${rcVersion}`, `📴响应签名验证`)
-            $done({});
-        }
     }
-} else {
-    console.log(`版本号: unknown, UA: ${UA}, Trusted Entitlements: unknown`);
 }
 if (typeof $response == "undefined") {
     delete $request.headers["x-revenuecat-etag"];
@@ -80,11 +68,9 @@ if (typeof $response == "undefined") {
     }
     const app = 'gd';
     const UAMappings = {
-        'totowallet': {name: 'all', id: 'com.ziheng.totowallet.onetimepurchase'},
         'apollo': {name: 'all', id: 'com'},
         'dtdvibe': {name: 'pro', id: 'com.dtd.aroundu.year'},
         'LUTCamera': {name: 'ProVersionLifeTime', id: 'com.uzero.funforcam.lifetimepurchase'},
-        // eTicket has x-signature
         // 目标地图
         '%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9B%BE':{ name: 'pro', id: 'com.happydogteam.relax.lifetimePro'},
         // 极简日记
@@ -101,9 +87,7 @@ if (typeof $response == "undefined") {
         'UTC': {name:'Entitlement.Pro', id:'com'},
         'Structured': {name:'pro', id:'com'},
         'VSCO': {name: 'pro', id: 'vscopro_global_5999_annual_AutoFreeTrial'},
-        // MoneyThings
-        'CashFlow': {name: 'Premium', id: 'com.lishaohui.cashflow.lifetime'}
-        // 'FocusFlights':{name:'all', id:'net.cementpla.focusflights.lifetime'}
+        'GoodThing':{ name: 'pro', id: 'goodhappens_basic_forever'},
     };
     const data = {
         "expires_date": "2030-12-31T05:06:53Z",
