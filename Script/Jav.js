@@ -2,8 +2,9 @@ console.log($request.url)
 console.log($request.method)
 if (typeof $response == "undefined") {
     if (url.includes("/api/v1/movies/") && url.includes("/play?")) {
-        header.authorization = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MzE4OTE0NSwidXNlcm5hbWUiOiJjaHhtMTAyNSJ9.9biip2hb60jXeakBMbnP-5QiLyycLj9s7dpHyXNUp7E";
-        $done({ headers: header });
+        $done({ response: {status: 301,headers: {
+              Location: "https://www.qq.com/"
+          }}});
     } else {
       $done({});
     }
