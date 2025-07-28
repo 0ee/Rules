@@ -52,6 +52,10 @@ if (typeof $response == "undefined") {
         if (body?.data?.show_vip_banner) {
             body.data.show_vip_banner = false;
           }
+        if (body?.data?.share_info){
+            extractedPart = body.data.share_info.split('\n')[0];
+            body.data.share_info = "https://missav.ai/search/"+extractedPart
+        }
     }
     body = JSON.stringify(body);
     $done({body});
