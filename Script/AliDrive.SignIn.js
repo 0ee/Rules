@@ -1,49 +1,3 @@
-
-/**************************************
-脚本名称：阿里云盘任务 感谢zqzess、lowking、leiyiyan、mounuo提供的巨大帮助
-脚本作者：@Sliverkiss
-更新日期：2024-01-24 13:13:56
-
-2024.04.19 
-- 移除头像显示,以兼容surge及ios 16系统无法显示通知的bug
-- 优化通知格式,多账号分别通知,以兼容surge通知长度限制
-- 移除备份奖励任务,减少不必要的性能损耗
-- 增加周五会员日任务
-
-------------------------------------------
-脚本兼容：NE/Node环境
-
-*************************
-【 签到脚本使用教程 】:
-*************************
-单账号&&多账号：
-1.将获取ck脚本拉取到本地
-2.打开阿里云盘，若提示获取ck成功，则可以使用该脚本
-3.获取成功后，关闭获取ck脚本，避免产生不必要的mitm
-
-QuantumultX配置如下：
-
-[task_local]
-0 7,11,17 * * * https://gist.githubusercontent.com/Sliverkiss/33800a98dcd029ba09f8b6fc6f0f5162/raw/aliyun.js, tag=阿里云签到, img-url=https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/AliYunDrive.png, enabled=true
-
-[rewrite_local]
-^https:\/\/(auth|aliyundrive)\.alipan\.com\/v2\/account\/token url script-request-body https://gist.githubusercontent.com/Sliverkiss/33800a98dcd029ba09f8b6fc6f0f5162/raw/aliyun.js
-
-[MITM]
-hostname = auth.alipan.com,auth.aliyundrive.com
-
-⚠️免责声明
-------------------------------------------
-1、此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
-2、由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
-3、请勿将此脚本用于任何商业或非法目的，若违反规定请自行对此负责。
-4、此脚本涉及应用与本人无关，本人对因此引起的任何隐私泄漏或其他后果不承担任何责任。
-5、本人对任何脚本引发的问题概不负责，包括但不限于由脚本错误引起的任何损失和损害。
-6、如果任何单位或个人认为此脚本可能涉嫌侵犯其权利，应及时通知并提供身份证明，所有权证明，我们将在收到认证文件确认后删除此脚本。
-7、所有直接或间接使用、查看此脚本的人均应该仔细阅读此声明。本人保留随时更改或补充此声明的权利。一旦您使用或复制了此脚本，即视为您已接受此免责声明。
-******************************************/
-
-
 // env.js 全局
 const $ = new Env("阿里云盘任务");
 const ckName = "aliyun_data";
@@ -65,6 +19,10 @@ $.notifyMsg = [];
 $.uploadFileList = [];
 //bark推送
 $.barkKey = ($.isNode() ? process.env["bark_key"] : $.getdata("bark_key")) || '';
+//---------------------- Header 处理相关变量 -----------------------------------
+// 从 XiaoMaoALiSignReward.js 借鉴的 header 处理逻辑
+let headers = $request && $request.headers;
+let requestUrl = $request && $request.url;
 //---------------------- 自定义变量区域 -----------------------------------
 
 //脚本入口函数main()
@@ -123,6 +81,44 @@ class UserInfo {
     }
     getRandomTime() {
         return randomInt(1000, 3000)
+    }
+
+    // 统一的 Header 管理方法 (整合两套机制)
+    getSignHeaders() {
+        // 优先使用存储的完整 header 信息，回退到基本的 authorization
+        return {
+            Host: "member.aliyundrive.com",
+            Cookie: $.getdata(`aliyun_Cookie_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_Cookie") || "",
+            "User-Agent": "AliApp(AYSD/5.8.1) com.alicloud.smartdrive/5.8.1 Version/17.6.1 Channel/201200 Language/zh-Hans-CN /iOS Mobile/iPhone16,2",
+            "x-timestamp": $.getdata(`aliyun_x-timestamp_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-timestamp") || "",
+            Referer: "https://aliyundrive.com/",
+            "X-Canary": "client=web,app=other,version=v0.1.0",
+            "x-sgext": $.getdata(`aliyun_x-sgext_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-sgext") || "",
+            "x-device-id": this.ADrivreInfo.device_id,
+            "Content-Length": 17,
+            Connection: "keep-alive",
+            "x-signature": $.getdata(`aliyun_x-signature_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-signature") || "",
+            "x-sign": $.getdata(`aliyun_x-sign_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-sign") || "",
+            "x-mini-wua": $.getdata(`aliyun_x-mini-wua_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-mini-wua") || "",
+            Authorization: $.getdata(`aliyun_Authorization_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_Authorization") || this.authorization,
+            "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+            "x-umt": $.getdata(`aliyun_x-umt_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-umt") || "",
+            Accept: "*/*",
+            "Content-Type": "application/json; charset=UTF-8",
+            "x-signature-v2": $.getdata(`aliyun_x-signature-v2_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-signature-v2") || "",
+            "Accept-Encoding": "gzip, deflate, br",
+            "x-nonce": $.getdata(`aliyun_x-nonce_${this.ADrivreInfo.device_id}`) || $.getdata("aliyun_x-nonce") || "",
+        };
+    }
+
+    // 检查是否有完整的签名 header
+    hasSignHeaders() {
+        const deviceSpecificCookie = $.getdata(`aliyun_Cookie_${this.ADrivreInfo.device_id}`);
+        const globalCookie = $.getdata("aliyun_Cookie");
+        const deviceSpecificTimestamp = $.getdata(`aliyun_x-timestamp_${this.ADrivreInfo.device_id}`);
+        const globalTimestamp = $.getdata("aliyun_x-timestamp");
+
+        return (deviceSpecificCookie && deviceSpecificTimestamp) || (globalCookie && globalTimestamp);
     }
     //请求二次封装
     Request(options, method) {
@@ -355,44 +351,90 @@ class UserInfo {
             await this.uploadFileToAlbums(this.albumsId);
         }
     }
-    // 领取签到奖励
+    // 领取签到奖励 (统一 Header 管理版本)
     async getSignReword(signInCount) {
         try {
+            // 使用统一的 header 管理方法
+            const headers = this.getSignHeaders();
+
+            // 检查是否有基本的认证信息
+            if (!headers.Authorization && !headers.Cookie) {
+                $.log(`❌缺少认证信息，请检查账号配置或通过重写规则获取Header`);
+                return "缺少认证信息";
+            }
+
             const options = {
                 url: `https://member.aliyundrive.com/v1/activity/sign_in_reward`,
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: this.authorization,
-                },
+                method: "POST",
+                headers: headers,
                 body: JSON.stringify({ signInDay: signInCount }),
             };
+
+            // 如果有完整的签名 header，记录日志
+            if (this.hasSignHeaders()) {
+                $.log(`✅ 使用完整签名Header进行签到奖励领取`);
+            } else {
+                $.log(`⚠️ 使用基础Authorization进行签到奖励领取，建议获取完整Header以提高成功率`);
+            }
+
             //post方法
-            let { result, message } = await this.Request(options);
-            //打印领取详情
-            $.log(`领取第${signInCount}天签到奖励 => 🎉${result.description || result.name}领取成功!`);
-            return result.description ? result.description : result.name;
+            let { result, message, code } = await this.Request(options);
+
+            // 处理错误响应 (借鉴 XiaoMaoALiSignReward.js 的错误处理)
+            if (code && (code == "Forbidden" || code == "InvalidSignature" || code == "ExchangeFailed")) {
+                $.log(`❌第${signInCount}天签到奖励: ${message}`);
+                if (!this.hasSignHeaders()) {
+                    $.log(`💡 建议通过重写规则获取完整的签名Header以解决此问题`);
+                }
+                $.notifyMsg.push(`签到奖励: ${message || "获取失败，可能需要更新Header"}`);
+                return message || "获取失败";
+            } else if (result) {
+                //打印领取详情
+                $.log(`领取第${signInCount}天签到奖励 => 🎉${result.description || result.name}领取成功!`);
+                return result.description ? result.description : result.name;
+            } else {
+                $.log(`❌领取第${signInCount}天签到奖励失败: ${message || "未知错误"}`);
+                return message || "未知错误";
+            }
         } catch (e) {
             $.log(`❌领取签到奖励失败！原因为:${e}`)
+            return `异常: ${e}`;
         }
     }
-    //领取备份奖励
+    //领取备份奖励 (统一 Header 管理版本)
     async getTaskReword(signInCount) {
         try {
+            // 使用统一的 header 管理方法
+            const headers = this.getSignHeaders();
+
             const options = {
                 url: `https://member.aliyundrive.com/v2/activity/sign_in_task_reward?_rx-s=mobile`,
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: this.authorization,
-                },
+                method: "POST",
+                headers: headers,
                 body: JSON.stringify({ "signInDay": signInCount })
             };
+
             //post方法
-            let { result, message } = await this.Request(options);
-            //打印领取详情
-            $.log((result && !message) ? `领取备份奖励 => 🎉${result.description}领取成功!` : `领取备份奖励 => ❌${message}`);
-            return (result && !message) ? result.description : message;
+            let { result, message, code } = await this.Request(options);
+
+            // 处理错误响应 (借鉴 XiaoMaoALiSignReward.js 的错误处理)
+            if (code && (code == "Forbidden" || code == "ExchangeFailed" || code == "InvalidSignature")) {
+                $.log(`❌第${signInCount}天备份奖励: ${message}`);
+                if (!this.hasSignHeaders()) {
+                    $.log(`💡 建议通过重写规则获取完整的签名Header以解决此问题`);
+                }
+                return message || "获取失败";
+            } else if (result && !message) {
+                //打印领取详情
+                $.log(`领取备份奖励 => 🎉${result.description}领取成功!`);
+                return result.description;
+            } else {
+                $.log(`领取备份奖励 => ❌${message || "未知错误"}`);
+                return message || "未知错误";
+            }
         } catch (e) {
             $.log(`❌领取备份奖励失败！原因为:${e}`)
+            return `异常: ${e}`;
         }
     }
     //备份设备列表
@@ -966,6 +1008,80 @@ async function getRespBody(refresh_token) {
     });
 }
 
+
+//Header 获取和存储逻辑 (借鉴自 XiaoMaoALiSignReward.js)
+if (
+    requestUrl &&
+    /^https:\/\/member\.aliyundrive\.com\/v1\/activity\/sign_in_reward?/.test(
+        requestUrl
+    )
+) {
+    if ($.getdata("aliyun_x-timestamp") == headers["x-timestamp"]) {
+        $done({
+            headers: {
+                Host: "member.aliyundrive.com",
+                Cookie: $.getdata("aliyun_Cookie") || "",
+                "User-Agent":
+                    "AliApp(AYSD/5.8.1) com.alicloud.smartdrive/5.8.1 Version/17.6.1 Channel/201200 Language/zh-Hans-CN /iOS Mobile/iPhone16,2",
+                "x-timestamp": $.getdata("aliyun_x-timestamp") || "",
+                Referer: "https://aliyundrive.com/",
+                "X-Canary": "client=web,app=other,version=v0.1.0",
+                "x-sgext": $.getdata("aliyun_x-sgext") || "",
+                "x-device-id": $.getdata("aliyun_x-device-id") || "",
+                "Content-Length": 17,
+                Connection: "keep-alive",
+                "x-signature": $.getdata("aliyun_x-signature") || "",
+                "x-sign": $.getdata("aliyun_x-sign") || "",
+                "x-mini-wua": $.getdata("aliyun_x-mini-wua") || "",
+                Authorization: $.getdata("aliyun_Authorization") || "",
+                "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+                "x-umt": $.getdata("aliyun_x-umt") || "",
+                Accept: "*/*",
+                "Content-Type": "application/json; charset=UTF-8",
+                "x-signature-v2": $.getdata("aliyun_x-signature-v2") || "",
+                "Accept-Encoding": "gzip, deflate, br",
+                "x-nonce": $.getdata("aliyun_x-nonce") || "",
+            },
+        });
+    } else {
+        // 获取设备ID用于多账号支持
+        const deviceId = headers["x-device-id"];
+
+        // 存储设备特定的 header (优先)
+        if (deviceId) {
+            $.setdata(headers["Cookie"], `aliyun_Cookie_${deviceId}`);
+            $.setdata(headers["x-sgext"], `aliyun_x-sgext_${deviceId}`);
+            $.setdata(headers["x-signature"], `aliyun_x-signature_${deviceId}`);
+            $.setdata(headers["x-sign"], `aliyun_x-sign_${deviceId}`);
+            $.setdata(headers["x-mini-wua"], `aliyun_x-mini-wua_${deviceId}`);
+            $.setdata(headers["Authorization"], `aliyun_Authorization_${deviceId}`);
+            $.setdata(headers["x-umt"], `aliyun_x-umt_${deviceId}`);
+            $.setdata(headers["x-signature-v2"], `aliyun_x-signature-v2_${deviceId}`);
+            $.setdata(headers["x-nonce"], `aliyun_x-nonce_${deviceId}`);
+            $.setdata(headers["x-timestamp"], `aliyun_x-timestamp_${deviceId}`);
+        }
+
+        // 同时存储全局 header (兼容性)
+        $.setdata(headers["Cookie"], "aliyun_Cookie");
+        $.setdata(headers["x-sgext"], "aliyun_x-sgext");
+        $.setdata(headers["x-device-id"], "aliyun_x-device-id");
+        $.setdata(headers["x-signature"], "aliyun_x-signature");
+        $.setdata(headers["x-sign"], "aliyun_x-sign");
+        $.setdata(headers["x-mini-wua"], "aliyun_x-mini-wua");
+        $.setdata(headers["Authorization"], "aliyun_Authorization");
+        $.setdata(headers["x-umt"], "aliyun_x-umt");
+        $.setdata(headers["x-signature-v2"], "aliyun_x-signature-v2");
+        $.setdata(headers["x-nonce"], "aliyun_x-nonce");
+        $.setdata(headers["x-timestamp"], "aliyun_x-timestamp");
+
+        $.msg(
+            "阿里云盘任务",
+            "Header获取成功！",
+            `签到相关Header获取成功！${deviceId ? `设备ID: ${deviceId}` : ''}可以正常使用签到功能了！`
+        );
+        $done({});
+    }
+}
 
 //主程序执行入口
 !(async () => {

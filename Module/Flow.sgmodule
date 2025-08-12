@@ -99,4 +99,5 @@ AVfactory = type=http-response , script-path=https://limbopro.com/Adguard/Adbloc
 http-request-jq ^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$ ".storefrontId = "143441-19,29""
 
 [Map Local]
+# 乐刻
 ^https?:\/\/lens\.leoao\.com\/lens\/.+(getUserScheme|queryAppBanners|Advert|popup) data-type=text data=" " status-code=200
