@@ -38,6 +38,9 @@ if ($request.method === 'OPTIONS') {
             if(i.code === '590xx'){
                 return false;
             }
+            if(i.code === 'dolby'){
+                return false;
+            }
             return true;
             });
         // coreFeatures
