@@ -6,15 +6,15 @@ const requestUrl = $request && $request.url;
 
 
 console.log("✅ 检测到新的Header，开始存储...");
-
+console.log(headers);
 // 存储所有必要的 header 信息
-$.setdata(headers["Cookie"], "aliyun_Cookie");
+$.setdata(headers["cookie"], "aliyun_Cookie");
 $.setdata(headers["x-sgext"], "aliyun_x-sgext");
 $.setdata(headers["x-device-id"], "aliyun_x-device-id");
 $.setdata(headers["x-signature"], "aliyun_x-signature");
 $.setdata(headers["x-sign"], "aliyun_x-sign");
 $.setdata(headers["x-mini-wua"], "aliyun_x-mini-wua");
-$.setdata(headers["Authorization"], "aliyun_Authorization");
+$.setdata(headers["authorization"], "aliyun_Authorization");
 $.setdata(headers["x-umt"], "aliyun_x-umt");
 $.setdata(headers["x-signature-v2"], "aliyun_x-signature-v2");
 $.setdata(headers["x-nonce"], "aliyun_x-nonce");
