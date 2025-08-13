@@ -3,12 +3,11 @@ const headers = $request && $request.headers;
 const requestUrl = $request && $request.url;
 
 // Header 获取和存储逻辑
-
-
 console.log("✅ 检测到新的Header，开始存储...");
 console.log(headers);
 // 存储所有必要的 header 信息
 $.setdata(headers["cookie"], "aliyun_Cookie");
+$.setdata(headers["user-agent"], "aliyun_userAgent");
 $.setdata(headers["x-sgext"], "aliyun_x-sgext");
 $.setdata(headers["x-device-id"], "aliyun_x-device-id");
 $.setdata(headers["x-signature"], "aliyun_x-signature");
