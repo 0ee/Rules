@@ -10,7 +10,7 @@
 
 Surge配置：
 [Script]
-阿里云盘Header获取 = type=http-request,pattern=^https:\/\/member\.aliyundrive\.com\/v1\/activity\/sign_in_reward,script-path=AliDrive2.cookie.js
+阿里云盘Header获取 = type=http-request,pattern=^https:\/\/member\.aliyundrive\.com\/v1\/activity\/sign_in_reward,script-path=AliDrive.Cookie.js
 
 [MITM]
 hostname = member.aliyundrive.com
@@ -27,31 +27,7 @@ if (typeof $request != "undefined" && $request.method == 'POST') {
     // 检查是否为重复的 header
     if ($persistentStore.read("aliyun_x-timestamp") == headers["x-timestamp"]) {
         console.log("⚠️ Header未变化，跳过重复获取");
-        $done({
-            headers: {
-                Host: "member.aliyundrive.com",
-                Cookie: $persistentStore.read("aliyun_Cookie") || "",
-                "User-Agent": "AliApp(AYSD/5.8.1) com.alicloud.smartdrive/5.8.1 Version/17.6.1 Channel/201200 Language/zh-Hans-CN /iOS Mobile/iPhone16,2",
-                "x-timestamp": $persistentStore.read("aliyun_x-timestamp") || "",
-                Referer: "https://aliyundrive.com/",
-                "X-Canary": "client=web,app=other,version=v0.1.0",
-                "x-sgext": $persistentStore.read("aliyun_x-sgext") || "",
-                "x-device-id": $persistentStore.read("aliyun_x-device-id") || "",
-                "Content-Length": 17,
-                Connection: "keep-alive",
-                "x-signature": $persistentStore.read("aliyun_x-signature") || "",
-                "x-sign": $persistentStore.read("aliyun_x-sign") || "",
-                "x-mini-wua": $persistentStore.read("aliyun_x-mini-wua") || "",
-                Authorization: $persistentStore.read("aliyun_Authorization") || "",
-                "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-                "x-umt": $persistentStore.read("aliyun_x-umt") || "",
-                Accept: "*/*",
-                "Content-Type": "application/json; charset=UTF-8",
-                "x-signature-v2": $persistentStore.read("aliyun_x-signature-v2") || "",
-                "Accept-Encoding": "gzip, deflate, br",
-                "x-nonce": $persistentStore.read("aliyun_x-nonce") || "",
-            },
-        });
+        $done({});
     } else {
         console.log("✅ 检测到新的Header，开始存储...");
 
