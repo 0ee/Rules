@@ -33,8 +33,6 @@ async function main() {
             if (user.ckStatus) {
                 //签到
                 let { signInCount } = await user.signCheckin();
-                //周五会员日
-                await user.vipFriday();
                 //补签卡任务
                 await user.finishCardTask();
                 //刷新数据
