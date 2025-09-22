@@ -68,7 +68,7 @@ async function autoSignIn() {
             if (dayInfo) {
                 console.log(`第 ${day} 天状态: ${dayInfo.status}`);
                 // 如果状态不是 "end"，说明该天还可以签到/领取奖励
-                if (dayInfo.status !== 'end') {
+                if (dayInfo.status === 'finished') {
                     unSignedDays.push(day);
                     console.log(`📝 第 ${day} 天状态为 "${dayInfo.status}"，需要补签`);
                 } else {
