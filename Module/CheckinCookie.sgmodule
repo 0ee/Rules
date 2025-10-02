@@ -19,4 +19,4 @@
 
 
 [MITM]
-hostname = %APPEND% auth.aliyundrive.com, member.aliyundrive.com, auth.alipan.com, app.bilibili.com, m.bilibili.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn
+hostname = %APPEND% auth.aliyundrive.com, member.aliyundrive.com, auth.alipan.com, bbs-api.miyoushe.com, api-takumi.mihoyo.com, api.kurobbs.com, api.weibo.cn
