@@ -110,10 +110,10 @@ DOMAIN-SUFFIX,getdrafts.com
 
 // 1Password
 DOMAIN-SUFFIX,1password.com
+DOMAIN-SUFFIX,1passwordservices.com
 DOMAIN-SUFFIX,agilebits.com
 
 // Movie
-DOMAIN-SUFFIX,chaospace.fun
 
 // Tmdb.list
 DOMAIN-SUFFIX,themoviedb.org
