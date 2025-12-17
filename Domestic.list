@@ -4,6 +4,7 @@ PROCESS-NAME,企业微信*
 PROCESS-NAME,wechatwebdevtools*
 // Tencent Cloud
 IP-CIDR,162.14.0.0/18,no-resolve
+DOMAIN-SUFFIX,tlivemcdn.com
 // Aliyun
 IP-CIDR,140.205.1.0/24,no-resolve
 DOMAIN-SUFFIX,alibabausercontent.com
@@ -34,6 +35,8 @@ DOMAIN-SUFFIX,searchpstatp.com
 DOMAIN-SUFFIX,ndcpp.com
 DOMAIN-SUFFIX,qishui.com
 DOMAIN-SUFFIX,qishui.com.cn
+// 网易
+DOMAIN-SUFFIX,netease.com
 // 抖音商品详情
 DOMAIN-SUFFIX,ecombdimg.com
 DOMAIN-SUFFIX,ecombdstatic.com
@@ -45,6 +48,11 @@ DOMAIN-SUFFIX,volcvideo.com
 DOMAIN-SUFFIX,volcvod.com
 // ByteHouse
 DOMAIN-SUFFIX,bytehwm.com
+//
+DOMAIN-SUFFIX,ahdohpiechei.com
+DOMAIN-SUFFIX,cjjd14.com
+// 火山引擎
+DOMAIN-SUFFIX,vegslb.com
 // 字节 https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/ByteDance/ByteDance.list
 DOMAIN-SUFFIX,2333333333333.com
 DOMAIN-SUFFIX,365yg.com
@@ -816,6 +824,8 @@ DOMAIN-SUFFIX,aihuishou.com
 
 DOMAIN,wetype.weixin.qq.com
 DOMAIN-SUFFIX,qianwen.com
+
+DOMAIN-SUFFIX,ikang.com
 
 
 // Accelerate direct sites
