@@ -28,3 +28,6 @@ DOMAIN-SUFFIX,groq.com
 DOMAIN-SUFFIX,groqstatus.com
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
+
+#claude
+DOMAIN-SUFFIX,claude.ai
