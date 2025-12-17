@@ -103,6 +103,7 @@ DOMAIN-SUFFIX,api.amplitude.com
 DOMAIN-SUFFIX,app.smartmailcloud.com
 DOMAIN-SUFFIX,gate.hockeyapp.net
 DOMAIN-SUFFIX,smartmailcloud.com
+DOMAIN-SUFFIX,sparkmailapp.com
 
 // Drafts
 DOMAIN-SUFFIX,getdrafts.com
