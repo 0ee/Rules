@@ -63,7 +63,7 @@ async function autoSignIn() {
         console.log(`📅 当前签到天数: ${signInCount}, 今天是第 ${currentDay} 天`);
 
         // 检查当月1号到今天哪些天的状态不是 "end" (已失效)，需要补签
-        signInInfos.forEach((dayInfo) => {
+        signInInfos.filter(dayInfo => dayInfo.status === "normal").forEach((dayInfo) => {
             const dailySignInReward = dayInfo.rewards.find(reward => reward.type === "dailySignIn");
             if (dailySignInReward) {
                 const status = dailySignInReward.status;
