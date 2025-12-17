@@ -63,21 +63,22 @@ async function autoSignIn() {
         console.log(`📅 当前签到天数: ${signInCount}, 今天是第 ${currentDay} 天`);
 
         // 检查当月1号到今天哪些天的状态不是 "end" (已失效)，需要补签
-        for (let day = 1; day <= currentDay; day++) {
-            const dayInfo = signInInfos.find(info => Number(info.day) === day);
-            if (dayInfo) {
-                console.log(`第 ${day} 天状态: ${dayInfo.status}`);
-                // 如果状态不是 "end"，说明该天还可以签到/领取奖励
-                if (dayInfo.status === 'finished') {
-                    unSignedDays.push(day);
-                    console.log(`📝 第 ${day} 天状态为 "${dayInfo.status}"，需要补签`);
+        signInInfos.forEach((dayInfo) => {
+            const dailySignInReward = dayInfo.rewards.find(reward => reward.type === "dailySignIn");
+            if (dailySignInReward) {
+                const status = dailySignInReward.status;
+                if (status === "finished") {
+                    unSignedDays.push(Number(dayInfo.day));
+                    console.log(`📝 第 ${dayInfo.day} 天奖励可领取`);
+                } else if (status === "verification") {
+                    console.log(`✅ 第 ${dayInfo.day} 天奖励已领取`);
                 } else {
-                    console.log(`✅ 第 ${day} 天状态为 "end"，已失效`);
+                    console.log(`🔜 第 ${dayInfo.day} 天奖励未开放或无状态匹配: ${status}`);
                 }
             } else {
-                console.log(`❌ 第 ${day} 天未找到信息`);
+                console.log(`❌ 第 ${dayInfo.day} 天的签到奖励数据未找到`);
             }
-        }
+        });
 
         console.log(`📅 需要补签的日期: ${unSignedDays.join(', ') || '无'}`);
 
