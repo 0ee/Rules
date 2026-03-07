@@ -17,9 +17,7 @@
 
 微博超话 Cookie = type=http-request,pattern=https://api.weibo.cn/2/page/button\?,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/WeiboSuper.js
 
-NGA活动 Cookie = type=http-request,
-
-NGA签到捕获 = type=http-request,pattern=^https://bbs\.nga\.cn/nuke\.php.*genshin_task_get, script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/NgaSign.js
+NGA签到捕获 = type=http-request,pattern=^https://bbs\.nga\.cn/nuke\.php.*genshin,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/NgaSign.js
 
 
 [MITM]
