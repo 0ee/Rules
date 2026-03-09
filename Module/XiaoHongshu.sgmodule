@@ -26,4 +26,4 @@
 ^https:\/\/www\.xiaohongshu\.com\/api\/sns\/v1\/ads\/resource\? data="https://raw.githubusercontent.com/0ee/Rules/Surge/empty-body.json"
 
 [MITM]
-hostname = %APPEND% edith.xiaohongshu.com, www.xiaohongshu.com
+hostname = %APPEND% www.xiaohongshu.com
