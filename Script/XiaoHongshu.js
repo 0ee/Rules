@@ -3,11 +3,10 @@
 // https://github.com/RuCu6/QuanX/blob/main/Scripts/xiaohongshu.js
 console.log($request.url)
 console.log($request.method)
-console.log(body)
 const url = $request.url;
 if (!$response.body) $done({});
 let obj = JSON.parse($response.body);
-
+console.log(obj)
 if (url.includes("/v1/search/banner_list")) {
   if (obj?.data) {
     // obj.data = {};
