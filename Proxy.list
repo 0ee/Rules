@@ -1,5 +1,6 @@
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,linux.do
+DOMAIN-SUFFIX,mikanani.me
 // https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Surge/Cloudflare/Cloudflare.list
 DOMAIN-SUFFIX,cf-ipfs.com
 DOMAIN-SUFFIX,cf-ns.com
