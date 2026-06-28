@@ -195,10 +195,10 @@ const signHeadersString = $.getdata('kayanouriko_mihoyobbs_headers_sign')
  */
 
 const config = {
-    tasks: [1, 2],
+    tasks: [2],
     micoin: {
-        sections: [34],
-        actions: [58, 59, 60, 61]
+        sections: [],
+        actions: []
     }
 }
 //==== 主入口 ====
