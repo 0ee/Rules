@@ -9,8 +9,4 @@
 
 库社区任务 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=600,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/Kuro.SignIn.js
 
-#米游社任务 = type=cron,cronexp=8 0 * * *,wake-system=1,timeout=1200,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/MiYouShe.SignIn.js
-
-阿里云盘每日任务 = type=cron,cronexp=0 7 * * *,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/AliDrive.SignIn.js
-
 NGA自动签到 = type=cron, cronexp="2 0 * * *", script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/NgaSign.js
