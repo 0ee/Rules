@@ -21,7 +21,7 @@ https?:\/\/[0-9a-zA-Z]{10,16}\.cloudfront\.net\/\?[a-z]{3,7}=\d{4,8} reject
 https://creative.live.missav.com/widgets/Spot/lib.js reject
 
 [MITM]
-hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, open.e.kuaishou.com, security.wechat.com, weixin110.qq.com, api-takumi-record.mihoyo.com, *.cloudfront.net, missav.ws, missav.ai, missav.com
+hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, open.e.kuaishou.com, security.wechat.com, weixin110.qq.com, api-takumi-record.mihoyo.com, *.cloudfront.net, missav.ws, missav.ai, missav.com, creative.live.missav.com
 
 [Script]
 广告联盟去广告 = type=http-response,pattern=^https:\/\/((api-access\.pangolin-sdk-toutiao|is\.snssdk)\.com\/api\/ad\/union\/sdk\/get_ads|open\.e\.kuaishou\.com\/rest\/e\/v3\/open\/univ$|mi\.gdt\.qq\.com\/gdt_mview\.fcg\?),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/adsense.js
