@@ -16,9 +16,9 @@ always-real-ip = %INSERT% *.lan, cable.auth.com, *.msftconnecttest.com, *.msftnc
 
 [URL Rewrite]
 # missav 播放页弹窗
-https?:\/\/[0-9a-zA-Z]{10,16}\.cloudfront\.net\/\?[a-z]{3,7}=\d{4,8} reject
+^https?:\/\/[0-9a-zA-Z]{10,16}\.cloudfront\.net\/\?[a-z]{3,7}=\d{4,8} - reject
 # missav 直播跳出广告
-https://creative.live.missav.com/widgets/Spot/lib.js reject
+^https:\/\/creative\.live\.missav\.com\/widgets\/Spot\/lib\.js - reject
 
 [MITM]
 hostname = %APPEND% api-access.pangolin-sdk-toutiao.com, open.e.kuaishou.com, security.wechat.com, weixin110.qq.com, api-takumi-record.mihoyo.com, *.cloudfront.net, missav.ws, missav.ai, missav.com, creative.live.missav.com
