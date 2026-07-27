@@ -35,7 +35,6 @@ DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,adash-c.ut.taobao.com
 DOMAIN-SUFFIX,h-adashx.ut.taobao.com
 DOMAIN,mdap.alipay.com
-DOMAIN,loggw-ex.alipay.com
 // 腾讯
 #容易引导腾讯视频在Chrome崩溃
 #DOMAIN-SUFFIX,beacon.qq.com
