@@ -52,6 +52,8 @@ function signTask() {
         let decodedData = decodeUnicode(data)
         console.log('签到响应: ' + decodedData)
 
+        if (stopOnApiError(data, '签到')) return
+
         setTimeout(() => {
             getScore()
         }, 1000)
@@ -83,6 +85,8 @@ function getScore() {
 
         let decodedData = decodeUnicode(data)
         console.log('积分响应: ' + decodedData)
+
+        if (stopOnApiError(data, '积分')) return
 
         try {
             let result = JSON.parse(data)
@@ -131,6 +135,8 @@ function luckydraw() {
 
         let decodedData = decodeUnicode(data)
         console.log('抽奖响应: ' + decodedData)
+
+        if (stopOnApiError(data, '抽奖')) return
 
         let notifyText = getReadableMsg(decodedData)
 
@@ -187,4 +193,27 @@ function getReadableMsg(data) {
     } catch (e) {
         return data
     }
+}
+
+function stopOnApiError(data, step) {
+    let result
+    try {
+        result = JSON.parse(data)
+    } catch (e) {
+        return false
+    }
+
+    if (result && Object.prototype.hasOwnProperty.call(result, 'error')) {
+        let message = Array.isArray(result.error)
+            ? result.error.join('；')
+            : typeof result.error === 'string'
+                ? result.error
+                : JSON.stringify(result.error)
+        console.log(step + '失败，停止执行: ' + message)
+        $notification.post('NGA原神' + step + '失败', '已停止后续步骤', message)
+        $done({})
+        return true
+    }
+
+    return false
 }
