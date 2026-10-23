@@ -1,3 +1,55 @@
+// Diagnostic wrapper: logs bounded response structure, not response headers or text.
+(function (finish) {
+  const extra = new Set([
+    "/api/sns/v6/homefeed", "/api/sns/v1/localfeed",
+    "/api/sns/v1/localfeed/header", "/api/sns/v1/localfeed/tab_config"
+  ]);
+  const match = /^https:\/\/(edith|www|rec)\.xiaohongshu\.com(\/[^?#]*)/.exec($request.url || "");
+  const path = match ? match[2] : "";
+  const enums = new Set(["model_type", "biz_type", "card_type", "item_type", "ad_type", "ads_type", "type", "tab_id", "tab_name", "enable_show", "priority", "is_ads", "is_ad", "has_ads", "sponsored", "zh_cn"]);
+  function snapshot(root) {
+    let budget = 1000;
+    function walk(v, key, depth) {
+      if (--budget < 0 || depth > 8) return "[limit]";
+      if (v === null) return null;
+      if (Array.isArray(v)) {
+        // Sample ordinary cards plus explicitly marked ad-shaped cards later in the list.
+        const selected = v.map((x, i) => i).filter(i => i < 8 ||
+          (v[i] && typeof v[i] === "object" && Object.keys(v[i]).some(k => /^(ads?_info|ads?_id|is_ads?|sponsored)$/.test(k)))).slice(0, 24);
+        return { length: v.length, samples: selected.map(i => ({ index: i, shape: walk(v[i], "", depth + 1) })) };
+      }
+      if (typeof v === "object") {
+        const out = {};
+        for (const k of Object.keys(v).slice(0, 100)) {
+          const name = /^[a-f0-9]{24,}$/i.test(k) ? "[dynamic-key]" : k;
+          if (/token|session|cookie|authorization|password|device_id|user_id/i.test(k)) out[name] = "[redacted]";
+          else out[name] = walk(v[k], k, depth + 1);
+          if (budget < 0) break;
+        }
+        return out;
+      }
+      if (typeof v === "boolean") return v;
+      if (enums.has(key) && typeof v === "number") return v;
+      if (enums.has(key) && typeof v === "string") return v.slice(0, 100);
+      return typeof v;
+    }
+    return walk(root, "", 0);
+  }
+  let completed = false;
+  const $done = function (result) {
+    if (completed) return;
+    completed = true;
+    try {
+      const event = { version: "XHS-REC-MARKET-20261023", host: match ? match[1] : "unknown", path,
+        modified: !!(result && result.body), action: result && result.body ? "modified" : "passthrough" };
+      try { event.shape = snapshot(JSON.parse($response.body)); }
+      catch (_) { event.shape = "[no JSON body]"; }
+      console.log("[XHS-DIAG] " + JSON.stringify(event));
+    } catch (_) {}
+    finish(result);
+  };
+  // The unchanged validated production candidate follows here.
+
 // Surge http-response script. Offline candidate, 2026-10-22.
 // Only recognized ad components are removed; unknown data passes through.
 // No response-body logging, credential access, or persistent-store writes.
@@ -9,7 +61,7 @@
 
   try {
     const url = typeof $request !== "undefined" ? $request.url : "";
-    const match = /^https:\/\/(edith|www)\.xiaohongshu\.com(\/[^?#]*)/.exec(url || "");
+    const match = /^https:\/\/(edith|www|rec)\.xiaohongshu\.com(\/[^?#]*)/.exec(url || "");
     const path = match ? match[2] : "";
     const notePaths = [
       "/api/sns/v1/note/imagefeed", "/api/sns/v2/note/feed",
@@ -17,7 +69,8 @@
     ];
     const widgetsPath = "/api/sns/v2/note/widgets";
     const splashPath = "/api/sns/v2/system_service/splash_config";
-    if (path !== widgetsPath && path !== splashPath && !notePaths.includes(path)) {
+    const navigationPaths = ["/api/sns/v1/system_service/config", "/api/sns/v1/localfeed/tab_config"];
+    if (path !== widgetsPath && path !== splashPath && !navigationPaths.includes(path) && !notePaths.includes(path)) {
       $done(result);
       return;
     }
@@ -33,7 +86,36 @@
     const data = obj.data;
     let changed = false;
 
-    if (path === widgetsPath && isObject(data)) {
+    if (navigationPaths.includes(path) && isObject(data)) {
+      // Explicit user preference: hide market navigation, not search goods or POI.
+      const marketNames = new Set(["市集", "购买", "購買", "商城", "Market"]);
+      const marketIds = new Set(["market", "mall"]);
+      const isMarket = (tab) => {
+        if (!isObject(tab)) return false;
+        return [tab.tab_id, tab.type_2tab].some(v => typeof v === "string" && marketIds.has(v.toLowerCase())) ||
+          [tab.title, tab.tab_name, tab.zh_cn_name, tab.zh_tw_name, tab.en_name].some(v => marketNames.has(v));
+      };
+      const prune = (container, key) => {
+        if (!isObject(container) || !Array.isArray(container[key])) return;
+        const tabs = container[key];
+        const kept = tabs.filter(tab => !isMarket(tab));
+        // Do not empty an unfamiliar navigation container completely.
+        if (kept.length && kept.length !== tabs.length) {
+          container[key] = kept;
+          changed = true;
+        }
+      };
+      if (path === "/api/sns/v1/system_service/config") {
+        prune(data.tabbar, "tabs");
+        if (isMarket(data.name_2tab_config)) {
+          delete data.name_2tab_config;
+          changed = true;
+        }
+      } else {
+        // Unseen response body: only recognize explicit navigation arrays.
+        for (const key of ["tabs", "tab_list", "tab_config"]) prune(data, key);
+      }
+    } else if (path === widgetsPath && isObject(data)) {
       if (isObject(data.generic)) {
         // Explicit advertising CTA, without removing the generic container.
         if (isObject(data.generic.ads_engage_bar)) {
@@ -84,3 +166,5 @@
   }
   $done(result);
 })();
+
+})($done);
