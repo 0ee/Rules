@@ -3,7 +3,7 @@
 #!category=Custom
 
 [Script]
-小红书记录 = type=http-response,,pattern=^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/(?:v1\/note\/imagefeed|v2\/note\/(?:feed|widgets)|v[34]\/note\/videofeed|v2\/system_service\/splash_config)(?:\?|$),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/XiaoHongshu.js
+小红书记录 = type=http-response,pattern=^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/(?:v1\/note\/imagefeed|v2\/note\/(?:feed|widgets)|v[34]\/note\/videofeed|v2\/system_service\/splash_config)(?:\?|$),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/XiaoHongshu.js
 
 [Map Local]
 # 原有惊喜弹窗规则：补充 edith 和无查询参数形式。日志尚未捕获此接口。
