@@ -3,13 +3,14 @@
 #!category=Custom
 
 [Script]
-小红书记录 = type=http-response,pattern=^https:\/\/www\.xiaohongshu\.com\/api\/*,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/XiaoHongshu.js
+小红书记录 = type=http-response,,pattern=^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/(?:v1\/note\/imagefeed|v2\/note\/(?:feed|widgets)|v[34]\/note\/videofeed|v2\/system_service\/splash_config)(?:\?|$),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/0ee/Rules/Surge/Script/XiaoHongshu.js
 
 [Map Local]
-# 惊喜弹窗
-^https:\/\/www\.xiaohongshu\.com\/api\/marketing\/box\/trigger\? data="https://raw.githubusercontent.com/0ee/Rules/Surge/empty-body.json"
-# 信息流
-^https:\/\/www\.xiaohongshu\.com\/api\/sns\/v1\/ads\/resource\? data="https://raw.githubusercontent.com/0ee/Rules/Surge/empty-body.json"
+# 原有惊喜弹窗规则：补充 edith 和无查询参数形式。日志尚未捕获此接口。
+# 不拦截 surprisebox/submit_action 操作提交接口。
+^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/marketing\/box\/trigger(?:\?|$) data-type=text data="{}" status-code=200 header="Content-Type:application/json; charset=utf-8"
+# 广告资源预加载接口，返回与已观察响应一致的成功信封及空列表。
+^https:\/\/(?:edith|www)\.xiaohongshu\.com\/api\/sns\/v1\/ads\/resource(?:\?|$) data-type=base64 data="eyJjb2RlIjowLCJzdWNjZXNzIjp0cnVlLCJtc2ciOiIiLCJkYXRhIjpbXX0=" status-code=200 header="Content-Type:application/json; charset=utf-8"
 
 [MITM]
-hostname = %APPEND% www.xiaohongshu.com
+hostname = %APPEND% edith.xiaohongshu.com, www.xiaohongshu.com
