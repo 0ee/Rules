@@ -1,59 +1,90 @@
-// Surge response script: conditional splash filter + diagnostic output.
-// Experimental: real Qishui payload fields have not been confirmed.
+// 汽水音乐接口诊断：只记录，所有响应原样放行。
 (function () {
-  const PREFIX = "[汽水开屏诊断] ";
-  const scopes = /^https:\/\/(beta-luna\.douyin\.com|api\.qishui\.com)(\/luna\/(?:ads|media_ads)(?:\/[^?#]*)?)(?:\?|$)/;
-  const markers = new Set(["splash", "splash_ad", "open_screen", "open_screen_ad"]);
-  const splashFields = ["splash_ad", "splash_ads", "open_screen_ad", "open_screen_ads"];
-  const object = v => v !== null && typeof v === "object" && !Array.isArray(v);
-  const log = text => { try { console.log(PREFIX + text); } catch (_) {} };
-  let result = {};
-  try {
-    const match = scopes.exec($request.url || "");
-    if (!match) {
-      log("脚本执行，但 URL 不在处理范围；原样放行");
-    } else {
-      log("触发：" + match[1] + match[2].replace(/\b[0-9a-f]{24,}\b/gi, "[ID]") + "；HTTP " + String($response.status || "未知"));
-      if (typeof $response.body !== "string" || !$response.body) {
-        log("没有可读取的文本正文；原样放行");
-      } else {
-        let body, parsed = false;
-        try { body = JSON.parse($response.body); parsed = true; }
-        catch (_) { log("正文不是有效 JSON；原样放行（未记录正文）"); }
-        if (parsed) {
-          let fields = 0, cards = 0, visited = 0;
-          const isSplash = v => object(v) && [v.ad_type, v.ad_format, v.placement_type]
-            .some(x => typeof x === "string" && markers.has(x.toLowerCase()));
-          function walk(v, depth) {
-            if (++visited > 20000 || depth > 100) throw new Error("limit");
-            if (Array.isArray(v)) {
-              const children = v.map(item => walk(item, depth + 1));
-              return children.filter(item => {
-                if (isSplash(item)) { cards++; return false; }
-                return true;
-              });
-            }
-            if (object(v)) {
-              for (const key of Object.keys(v)) v[key] = walk(v[key], depth + 1);
-              for (const key of splashFields) {
-                if (Object.prototype.hasOwnProperty.call(v, key)) { delete v[key]; fields++; }
-              }
-            }
-            return v;
-          }
-          const changed = walk(body, 0);
-          if (fields || cards) {
-            result = { body: JSON.stringify(changed) };
-            log("已过滤明确开屏标识：字段 " + fields + " 个，卡片 " + cards + " 个；其他数据保留");
-          } else {
-            log("已触发，但未找到支持的开屏标识；无修改，原样放行");
-          }
-        }
-      }
+  const PREFIX = "[汽水接口诊断] ";
+  const log = message => console.log(PREFIX + message);
+
+  // 仅显示字段名、类型和数组长度，不输出字段值。
+  function shape(value, depth) {
+    if (value === null) return "null";
+
+    if (Array.isArray(value)) {
+      return {
+        type: "array",
+        length: value.length,
+        sample: depth > 0 && value.length
+          ? shape(value[0], depth - 1)
+          : undefined
+      };
     }
-  } catch (_) {
-    result = {};
-    log("处理异常或超过结构限制；原样放行（未记录异常正文）");
+
+    if (typeof value === "object") {
+      const keys = Object.keys(value);
+
+      if (depth <= 0) return "object";
+
+      const fields = {};
+      keys.slice(0, 20).forEach(key => {
+        // 跳过可能包含动态 ID 的键。
+        if (/^[A-Za-z_][A-Za-z0-9_]{0,63}$/.test(key)) {
+          fields[key] = shape(value[key], depth - 1);
+        }
+      });
+
+      return {
+        type: "object",
+        fields: fields,
+        omitted: Math.max(0, keys.length - 20)
+      };
+    }
+
+    return typeof value;
   }
-  $done(result);
+
+  try {
+    const match = /^https:\/\/(api(?:3|5)-lf\.qishui\.com)(\/[^?#]*)/i
+      .exec($request.url || "");
+
+    if (!match) return;
+
+    // 去掉查询参数，并隐藏路径中常见的数字 ID、长标识。
+    const path = match[2]
+      .split("/")
+      .map(part => (
+        /^\d+$/.test(part) ||
+        /^[a-f0-9-]{24,}$/i.test(part) ||
+        part.length > 64
+      ) ? ":id" : part)
+      .join("/")
+      .slice(0, 300);
+
+    log(
+      ($request.method || "UNKNOWN") + " " +
+      match[1] + path +
+      " | HTTP " + $response.status
+    );
+
+    const body = $response.body;
+    if (typeof body !== "string" || !body.length) {
+      log("无文本响应体，原样放行");
+      return;
+    }
+
+    log("响应字符数：" + body.length);
+
+    let data;
+    try {
+      data = JSON.parse(body);
+    } catch (_) {
+      log("非 JSON 响应，不输出正文，原样放行");
+      return;
+    }
+
+    const summary = JSON.stringify(shape(data, 4));
+    log("JSON结构：" + summary.slice(0, 6000));
+    log("仅记录，未修改响应");
+  } catch (_) {
+    log("诊断异常，原样放行");
+  } finally {
+    $done({});
+  }
 })();
