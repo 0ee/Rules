@@ -1,9 +1,6 @@
 // Diagnostic wrapper: logs bounded response structure, not response headers or text.
 (function (finish) {
-  const extra = new Set([
-    "/api/sns/v6/homefeed", "/api/sns/v1/localfeed",
-    "/api/sns/v1/localfeed/header", "/api/sns/v1/localfeed/tab_config"
-  ]);
+  const changes = { titleFields: 0, feedAds: 0, widgetAds: 0, marketTabs: 0, marketMetadata: 0, splashArrays: 0 };
   const match = /^https:\/\/(edith|www|rec)\.xiaohongshu\.com(\/[^?#]*)/.exec($request.url || "");
   const path = match ? match[2] : "";
   const enums = new Set(["model_type", "biz_type", "card_type", "item_type", "ad_type", "ads_type", "type", "tab_id", "tab_name", "enable_show", "priority", "is_ads", "is_ad", "has_ads", "sponsored", "zh_cn"]);
@@ -35,26 +32,52 @@
     }
     return walk(root, "", 0);
   }
+  function navigationSummary(body) {
+    const root = JSON.parse(body);
+    const data = root && root.data;
+    if (!data || typeof data !== "object") return {};
+    const knownMarket = tab => tab && typeof tab === "object" && (
+      [tab.tab_id, tab.type_2tab].some(v => typeof v === "string" && ["market", "mall"].includes(v.toLowerCase())) ||
+      [tab.title, tab.tab_name, tab.zh_cn_name, tab.zh_tw_name, tab.en_name].some(v => ["市集", "购买", "購買", "商城", "Market"].includes(v))
+    );
+    const output = {};
+    if (data.tabbar && Array.isArray(data.tabbar.tabs)) {
+      output.bottomTabs = { count: data.tabbar.tabs.length, marketIndices: data.tabbar.tabs.map((v, i) => knownMarket(v) ? i : -1).filter(i => i >= 0) };
+    }
+    output.marketMetadataPresent = Object.prototype.hasOwnProperty.call(data, "name_2tab_config");
+    if (output.marketMetadataPresent) output.marketMetadataRecognized = !!knownMarket(data.name_2tab_config);
+    if (Array.isArray(data.categories)) {
+      output.categories = { count: data.categories.length, recognized: data.categories.map((v, i) => ({ index: i, kind: v && ["homefeed.shop", "homefeed.sketch", "homefeed.live"].includes(v.oid) ? v.oid : "other" })) };
+    }
+    if (data.configs && typeof data.configs === "object" && !Array.isArray(data.configs)) {
+      output.configKeys = Object.keys(data.configs).filter(k => /tab|market|mall|navig|mainframe/i.test(k)).slice(0, 80);
+    }
+    return output;
+  }
   let completed = false;
   const $done = function (result) {
     if (completed) return;
     completed = true;
     try {
-      const event = { version: "XHS-REC-MARKET-20261023", host: match ? match[1] : "unknown", path,
-        modified: !!(result && result.body), action: result && result.body ? "modified" : "passthrough" };
-      try { event.shape = snapshot(JSON.parse($response.body)); }
+      const event = { version: "XHS-MARKET-TRACE-20261026", host: match ? match[1] : "unknown", path,
+        modified: !!(result && result.body), action: result && result.body ? "modified" : "passthrough", changes };
+      try {
+        event.navigationBefore = navigationSummary($response.body);
+        event.navigationAfter = navigationSummary(result && result.body ? result.body : $response.body);
+        event.shape = snapshot(JSON.parse($response.body));
+      }
       catch (_) { event.shape = "[no JSON body]"; }
       console.log("[XHS-DIAG] " + JSON.stringify(event));
     } catch (_) {}
     finish(result);
   };
-  // The unchanged validated production candidate follows here.
+  // Conservative response edits; changes records counts only, never title text.
 
-// Surge http-response script. Offline candidate, 2026-10-22.
+// Surge http-response script. Local candidate, 2026-10-26.
 // Only recognized ad components are removed; unknown data passes through.
 // No response-body logging, credential access, or persistent-store writes.
 (function () {
-  const LABEL_TITLES = true; // Add 【图文】 / 【视频】 to nonempty note titles.
+  const LABEL_TITLES = true; // Prefix both existing title and display_title fields.
   const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
   const own = (v, key) => Object.prototype.hasOwnProperty.call(v, key);
   let result = {};
@@ -67,10 +90,11 @@
       "/api/sns/v1/note/imagefeed", "/api/sns/v2/note/feed",
       "/api/sns/v3/note/videofeed", "/api/sns/v4/note/videofeed"
     ];
+    const feedPaths = ["/api/sns/v6/homefeed", "/api/sns/v1/localfeed"];
     const widgetsPath = "/api/sns/v2/note/widgets";
     const splashPath = "/api/sns/v2/system_service/splash_config";
     const navigationPaths = ["/api/sns/v1/system_service/config", "/api/sns/v1/localfeed/tab_config"];
-    if (path !== widgetsPath && path !== splashPath && !navigationPaths.includes(path) && !notePaths.includes(path)) {
+    if (path !== widgetsPath && path !== splashPath && !navigationPaths.includes(path) && !notePaths.includes(path) && !feedPaths.includes(path)) {
       $done(result);
       return;
     }
@@ -102,6 +126,7 @@
         // Do not empty an unfamiliar navigation container completely.
         if (kept.length && kept.length !== tabs.length) {
           container[key] = kept;
+          changes.marketTabs += tabs.length - kept.length;
           changed = true;
         }
       };
@@ -109,6 +134,7 @@
         prune(data.tabbar, "tabs");
         if (isMarket(data.name_2tab_config)) {
           delete data.name_2tab_config;
+          changes.marketMetadata++;
           changed = true;
         }
       } else {
@@ -120,6 +146,7 @@
         // Explicit advertising CTA, without removing the generic container.
         if (isObject(data.generic.ads_engage_bar)) {
           delete data.generic.ads_engage_bar;
+          changes.widgetAds++;
           changed = true;
         }
         const pgy = data.generic.pgy_comment_component;
@@ -127,11 +154,18 @@
         if (isObject(pgy) && isObject(pgy.brand_info) && isObject(pgy.component_info) &&
             pgy.component_info.type === 3 && pgy.component_info.sub_type === "NOTE_COMMENT_SEARCH") {
           delete pgy.component_info;
+          changes.widgetAds++;
           changed = true;
         }
       }
       if (isObject(data.widgets_nbb) && data.widgets_nbb.biz_type === "nbb_ads_related_search") {
         delete data.widgets_nbb;
+        changes.widgetAds++;
+        changed = true;
+      }
+      if (isObject(data.widgets_ncb) && data.widgets_ncb.biz_type === "ncb_ads_note_bar") {
+        delete data.widgets_ncb;
+        changes.widgetAds++;
         changed = true;
       }
       // Preserve widget_list, widgets_ndb, normal searches, POI, sound and interactions.
@@ -140,20 +174,35 @@
       for (const key of ["ads_groups", "bidding_ads"]) {
         if (Array.isArray(data[key]) && data[key].length > 0) {
           data[key] = [];
+          changes.splashArrays++;
           changed = true;
         }
       }
-    } else if (LABEL_TITLES && Array.isArray(data)) {
+    } else if (Array.isArray(data)) {
+      // Only the observed homefeed ad shape is removed. Unknown cards pass through.
+      let items = data;
+      if (path === "/api/sns/v6/homefeed") {
+        items = data.filter(item => !(isObject(item) && item.is_ads === true && isObject(item.ads_info)));
+        if (items.length !== data.length) {
+          changes.feedAds += data.length - items.length;
+          obj.data = items;
+          changed = true;
+        }
+      }
       const label = (note) => {
-        if (!isObject(note) || (own(note, "model_type") && note.model_type !== "note") ||
-            typeof note.title !== "string" || !note.title.trim()) return;
+        if (!LABEL_TITLES || !isObject(note) ||
+            (own(note, "model_type") && note.model_type !== "note") ||
+            note.is_ads === true || isObject(note.ads_info)) return;
         const prefix = note.type === "normal" ? "【图文】" : note.type === "video" ? "【视频】" : "";
-        if (prefix && !/^【(?:图文|视频)】/.test(note.title)) {
-          note.title = prefix + note.title;
+        if (!prefix) return;
+        for (const key of ["title", "display_title"]) {
+          if (typeof note[key] !== "string" || !note[key].trim() || /^【(?:图文|视频)】/.test(note[key])) continue;
+          note[key] = prefix + note[key];
+          changes.titleFields++;
           changed = true;
         }
       };
-      for (const item of data) {
+      for (const item of items) {
         if (!isObject(item)) continue;
         if (Array.isArray(item.note_list)) item.note_list.forEach(label);
         else label(item);
