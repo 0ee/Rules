@@ -1,219 +1,230 @@
-console.log(typeof $request != "undefined")
+// 支持 bbs.nga.cn 和 ngabbs.com。
+// 更新后，请在同一域名重新操作签到、积分查询和抽奖以捕获请求。
 
-if (typeof $request != "undefined") {
-    if ($request.url.includes('genshin_task_get')) {
-        $persistentStore.write($request.url, 'nga_genshin_task_get_url')
-        $persistentStore.write(JSON.stringify($request.headers), 'nga_genshin_headers')
-        console.log('缓存task_get URL: ' + $request.url)
-    } else if ($request.url.includes('genshin_get_score')) {
-        $persistentStore.write($request.url, 'nga_genshin_score_url')
-        $persistentStore.write(JSON.stringify($request.headers), 'nga_genshin_headers')
-        console.log('缓存get_score URL: ' + $request.url)
-    } else if ($request.url.includes('genshin_task_counter_add')) {
-        $persistentStore.write($request.url, 'nga_genshin_sign_url')
-        $persistentStore.write(JSON.stringify($request.headers), 'nga_genshin_headers')
-        console.log('缓存task_counter_add URL: ' + $request.url)
-    } else if ($request.url.includes('genshin_luckydraw')) {
-        $persistentStore.write($request.url, 'nga_genshin_luckydraw_url')
-        $persistentStore.write(JSON.stringify($request.headers), 'nga_genshin_headers')
-        console.log('缓存luckydraw URL: ' + $request.url)
+const ACTIONS = {
+    genshin_task_get: {
+        key: 'nga_genshin_task_get_url',
+        name: '任务'
+    },
+    genshin_get_score: {
+        key: 'nga_genshin_score_url',
+        name: '积分查询'
+    },
+    genshin_task_counter_add: {
+        key: 'nga_genshin_sign_url',
+        name: '签到'
+    },
+    genshin_luckydraw: {
+        key: 'nga_genshin_luckydraw_url',
+        name: '抽奖'
     }
+};
 
-    $notification.post('NGA原神信息已缓存', '已保存最新的URL和headers', '')
-    $done({})
-} else {
-    console.log('开始执行NGA原神自动签到')
-    signTask()
+function parseAddress(url) {
+    const match = /^https:\/\/(bbs\.nga\.cn|ngabbs\.com)\/nuke\.php\?([^#]*)/i.exec(url);
+    if (!match) throw new Error('不支持的 NGA 活动地址');
+
+    const params = {};
+    match[2].split('&').forEach(function (part) {
+        const index = part.indexOf('=');
+        const key = index < 0 ? part : part.slice(0, index);
+        const value = index < 0 ? '' : part.slice(index + 1);
+        params[decodeURIComponent(key)] = decodeURIComponent(value.replace(/\+/g, ' '));
+    });
+
+    return {
+        host: match[1].toLowerCase(),
+        action: (params.__act || '').replace(/^\d{8}/, '')
+    };
 }
 
-function signTask() {
-    let signUrl = $persistentStore.read('nga_genshin_sign_url')
+function readHeaders(key, host) {
+    let headers = {};
 
-    if (!signUrl) {
-        console.log('签到URL未缓存，请先手动访问一次')
-        $notification.post('NGA签到失败', '未找到缓存的URL', '请手动访问原神签到活动')
-        $done({})
-        return
-    }
+    // 优先使用该接口对应的请求头。
+    const own = $persistentStore.read(key + '_headers');
+    if (own) {
+        headers = JSON.parse(own);
+    } else {
+        // 兼容旧缓存，但不把其他域名的身份信息带过来。
+        const legacy = $persistentStore.read('nga_genshin_headers');
+        if (legacy) {
+            const saved = JSON.parse(legacy);
+            const hostKey = Object.keys(saved).find(function (name) {
+                return name.toLowerCase() === 'host' ||
+                    name.toLowerCase() === ':authority';
+            });
 
-    $httpClient.post({
-        url: signUrl,
-        headers: getHeaders(),
-        body: '__output=11',
-        timeout: 5
-    }, function (error, response, data) {
-        if (error) {
-            console.log('签到请求失败: ' + error)
-            $notification.post('NGA签到失败', '签到请求出错', String(error))
-            $done({})
-            return
-        }
-
-        let decodedData = decodeUnicode(data)
-        console.log('签到响应: ' + decodedData)
-
-        if (stopOnApiError(data, '签到')) return
-
-        setTimeout(() => {
-            getScore()
-        }, 1000)
-    })
-}
-
-function getScore() {
-    let scoreUrl = $persistentStore.read('nga_genshin_score_url')
-
-    if (!scoreUrl) {
-        console.log('积分查询URL未缓存')
-        $notification.post('NGA签到完成', '但积分查询失败', '积分查询URL未缓存')
-        $done({})
-        return
-    }
-
-    $httpClient.post({
-        url: scoreUrl,
-        headers: getHeaders(),
-        body: '__output=11',
-        timeout: 5
-    }, function (error, response, data) {
-        if (error) {
-            console.log('获取积分失败: ' + error)
-            $notification.post('NGA签到完成', '但获取积分失败', String(error))
-            $done({})
-            return
-        }
-
-        let decodedData = decodeUnicode(data)
-        console.log('积分响应: ' + decodedData)
-
-        if (stopOnApiError(data, '积分')) return
-
-        try {
-            let result = JSON.parse(data)
-            let score = Number(result.data[0])
-
-            console.log('当前积分: ' + score)
-
-            if (score >= 30) {
-                console.log('积分充足，执行抽奖')
-                luckydraw()
+            if (hostKey && String(saved[hostKey]).toLowerCase() === host) {
+                headers = saved;
             } else {
-                console.log('积分不足，需要 ' + (30 - score) + ' 积分')
-                $notification.post('NGA原神签到', '签到成功', '当前积分: ' + score)
-                $done({})
+                throw new Error('请在 ' + host + ' 重新捕获活动请求');
             }
-        } catch (e) {
-            console.log('解析积分失败: ' + e)
-            $notification.post('NGA签到完成', '但解析积分失败', String(e))
-            $done({})
-        }
-    })
-}
-
-function luckydraw() {
-    let luckyUrl = $persistentStore.read('nga_genshin_luckydraw_url')
-
-    if (!luckyUrl) {
-        console.log('抽奖URL未缓存')
-        $notification.post('NGA原神签到', '积分充足，但抽奖失败', '抽奖URL未缓存')
-        $done({})
-        return
-    }
-
-    $httpClient.post({
-        url: luckyUrl,
-        headers: getHeaders(),
-        body: '__output=11',
-        timeout: 5
-    }, function (error, response, data) {
-        if (error) {
-            console.log('抽奖失败: ' + error)
-            $notification.post('NGA抽奖失败', '抽奖请求出错', String(error))
-            $done({})
-            return
-        }
-
-        let decodedData = decodeUnicode(data)
-        console.log('抽奖响应: ' + decodedData)
-
-        if (stopOnApiError(data, '抽奖')) return
-
-        let notifyText = getReadableMsg(decodedData)
-
-        $notification.post('NGA原神抽奖', '抽奖完成', notifyText)
-        $done({})
-    })
-}
-
-function getHeaders() {
-    let headerStr = $persistentStore.read('nga_genshin_headers')
-
-    if (!headerStr) {
-        return {
-            'Host': 'bbs.nga.cn',
-            'Accept': '*/*',
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15',
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Origin': 'https://bbs.nga.cn'
+        } else {
+            throw new Error('请求头未缓存，请重新操作活动页面');
         }
     }
 
+    const cleaned = {};
+    Object.keys(headers).forEach(function (name) {
+        const lower = name.toLowerCase();
+
+        // 由 HTTP 客户端按实际地址生成 Host 和请求长度。
+        if (name.startsWith(':') ||
+            ['host', 'content-length', 'connection',
+             'origin', 'referer', 'content-type'].includes(lower)) {
+            return;
+        }
+
+        cleaned[name] = headers[name];
+    });
+
+    cleaned.Origin = 'https://' + host;
+    cleaned.Referer = 'https://' + host + '/';
+    cleaned['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    return cleaned;
+}
+
+function capture() {
     try {
-        return JSON.parse(headerStr)
-    } catch (e) {
-        console.log('headers解析失败，使用默认headers: ' + e)
-        return {
-            'Host': 'bbs.nga.cn',
-            'Accept': '*/*',
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15',
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Origin': 'https://bbs.nga.cn'
+        const address = parseAddress($request.url);
+        const action = ACTIONS[address.action];
+
+        // is_login 等请求不属于可缓存的执行接口。
+        if (!action) return;
+
+        const savedHeaders = $persistentStore.write(
+            JSON.stringify($request.headers || {}),
+            action.key + '_headers'
+        );
+        const savedUrl = $persistentStore.write($request.url, action.key);
+
+        if (!savedHeaders || !savedUrl) {
+            throw new Error('缓存写入失败');
         }
+
+        $notification.post(
+            'NGA原神信息已缓存',
+            action.name + '请求已保存',
+            '域名：' + address.host
+        );
+    } catch (error) {
+        $notification.post('NGA捕获失败', '', String(error.message || error));
+    } finally {
+        $done({});
     }
 }
 
-function decodeUnicode(str) {
-    if (typeof str !== 'string') return str
+function callApi(actionName) {
+    return new Promise(function (resolve, reject) {
+        const action = ACTIONS[actionName];
+        const url = $persistentStore.read(action.key);
 
-    return str.replace(/\\u([\dA-Fa-f]{4})/g, function (_, code) {
-        return String.fromCharCode(parseInt(code, 16))
-    })
+        if (!url) {
+            reject(new Error(action.name + '地址未缓存，请先手动操作一次'));
+            return;
+        }
+
+        let headers;
+        try {
+            const address = parseAddress(url);
+            if (address.action !== actionName) {
+                throw new Error(action.name + '缓存地址不正确，请重新捕获');
+            }
+            headers = readHeaders(action.key, address.host);
+        } catch (error) {
+            reject(error);
+            return;
+        }
+
+        $httpClient.post({
+            url: url,
+            headers: headers,
+            body: '__output=11',
+            timeout: 10
+        }, function (error, response, data) {
+            if (error) {
+                reject(new Error(action.name + '请求失败：' + String(error)));
+                return;
+            }
+
+            const status = Number(response && (response.status || response.statusCode));
+            if (status < 200 || status >= 300 || !status) {
+                reject(new Error(action.name + '返回 HTTP ' + (status || '未知状态')));
+                return;
+            }
+
+            try {
+                const result = JSON.parse(data);
+                if (!result || typeof result !== 'object') {
+                    throw new Error('返回内容格式不正确');
+                }
+
+                if (Object.prototype.hasOwnProperty.call(result, 'error')) {
+                    throw new Error(readable(result.error));
+                }
+
+                resolve(result);
+            } catch (error) {
+                reject(new Error(action.name + '失败：' + String(error.message || error)));
+            }
+        });
+    });
 }
 
-function getReadableMsg(data) {
+function readable(value) {
+    if (typeof value === 'string') return value;
+    if (Array.isArray(value)) return value.map(readable).join('；');
+    if (value == null) return '接口未返回说明';
+    return JSON.stringify(value);
+}
+
+function pause(ms) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function run() {
     try {
-        let obj = JSON.parse(data)
+        await callApi('genshin_task_counter_add');
+        await pause(1000);
 
-        if (obj.msg) return obj.msg
-        if (obj.message) return obj.message
-        if (obj.error) return obj.error
-        if (obj.data) return typeof obj.data === 'string' ? obj.data : JSON.stringify(obj.data)
+        const result = await callApi('genshin_get_score');
+        const rawScore = result.data && result.data[0];
 
-        return JSON.stringify(obj)
-    } catch (e) {
-        return data
+        if (rawScore == null || String(rawScore).trim() === '') {
+            throw new Error('签到请求已完成，但积分返回内容为空');
+        }
+
+        const score = Number(rawScore);
+        if (!Number.isFinite(score) || score < 0) {
+            throw new Error('签到请求已完成，但无法识别当前积分');
+        }
+
+        if (score < 30) {
+            $notification.post('NGA原神签到', '签到成功', '当前积分：' + score);
+            return;
+        }
+
+        const draw = await callApi('genshin_luckydraw');
+        const message = draw.msg != null ? draw.msg :
+            draw.message != null ? draw.message : draw.data;
+
+        $notification.post('NGA原神抽奖', '抽奖请求已完成', readable(message));
+    } catch (error) {
+        $notification.post(
+            'NGA原神任务未完成',
+            '已停止后续步骤',
+            String(error.message || error)
+        );
+    } finally {
+        $done({});
     }
 }
 
-function stopOnApiError(data, step) {
-    let result
-    try {
-        result = JSON.parse(data)
-    } catch (e) {
-        return false
-    }
-
-    if (result && Object.prototype.hasOwnProperty.call(result, 'error')) {
-        let message = Array.isArray(result.error)
-            ? result.error.join('；')
-            : typeof result.error === 'string'
-                ? result.error
-                : JSON.stringify(result.error)
-        console.log(step + '失败，停止执行: ' + message)
-        $notification.post('NGA原神' + step + '失败', '已停止后续步骤', message)
-        $done({})
-        return true
-    }
-
-    return false
+if (typeof $request !== 'undefined') {
+    capture();
+} else {
+    run();
 }
